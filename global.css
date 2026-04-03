@@ -1,0 +1,223 @@
+@import "tailwindcss";
+@import "uniwind";
+@import "heroui-native/styles";
+
+@source './node_modules/heroui-native/lib';
+
+@theme {
+	--border-width: 0px;
+	--field-border-width: 1px;
+	--font-sans: "Manrope";
+	--font-headline: "Manrope";
+	--font-body: "Manrope";
+	--font-label: "Manrope";
+	--radius: 0.25rem;
+	--radius-lg: 0.5rem;
+	--radius-xl: 0.75rem;
+	--radius-full: 9999px;
+	--field-radius: 0.25rem;
+}
+
+@layer theme {
+	:root {
+		@variant light {
+			--on-secondary: #004d57;
+			--on-secondary-fixed: #003a42;
+			--error-dim: #d73357;
+			--primary-fixed-dim: #9c7eff;
+			--secondary-fixed: #26e6ff;
+			--surface: #16052a;
+			--on-primary-fixed: #000000;
+			--surface-container-low: #1c0832;
+			--on-tertiary-container: #100003;
+			--on-primary-fixed-variant: #32008a;
+			--on-tertiary: #48001c;
+			--on-primary-container: #280072;
+			--secondary: #00e3fd;
+			--inverse-primary: #6834eb;
+			--tertiary-fixed: #ff8fa9;
+			--tertiary: #ff6c95;
+			--primary: #b6a0ff;
+			--surface-tint: #b6a0ff;
+			--primary-fixed: #a98fff;
+			--error: #ff6e84;
+			--on-primary: #340090;
+			--surface-container-highest: #32194e;
+			--inverse-on-surface: #604d75;
+			--on-secondary-fixed-variant: #005964;
+			--on-secondary-container: #e8fbff;
+			--surface-bright: #391e58;
+			--inverse-surface: #fff7ff;
+			--tertiary-dim: #ff6c95;
+			--on-background: #f1dfff;
+			--surface-dim: #16052a;
+			--error-container: #a70138;
+			--surface-container-lowest: #000000;
+			--on-error-container: #ffb2b9;
+			--secondary-fixed-dim: #00d7f0;
+			--surface-container-high: #2b1345;
+			--primary-dim: #7e51ff;
+			--secondary-container: #006875;
+			--on-surface: #f1dfff;
+			--on-error: #490013;
+			--tertiary-container: #fd3e80;
+			--on-tertiary-fixed: #380014;
+			--tertiary-fixed-dim: #ff769b;
+			--primary-container: #a98fff;
+			--outline-variant: #524067;
+			--background: #16052a;
+			--surface-container: #240e3b;
+			--on-tertiary-fixed-variant: #770033;
+			--on-surface-variant: #b9a2d0;
+			--surface-variant: #32194e;
+			--outline: #826d98;
+			--secondary-dim: #00d4ec;
+
+			--foreground: var(--on-background);
+
+			--surface-foreground: var(--on-surface);
+			--surface-secondary: var(--surface-container-low);
+			--surface-secondary-foreground: var(--on-surface);
+			--surface-tertiary: var(--surface-container);
+			--surface-tertiary-foreground: var(--on-surface);
+			--overlay: color-mix(in srgb, var(--surface-bright) 60%, transparent);
+			--overlay-foreground: var(--on-surface);
+			--muted: var(--on-surface-variant);
+
+			--default: var(--surface-container);
+			--default-foreground: var(--on-surface);
+			--accent: var(--secondary);
+			--accent-foreground: var(--on-secondary);
+			--success: var(--secondary-fixed);
+			--success-foreground: var(--on-secondary-fixed);
+			--warning: var(--primary-fixed);
+			--warning-foreground: var(--on-primary-fixed);
+			--danger: var(--tertiary);
+			--danger-foreground: var(--on-tertiary);
+			--segment: var(--surface-container-high);
+			--segment-foreground: var(--on-surface);
+			--border: color-mix(in srgb, var(--outline-variant) 15%, transparent);
+			--separator: color-mix(in srgb, var(--outline-variant) 12%, transparent);
+			--focus: var(--secondary);
+			--link: var(--primary);
+
+			--field-background: transparent;
+			--field-foreground: var(--on-surface);
+			--field-placeholder: var(--on-surface-variant);
+			--field-border: color-mix(
+				in srgb,
+				var(--outline-variant) 20%,
+				transparent
+			);
+
+			--surface-shadow: 0 0 0 0 transparent;
+			--overlay-shadow:
+				0 0 1px 0 color-mix(in srgb, var(--outline-variant) 15%, transparent)
+					inset,
+				0 0 40px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+			--field-shadow:
+				0 1px 0 0 color-mix(in srgb, var(--outline-variant) 20%, transparent),
+				0 10px 30px -18px color-mix(in srgb, var(--secondary) 18%, transparent);
+		}
+
+		@variant dark {
+			--on-secondary: #004d57;
+			--on-secondary-fixed: #003a42;
+			--error-dim: #d73357;
+			--primary-fixed-dim: #9c7eff;
+			--secondary-fixed: #26e6ff;
+			--surface: #16052a;
+			--on-primary-fixed: #000000;
+			--surface-container-low: #1c0832;
+			--on-tertiary-container: #100003;
+			--on-primary-fixed-variant: #32008a;
+			--on-tertiary: #48001c;
+			--on-primary-container: #280072;
+			--secondary: #00e3fd;
+			--inverse-primary: #6834eb;
+			--tertiary-fixed: #ff8fa9;
+			--tertiary: #ff6c95;
+			--primary: #b6a0ff;
+			--surface-tint: #b6a0ff;
+			--primary-fixed: #a98fff;
+			--error: #ff6e84;
+			--on-primary: #340090;
+			--surface-container-highest: #32194e;
+			--inverse-on-surface: #604d75;
+			--on-secondary-fixed-variant: #005964;
+			--on-secondary-container: #e8fbff;
+			--surface-bright: #391e58;
+			--inverse-surface: #fff7ff;
+			--tertiary-dim: #ff6c95;
+			--on-background: #f1dfff;
+			--surface-dim: #16052a;
+			--error-container: #a70138;
+			--surface-container-lowest: #000000;
+			--on-error-container: #ffb2b9;
+			--secondary-fixed-dim: #00d7f0;
+			--surface-container-high: #2b1345;
+			--primary-dim: #7e51ff;
+			--secondary-container: #006875;
+			--on-surface: #f1dfff;
+			--on-error: #490013;
+			--tertiary-container: #fd3e80;
+			--on-tertiary-fixed: #380014;
+			--tertiary-fixed-dim: #ff769b;
+			--primary-container: #a98fff;
+			--outline-variant: #524067;
+			--background: #16052a;
+			--surface-container: #240e3b;
+			--on-tertiary-fixed-variant: #770033;
+			--on-surface-variant: #b9a2d0;
+			--surface-variant: #32194e;
+			--outline: #826d98;
+			--secondary-dim: #00d4ec;
+
+			--foreground: var(--on-background);
+
+			--surface-foreground: var(--on-surface);
+			--surface-secondary: var(--surface-container-low);
+			--surface-secondary-foreground: var(--on-surface);
+			--surface-tertiary: var(--surface-container);
+			--surface-tertiary-foreground: var(--on-surface);
+			--overlay: color-mix(in srgb, var(--surface-bright) 60%, transparent);
+			--overlay-foreground: var(--on-surface);
+			--muted: var(--on-surface-variant);
+
+			--default: var(--surface-container);
+			--default-foreground: var(--on-surface);
+			--accent: var(--secondary);
+			--accent-foreground: var(--on-secondary);
+			--success: var(--secondary-fixed);
+			--success-foreground: var(--on-secondary-fixed);
+			--warning: var(--primary-fixed);
+			--warning-foreground: var(--on-primary-fixed);
+			--danger: var(--tertiary);
+			--danger-foreground: var(--on-tertiary);
+			--segment: var(--surface-container-high);
+			--segment-foreground: var(--on-surface);
+			--border: color-mix(in srgb, var(--outline-variant) 15%, transparent);
+			--separator: color-mix(in srgb, var(--outline-variant) 12%, transparent);
+			--focus: var(--secondary);
+			--link: var(--primary);
+
+			--field-background: transparent;
+			--field-foreground: var(--on-surface);
+			--field-placeholder: var(--on-surface-variant);
+			--field-border: color-mix(
+				in srgb,
+				var(--outline-variant) 20%,
+				transparent
+			);
+
+			--surface-shadow: 0 0 0 0 transparent;
+			--overlay-shadow:
+				0 0 1px 0 color-mix(in srgb, var(--outline-variant) 15%, transparent)
+					inset,
+				0 0 40px 0 color-mix(in srgb, var(--primary) 8%, transparent);
+			--field-shadow:
+				0 1px 0 0 color-mix(in srgb, var(--outline-variant) 20%, transparent),
+				0 10px 30px -18px color-mix(in srgb, var(--secondary) 18%, transparent);
+		}
+	}
+}

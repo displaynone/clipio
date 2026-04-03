@@ -1,0 +1,84 @@
+import { Image } from 'expo-image';
+import * as VideoThumbnails from 'expo-video-thumbnails';
+import { PressableFeedback, useThemeColor } from 'heroui-native';
+import { useEffect, useState } from 'react';
+import { StyleProp, Text, View, ViewStyle } from 'react-native';
+import { VideoCameraIcon } from 'react-native-heroicons/outline';
+
+type Props = {
+  uri: string;
+  style?: StyleProp<ViewStyle>;
+  className?: string;
+  onPress?: () => void;
+  label?: string;
+};
+
+export default function VideoThumbnail({ uri, style, className, onPress, label }: Props) {
+  const [thumbnailUri, setThumbnailUri] = useState<string | null>(null);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const mutedColor = useThemeColor('muted');
+
+  // Extraer nombre del archivo de la URI para mostrar como fallback
+  const fileName = uri.split('/').pop()?.split('.')[0] || 'Video';
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const generateThumbnail = async () => {
+      if (thumbnailUri) return;
+
+      try {
+        setIsGenerating(true);
+
+        const { uri: generatedUri } = await VideoThumbnails.getThumbnailAsync(uri, {
+          time: 1000,
+          quality: 0.8,
+        });
+
+        if (isMounted) {
+          setThumbnailUri(generatedUri);
+        }
+      } catch (error) {
+        console.warn('Error generating thumbnail:', error);
+      } finally {
+        if (isMounted) {
+          setIsGenerating(false);
+        }
+      }
+    };
+
+    generateThumbnail();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [thumbnailUri, uri]);
+
+  return (
+    <PressableFeedback
+      onPress={onPress}
+      style={style}
+      className={`relative overflow-hidden rounded-lg bg-surface-secondary ${className ?? ''}`}
+    >
+      {thumbnailUri ? (
+        <Image source={{ uri: thumbnailUri }} style={{ width: '100%', height: '100%' }} contentFit="cover" />
+      ) : (
+        <View className="flex-1 items-center justify-center p-2">
+          <VideoCameraIcon color={mutedColor} width={32} height={32} />
+          <Text className="mt-2 text-center text-xs leading-4 text-muted" numberOfLines={2}>
+            {fileName}
+          </Text>
+          {isGenerating && (
+            <Text className="mt-1 text-[10px] text-accent">Generando...</Text>
+          )}
+        </View>
+      )}
+      <View className="absolute inset-0 bg-black/10" />
+      {label && (
+        <View className="absolute right-1 bottom-1 left-1 rounded-sm bg-black/70 px-1.5 py-0.5">
+          <Text className="text-center text-[10px] text-foreground">{label}</Text>
+        </View>
+      )}
+    </PressableFeedback>
+  );
+}

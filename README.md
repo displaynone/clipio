@@ -1,29 +1,64 @@
-# Welcome to your Expo app 👋
+# Clipio - Editor de vídeo por plantillas (Expo + React Native + TypeScript)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Proyecto inicial con arquitectura modular y base para future integración nativa (FFmpeg, export).
 
-## Get started
+## Estructura principal del proyecto
 
-1. Install dependencies
+## Cómo ejecutar
 
-   ```bash
-   npm install
-   ```
+### Opción 1: Development Build (recomendado para desarrollo local)
 
-2. Start the app
+```bash
+npm install
 
-   ```bash
-   npx expo start
-   ```
+# Primera vez: compila e instala el dev client
+npm run android
+# npm run ios
+```
 
-In the output, you'll find options to open the app in a
+Después, para cambios en código JavaScript:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+```bash
+npm start  # inicia el servidor de desarrollo
+# Presiona 'a' para Android o 'i' para iOS
+```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Opción 2: Prebuild + Compilación nativa (para verificar cambios nativos)
+
+```bash
+npm install
+npx expo prebuild --clean
+npm run android
+```
+
+### Opción 3: EAS Build (cloud, recomendado para CI/CD)
+
+```bash
+npx expo login  # si no estás logeado
+eas build --profile development --platform android
+eas build --profile development --platform ios
+```
+
+**IMPORTANTE:** Este proyecto **NO usa Expo Go**. Usa development builds compilados.
+
+### Rutas importantes
+
+- `app/(tabs)/index.tsx`: lista de plantillas
+- `app/template/[templateId].tsx`: editor de plantilla con picker + preview
+
+### Qué incluye el MVP
+
+- Selección de 4 vídeos (expo-image-picker)
+- Preview 2x2 y Focus con total layout relativo (%)
+- Reordenar con botones arriba/abajo
+- Ajustes de color fondo, gap y border radius
+- Estructura limpia: components/features/hooks/types/services
+
+### Integración futura (FFmpeg / export nativo)
+
+- `services/videoExportService.ts` contiene una capa de abstracción para la futura exportación y renderizado nativo
+- `expo-file-system` ya está instalado para manejo de archivos
+- Plantillas declarativas por datos (`features/templates/templates.ts`)
 
 ## Get a fresh project
 

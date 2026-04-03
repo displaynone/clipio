@@ -1,98 +1,61 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+import HomeEmptyState from '@/components/home/HomeEmptyState';
+import SelectedLibraryScreen from '@/components/library/SelectedLibraryScreen';
+import HeaderLoadVideosButton from '@/components/navigation/HeaderLoadVideosButton';
+import { pickVideoFromLibrary } from '@/features/media/mediaPicker';
+import { useVideoSelection } from '@/hooks/useVideoSelection';
+import { Tabs, useRouter } from 'expo-router';
+import { useState } from 'react';
+import { Alert, View } from 'react-native';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const { libraryUris, selectedUris, addUri, removeUri, toggleUriSelection } = useVideoSelection();
+  const [isPickLoading, setIsPickLoading] = useState(false);
+  const router = useRouter();
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+  const handlePickVideo = async () => {
+    try {
+      setIsPickLoading(true);
+      const uris = await pickVideoFromLibrary();
+      if (uris.length > 0) {
+        addUri(uris);
+      }
+    } catch (error) {
+      Alert.alert('Error al seleccionar video', `${error}`);
+    } finally {
+      setIsPickLoading(false);
+    }
+  };
+
+  const handleContinue = () => {
+    if (selectedUris.length === 0) {
+      Alert.alert('Selecciona videos', 'Debes seleccionar al menos un video para continuar.');
+      return;
+    }
+    router.push('/select-template');
+  };
+
+  return (
+    <View>
+      <Tabs.Screen
+        options={{
+          headerRight: () =>
+            libraryUris.length > 0 ? (
+              <HeaderLoadVideosButton onPress={handlePickVideo} isLoading={isPickLoading} />
+            ) : null,
+        }}
+      />
+
+      {libraryUris.length === 0 ? (
+        <HomeEmptyState onLoadVideos={handlePickVideo} isLoading={isPickLoading} />
+      ) : (
+        <SelectedLibraryScreen
+          libraryUris={libraryUris}
+          selectedUris={selectedUris}
+          onRemove={removeUri}
+          onToggleSelect={toggleUriSelection}
+          onContinue={handleContinue}
+        />
+      )}
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
-});
