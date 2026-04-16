@@ -1,8 +1,10 @@
 import VideoThumbnail from "@/components/VideoThumbnail";
+import { useEditorStore } from "@/stores/editorStore";
 import { useRouter } from "expo-router";
+import { useVideoPlayer } from "expo-video";
 import type { MenuTriggerRef } from "heroui-native";
 import { Menu, PressableFeedback, useThemeColor } from "heroui-native";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Text, View } from "react-native";
 import {
 	CheckIcon,
@@ -19,9 +21,20 @@ type Props = {
 	onToggleSelect: () => void;
 };
 
+function formatDuration(durationMs: number | null) {
+	if (!durationMs || durationMs <= 0) {
+		return "--:--";
+	}
+
+	const totalSeconds = Math.max(0, Math.round(durationMs / 1000));
+	const minutes = Math.floor(totalSeconds / 60);
+	const seconds = totalSeconds % 60;
+	return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+}
+
 export default function LibraryClipCard({
 	uri,
-	index,
+	index: _index,
 	isSelected,
 	onRemove,
 	onToggleSelect,
@@ -32,6 +45,29 @@ export default function LibraryClipCard({
 	const accentColor = useThemeColor("accent");
 	const accentForegroundColor = useThemeColor("accent-foreground");
 	const dangerColor = useThemeColor("danger");
+	const trim = useEditorStore((state) => state.trimsByUri[uri]);
+	const [videoDurationMs, setVideoDurationMs] = useState<number | null>(
+		trim?.durationMs ?? null,
+	);
+	const player = useVideoPlayer(uri, (videoPlayer) => {
+		videoPlayer.loop = false;
+		videoPlayer.pause();
+	});
+
+	useEffect(() => {
+		if (trim?.durationMs != null) {
+			setVideoDurationMs(trim.durationMs);
+			return;
+		}
+
+		const loadSubscription = player.addListener("sourceLoad", ({ duration }) => {
+			setVideoDurationMs(Math.max(0, Math.round(duration * 1000)));
+		});
+
+		return () => {
+			loadSubscription.remove();
+		};
+	}, [player, trim?.durationMs]);
 
 	const handleOpenMenu = () => {
 		menuTriggerRef.current?.open();
@@ -128,7 +164,7 @@ export default function LibraryClipCard({
 
 			<View className="absolute inset-x-0 bottom-0 bg-black/40 px-3 py-3">
 				<Text className="text-[10px] font-bold uppercase tracking-[0.08em] text-foreground">
-					Clip {index + 1}
+					{formatDuration(videoDurationMs)}
 				</Text>
 			</View>
 		</View>

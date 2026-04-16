@@ -1,32 +1,60 @@
-import { TemplateData } from '@/types/template';
-import { Card, PressableFeedback, useThemeColor } from 'heroui-native';
-import { Link } from 'expo-router';
-import { Text, View } from 'react-native';
-import { SparklesIcon } from 'react-native-heroicons/outline';
+import { TemplateData } from "@/types/template";
+import { Link } from "expo-router";
+import { PressableFeedback, useThemeColor } from "heroui-native";
+import { Text, View } from "react-native";
+import { CheckIcon } from "react-native-heroicons/outline";
 
 type Props = {
-  template: TemplateData;
+	template: TemplateData;
 };
 
-export default function TemplateCard({ template }: Props) {
-  const accentColor = useThemeColor('accent');
+function TemplateMiniPreview({ template }: { template: TemplateData }) {
+	const Template = template.template;
 
-  return (
-    <Link href={`/template/${template.id}`} asChild>
-      <PressableFeedback className="mb-3 min-w-full">
-        <Card className="min-w-full rounded-2xl border border-border-secondary bg-surface-secondary px-4 py-4">
-          <Card.Header className="mb-1 flex-row items-center justify-between">
-            <Card.Title className="text-[17px] font-extrabold text-foreground">{template.name}</Card.Title>
-            <View className="flex-row items-center">
-              <SparklesIcon color={accentColor} width={14} height={14} />
-              <Text className="ml-1 text-xs font-semibold uppercase tracking-[0.05em] text-accent">{template.maxSlots} clips</Text>
-            </View>
-          </Card.Header>
-          <Card.Body>
-            <Card.Description className="text-[13px] text-muted">{template.description}</Card.Description>
-          </Card.Body>
-        </Card>
-      </PressableFeedback>
-    </Link>
-  );
+	return (
+		<View className="relative w-full overflow-hidden rounded-lg bg-surface-secondary p-2 h-fit">
+			<View className="h-32">{Template}</View>
+		</View>
+	);
+}
+
+export default function TemplateCard({ template }: Props) {
+	const borderColor = useThemeColor("border");
+	const accentColor = useThemeColor("accent");
+
+	return (
+		<Link href={`/template/${template.id}`} asChild>
+			<PressableFeedback className="mb-4 w-full rounded-xl bg-surface-container px-4 py-4 active:scale-[0.98]">
+				<View
+					style={{
+						borderWidth: 1,
+						borderColor: `${borderColor}26`,
+					}}
+					className="rounded-xl bg-surface-container px-1 py-1"
+				>
+					<View className="gap-4 rounded-[10px] bg-surface-container px-1 py-1">
+						<TemplateMiniPreview template={template} />
+
+						<View className="flex-row items-start justify-between gap-3 px-1 pb-1">
+							<View className="flex-1">
+								<Text className="font-headline text-lg font-bold tracking-tight text-foreground">
+									{template.name}
+								</Text>
+								<Text className="mt-1 text-sm leading-5 text-muted">
+									{template.description}
+								</Text>
+							</View>
+
+							<View
+								className="mt-0.5 h-6 w-6 items-center justify-center rounded-full border"
+								style={{ borderColor: `${borderColor}80` }}
+							>
+								<CheckIcon width={14} height={14} color={accentColor} />
+							</View>
+						</View>
+					</View>
+				</View>
+			</PressableFeedback>
+		</Link>
+	);
 }

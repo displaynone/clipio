@@ -197,7 +197,10 @@ export const useEditorStore = create<EditorStore>((set) => ({
         return state;
       }
 
-      const initialUris = (seedUris ?? state.selectedUris).slice(0, template.maxSlots);
+      const initialUris =
+        template.maxSlots == null
+          ? [...(seedUris ?? state.selectedUris)]
+          : (seedUris ?? state.selectedUris).slice(0, template.maxSlots);
 
       return {
         instance: {

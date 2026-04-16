@@ -6,10 +6,32 @@ export type TemplateSlot = {
 	height: number; // porcentaje 0-100
 };
 
+export type TemplateSequenceEffect =
+	| "fade"
+	| "blur"
+	| "zoom"
+	| "contrast-pop"
+	| "pixelate"
+	| "hlslice"
+	| "hrslice"
+	| "fadeblack"
+	| "diagtl"
+	| "flash-shake"
+	| "rgb-split"
+	| "glow"
+	| "speed-ramp"
+	| "vhs-retro"
+	| "light-point"
+	| "wipe-left"
+	| "wipe-up"
+	| "circle-close";
+
 export type TemplateStylePreset = {
 	backgroundColor: string;
 	gap: number;
 	borderRadius: number;
+	sequenceEffect?: TemplateSequenceEffect;
+	sequenceTransitionSeconds?: number;
 };
 
 export type TemplateOutput = {
@@ -17,14 +39,20 @@ export type TemplateOutput = {
 	height: number;
 };
 
+export type TemplateOrientation = "vertical" | "landscape";
+export type TemplateKind = "grid" | "sequence";
+
 export type TemplateData = {
 	id: string;
 	name: string;
 	description: string;
+	kind?: TemplateKind;
+	orientation: TemplateOrientation;
 	slots: TemplateSlot[];
-	maxSlots: number;
+	maxSlots: number | null;
 	defaultStyle: TemplateStylePreset;
 	output: TemplateOutput;
+	template?: React.ReactNode;
 };
 
 export type TemplateInstance = {
@@ -33,3 +61,11 @@ export type TemplateInstance = {
 	audioSourceUri: string | null;
 	style: TemplateStylePreset;
 };
+
+export function isUnlimitedTemplate(template: TemplateData) {
+	return template.maxSlots == null;
+}
+
+export function getTemplateCapacity(template: TemplateData) {
+	return template.maxSlots ?? Number.POSITIVE_INFINITY;
+}

@@ -5,6 +5,7 @@ export function createEditorState(template: TemplateData): TemplateEditorState {
 	const instance: TemplateInstance = {
 		templateId: template.id,
 		selectedUris: [],
+		audioSourceUri: null,
 		style: template.defaultStyle,
 	};
 
@@ -19,7 +20,9 @@ export function createEditorState(template: TemplateData): TemplateEditorState {
 
 export function validateTemplateReady(
 	instance: TemplateInstance,
-	maxSlots: number,
+	maxSlots: number | null,
 ): boolean {
-	return instance.selectedUris.length === maxSlots;
+	return maxSlots == null
+		? instance.selectedUris.length > 0
+		: instance.selectedUris.length === maxSlots;
 }

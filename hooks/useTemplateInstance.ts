@@ -1,5 +1,10 @@
 import { useEditorStore } from '@/stores/editorStore';
-import { TemplateData, TemplateInstance } from '@/types/template';
+import {
+	isUnlimitedTemplate,
+	TemplateData,
+	TemplateInstance,
+	TemplateSequenceEffect,
+} from '@/types/template';
 import { useEffect, useMemo } from 'react';
 
 export function useTemplateInstance(template: TemplateData) {
@@ -23,14 +28,20 @@ export function useTemplateInstance(template: TemplateData) {
 				? storedInstance
 				: {
 						templateId: template.id,
-						selectedUris: selectedGlobalUris.slice(0, template.maxSlots),
+						selectedUris: isUnlimitedTemplate(template)
+							? [...selectedGlobalUris]
+							: selectedGlobalUris.slice(0, template.maxSlots ?? undefined),
 						audioSourceUri: selectedGlobalUris[0] ?? null,
 						style: template.defaultStyle,
 				  },
 		[storedInstance, template, selectedGlobalUris],
 	);
 
-	const addUri = (uri: string | string[]) => addEditorUri(uri, template.maxSlots);
+	const addUri = (uri: string | string[]) =>
+		addEditorUri(
+			uri,
+			isUnlimitedTemplate(template) ? undefined : (template.maxSlots ?? undefined),
+		);
 	const swap = (index: number, direction: -1 | 1) => swapEditorUris(index, direction);
 	const move = (fromIndex: number, toIndex: number) => moveEditorUri(fromIndex, toIndex);
 	const remove = (index: number) => removeEditorUri(index);
@@ -38,6 +49,10 @@ export function useTemplateInstance(template: TemplateData) {
 	const setGap = (gap: number) => updateEditorStyle({ gap });
 	const setBorderRadius = (borderRadius: number) => updateEditorStyle({ borderRadius });
 	const setBackgroundColor = (backgroundColor: string) => updateEditorStyle({ backgroundColor });
+	const setSequenceEffect = (sequenceEffect: TemplateSequenceEffect) =>
+		updateEditorStyle({ sequenceEffect });
+	const setSequenceTransitionSeconds = (sequenceTransitionSeconds: number) =>
+		updateEditorStyle({ sequenceTransitionSeconds });
 
 	return {
 		instance,
@@ -51,5 +66,7 @@ export function useTemplateInstance(template: TemplateData) {
 		setGap,
 		setBorderRadius,
 		setBackgroundColor,
+		setSequenceEffect,
+		setSequenceTransitionSeconds,
 	};
 }

@@ -1,8 +1,10 @@
+import { VideoProject } from "@/features/video-editor/domain/video-project";
 import { TemplateData, TemplateInstance } from "@/types/template";
 
 export type TemplateViewProps = {
 	template: TemplateData;
 	instance: TemplateInstance;
+	project: VideoProject;
 	selectedUris: string[];
 	audioSourceUri: string | null;
 	isPickLoading: boolean;
@@ -16,4 +18,6 @@ export type TemplateViewProps = {
 	onSetGap: (gap: number) => void;
 	onSetBorderRadius: (borderRadius: number) => void;
 	onSetBackgroundColor: (backgroundColor: string) => void;
+	onSetSequenceEffect: (effect: import("@/types/template").TemplateSequenceEffect) => void;
+	onSetSequenceTransitionSeconds: (seconds: number) => void;
 };

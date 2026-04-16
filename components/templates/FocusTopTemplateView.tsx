@@ -1,135 +1,99 @@
-import TemplatePreviewCanvas from "@/components/TemplatePreviewCanvas";
-import { Button, PressableFeedback } from "heroui-native";
+import VideoThumbnail from "@/components/VideoThumbnail";
+import ReorderableClipList from "@/components/templates/ReorderableClipList";
+import TemplateThumbnailLoadingIndicator from "@/components/templates/TemplateThumbnailLoadingIndicator";
+import { useVideoThumbnailPrefetch } from "@/hooks/useVideoThumbnailPrefetch";
+import { useMemo } from "react";
 import { ScrollView, Text, View } from "react-native";
-import {
-	ChevronDoubleDownIcon,
-	ChevronDoubleUpIcon,
-	VideoCameraIcon,
-} from "react-native-heroicons/outline";
 import { TemplateViewProps } from "./template-view.types";
 
-const BACKGROUND_COLORS = ["#111827", "#0B1120", "#1E3A8A", "#0F172A", "#1F2937"];
-
 export default function FocusTopTemplateView({
-	template,
-	instance,
+	project,
 	selectedUris,
-	audioSourceUri: _audioSourceUri,
-	isPickLoading,
-	accentColor,
+	audioSourceUri,
 	foregroundColor,
-	onPick,
-	onSwap,
-	onMove: _onMove,
-	onRemove,
-	onSetAudioSource: _onSetAudioSource,
-	onSetGap,
-	onSetBorderRadius,
-	onSetBackgroundColor,
+	onMove,
+	onSetAudioSource,
 }: TemplateViewProps) {
+	const orderedUris = useMemo(() => selectedUris, [selectedUris]);
+	const thumbnailLoading = useVideoThumbnailPrefetch(orderedUris);
+
 	return (
 		<ScrollView
 			className="flex-1"
-			contentContainerClassName="flex-grow px-4 pb-8 pt-4"
+			contentContainerClassName="flex-grow px-6 pb-10 pt-6"
 			showsVerticalScrollIndicator={false}
 		>
-			<Text className="mb-0.5 text-[22px] font-extrabold tracking-[-0.02em] text-foreground">
-				{template.name}
-			</Text>
-			<Text className="mb-3 text-sm text-muted">{template.description}</Text>
-
-			<TemplatePreviewCanvas template={template} instance={instance} />
-
-			<View className="mb-3">
-				<Button onPress={onPick} isDisabled={isPickLoading} className="w-full">
-					<VideoCameraIcon color={foregroundColor} width={18} height={18} />
-					<Button.Label>
-						{isPickLoading ? "Cargando..." : "Seleccionar videos"}
-					</Button.Label>
-				</Button>
-			</View>
-
-			<View className="mb-3">
-				<Text className="mb-2 text-xs font-semibold uppercase tracking-[0.05em] text-muted">
-					Color fondo
-				</Text>
-				<View className="flex-row gap-2">
-					{BACKGROUND_COLORS.map((color) => (
-						<PressableFeedback
-							key={color}
-							className="h-7.5 w-7.5 rounded-full border-2"
-							style={[
-								{
-									backgroundColor: color,
-									borderColor:
-										instance.style.backgroundColor === color ? accentColor : "transparent",
-								},
-							]}
-							onPress={() => onSetBackgroundColor(color)}
-						/>
-					))}
-				</View>
-			</View>
-
-			<View className="mb-3">
-				<Text className="mb-2 text-xs font-semibold uppercase tracking-[0.05em] text-muted">
-					Gap ({instance.style.gap}px)
-				</Text>
-				<View className="flex-row gap-2.5">
-					<Button
-						onPress={() => onSetGap(Math.max(0, instance.style.gap - 2))}
-						variant="ghost"
-					>
-						<Button.Label>-</Button.Label>
-					</Button>
-					<Button onPress={() => onSetGap(instance.style.gap + 2)} variant="ghost">
-						<Button.Label>+</Button.Label>
-					</Button>
-				</View>
-			</View>
-
-			<View className="mb-3">
-				<Text className="mb-2 text-xs font-semibold uppercase tracking-[0.05em] text-muted">
-					Bordes ({instance.style.borderRadius}px)
-				</Text>
-				<View className="flex-row gap-2.5">
-					<Button
-						onPress={() => onSetBorderRadius(Math.max(0, instance.style.borderRadius - 2))}
-						variant="ghost"
-					>
-						<Button.Label>-</Button.Label>
-					</Button>
-					<Button
-						onPress={() => onSetBorderRadius(Math.min(50, instance.style.borderRadius + 2))}
-						variant="ghost"
-					>
-						<Button.Label>+</Button.Label>
-					</Button>
-				</View>
-			</View>
-
-			<Text className="mb-1.5 mt-3 text-xs font-semibold uppercase tracking-[0.05em] text-muted">
-				Reordenar clips
-			</Text>
-			{selectedUris.map((uri, index) => (
+			<View className="mb-8 items-center">
 				<View
-					key={`${uri}-${index}`}
-					className="mb-2 flex-row items-center justify-between rounded-xl bg-surface-secondary px-3 py-2.5"
+					className="w-full max-w-[320px] overflow-hidden rounded-2xl"
+					style={{
+						aspectRatio: project.canvas.width / project.canvas.height,
+						backgroundColor: project.canvas.backgroundColor,
+					}}
 				>
-					<Text className="text-foreground">Clip {index + 1}</Text>
-					<View className="flex-row gap-2">
-						<Button onPress={() => onSwap(index, -1)} isIconOnly size="sm" variant="ghost">
-							<ChevronDoubleUpIcon width={14} height={14} color={foregroundColor} />
-						</Button>
-						<Button onPress={() => onSwap(index, 1)} isIconOnly size="sm" variant="ghost">
-							<ChevronDoubleDownIcon width={14} height={14} color={foregroundColor} />
-						</Button>
-						<Button onPress={() => onRemove(index)} isIconOnly size="sm" variant="danger">
-							<Text className="font-bold text-danger-foreground">✕</Text>
-						</Button>
+					<TemplateThumbnailLoadingIndicator
+						loadedCount={thumbnailLoading.loadedCount}
+						totalCount={thumbnailLoading.totalCount}
+					/>
+					<View className="h-1/2 w-full border border-background">
+						{orderedUris[0] ? (
+							<VideoThumbnail
+								uri={orderedUris[0]}
+								className="h-full w-full rounded-none"
+							/>
+						) : (
+							<View className="h-full w-full bg-surface-secondary" />
+						)}
+					</View>
+					<View className="h-1/2 w-full flex-row">
+						<View className="h-full w-1/2 border border-background">
+							{orderedUris[1] ? (
+								<VideoThumbnail
+									uri={orderedUris[1]}
+									className="h-full w-full rounded-none"
+								/>
+							) : (
+								<View className="h-full w-full bg-surface-secondary" />
+							)}
+						</View>
+						<View className="w-1/2 h-full flex-col">
+							{Array.from({ length: 2 }).map((_, index) => {
+								const uri = orderedUris[index + 2];
+
+								return (
+									<View
+										key={`preview-slot-${index + 2}`}
+										className="h-full flex-1 border border-background"
+									>
+										{uri ? (
+											<VideoThumbnail
+												uri={uri}
+												className="h-full w-full rounded-none"
+											/>
+										) : (
+											<View className="h-full w-full bg-surface-secondary" />
+										)}
+									</View>
+								);
+							})}
+						</View>
 					</View>
 				</View>
-			))}
+			</View>
+
+			<View className="mt-1">
+				<ReorderableClipList
+					project={project}
+					selectedUris={selectedUris}
+					foregroundColor={foregroundColor}
+					onMove={onMove}
+					audioSourceUri={audioSourceUri}
+					onSelectAudio={onSetAudioSource}
+					accordionValue="reorder-clips"
+					accordionTitle="Reorder Clips"
+					countLabel={(count) => `${count} Clips Selected`}
+				/>
+			</View>
 		</ScrollView>
 	);
 }

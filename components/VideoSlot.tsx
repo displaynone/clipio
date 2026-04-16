@@ -1,9 +1,17 @@
 import { Image } from 'expo-image';
-import * as VideoThumbnails from 'expo-video-thumbnails';
+import {
+  getVideoThumbnailCached,
+  shouldSkipThumbnailErrorLog,
+} from '@/components/video-thumbnail-cache';
 import { useThemeColor } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { VideoCameraIcon } from 'react-native-heroicons/outline';
+
+function scheduleWhenIdle(task: () => void) {
+  const handle = requestIdleCallback(task);
+  return () => cancelIdleCallback(handle);
+}
 
 type Props = {
   uri: string | null;
@@ -25,23 +33,25 @@ function LazyVideoSlot({ uri, style, className, gap = 0}: ActiveVideoSlotProps) 
 
     const generateThumbnail = async () => {
       try {
-        const { uri: generatedUri } = await VideoThumbnails.getThumbnailAsync(uri, {
-          time: 1000,
-          quality: 0.8,
-        });
+        const generatedUri = await getVideoThumbnailCached(uri);
 
         if (isMounted) {
           setThumbnailUri(generatedUri);
         }
       } catch (error) {
-        console.warn('Error generating slot thumbnail:', error);
+        if (!shouldSkipThumbnailErrorLog(error)) {
+          console.warn('Error generating slot thumbnail:', error);
+        }
       }
     };
 
-    generateThumbnail();
+    const cancelTask = scheduleWhenIdle(() => {
+      void generateThumbnail();
+    });
 
     return () => {
       isMounted = false;
+      cancelTask();
     };
   }, [uri]);
 

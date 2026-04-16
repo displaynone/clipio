@@ -2,9 +2,11 @@ import TemplateTemplateView from "@/components/templates/TemplateTemplateView";
 import { validateTemplateReady } from "@/features/editor/editorManager";
 import { pickVideoFromLibrary } from "@/features/media/mediaPicker";
 import { getTemplate, templateRegistry } from "@/features/templates/templates";
+import { useEditorProject } from "@/hooks/useEditorProject";
 import { useTemplateInstance } from "@/hooks/useTemplateInstance";
 import { videoExportService } from "@/services/videoExportService";
-import { TemplateInstance } from "@/types/template";
+import { useEditorStore } from "@/stores/editorStore";
+import { getTemplateCapacity, isUnlimitedTemplate, TemplateInstance } from "@/types/template";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { PressableFeedback, ScrollShadow, useThemeColor } from "heroui-native";
@@ -38,7 +40,11 @@ export default function TemplateDetailScreen() {
 		setGap,
 		setBorderRadius,
 		setBackgroundColor,
+		setSequenceEffect,
+		setSequenceTransitionSeconds,
 	} = useTemplateInstance(template ?? templateRegistry[0]);
+	const project = useEditorProject(template ?? templateRegistry[0], instance as TemplateInstance);
+	const setTrimForUri = useEditorStore((state) => state.setTrimForUri);
 
 	useEffect(() => {
 		if (!template) {
@@ -57,25 +63,38 @@ export default function TemplateDetailScreen() {
 	const handlePick = async () => {
 		try {
 			setIsPickLoading(true);
-			const uris = await pickVideoFromLibrary();
-			if (uris.length > 0) {
-				const availableSlots = template.maxSlots - selectedUris.length;
+			const assets = await pickVideoFromLibrary();
+			if (assets.length > 0) {
+				const availableSlots = isUnlimitedTemplate(template)
+					? Number.POSITIVE_INFINITY
+					: (template.maxSlots ?? 0) - selectedUris.length;
 				if (availableSlots <= 0) {
 					Alert.alert(
 						"Límite alcanzado",
-						`Esta plantilla solo permite ${template.maxSlots} videos.`,
+						`Esta plantilla solo permite ${getTemplateCapacity(template)} videos.`,
 					);
 					return;
 				}
 
 				// El hook addUri ahora maneja automáticamente los límites
-				addUri(uris);
+				addUri(assets.map((asset) => asset.uri));
+				assets.forEach((asset) => {
+					if (asset.duration == null || asset.duration <= 0) {
+						return;
+					}
 
-				const addedCount = Math.min(uris.length, availableSlots);
-				if (uris.length > availableSlots) {
+					setTrimForUri(asset.uri, {
+						startMs: 0,
+						endMs: asset.duration,
+						durationMs: asset.duration,
+					});
+				});
+
+				const addedCount = Math.min(assets.length, availableSlots);
+				if (Number.isFinite(availableSlots) && assets.length > availableSlots) {
 					Alert.alert(
 						"Algunos videos no se agregaron",
-						`Solo se pudieron agregar ${addedCount} video${addedCount !== 1 ? "s" : ""} de los ${uris.length} seleccionados.`,
+						`Solo se pudieron agregar ${addedCount} video${addedCount !== 1 ? "s" : ""} de los ${assets.length} seleccionados.`,
 					);
 				}
 			}
@@ -90,9 +109,15 @@ export default function TemplateDetailScreen() {
 		if (
 			!validateTemplateReady(instance as TemplateInstance, template.maxSlots)
 		) {
+			const remainingCount =
+				template.maxSlots == null
+					? 1 - selectedUris.length
+					: template.maxSlots - selectedUris.length;
 			Alert.alert(
 				"Exportación deshabilitada",
-				`Selecciona ${template.maxSlots - selectedUris.length} videos más para poder exportar.`,
+				template.maxSlots == null
+					? "Selecciona al menos un video para poder exportar."
+					: `Selecciona ${remainingCount} videos más para poder exportar.`,
 			);
 			return;
 		}
@@ -100,11 +125,9 @@ export default function TemplateDetailScreen() {
 		try {
 			setIsExporting(true);
 			setExportProgress(0);
-			const result = await videoExportService.exportToFile(
-				template,
-				instance as TemplateInstance,
-				setExportProgress,
-			);
+			const result = await videoExportService.exportToFile(project, (event) => {
+				setExportProgress(event.progress);
+			});
 
 			if (!result.success || !result.outputUri) {
 				throw new Error(result.error ?? "No se pudo exportar el video.");
@@ -115,6 +138,8 @@ export default function TemplateDetailScreen() {
 				`Video guardado en:\n${result.outputUri}`,
 			);
 		} catch (error) {
+			console.log("[video-export] Export failed", error);
+			console.error("[video-export] Export failed", error);
 			Alert.alert("Error de export", `${error}`);
 		} finally {
 			setIsExporting(false);
@@ -126,6 +151,9 @@ export default function TemplateDetailScreen() {
 			<Stack.Screen
 				options={{
 					headerShadowVisible: false,
+					headerTintColor: "#ffffff",
+					statusBarStyle: "light",
+					statusBarBackgroundColor: "#16052a",
 					headerStyle: {
 						backgroundColor: "#16052a",
 					},
@@ -167,6 +195,7 @@ export default function TemplateDetailScreen() {
 				<TemplateTemplateView
 					template={template}
 					instance={instance as TemplateInstance}
+					project={project}
 					selectedUris={selectedUris}
 					audioSourceUri={audioSourceUri}
 					isPickLoading={isPickLoading}
@@ -180,6 +209,8 @@ export default function TemplateDetailScreen() {
 					onSetGap={setGap}
 					onSetBorderRadius={setBorderRadius}
 					onSetBackgroundColor={setBackgroundColor}
+					onSetSequenceEffect={setSequenceEffect}
+					onSetSequenceTransitionSeconds={setSequenceTransitionSeconds}
 				/>
 			</ScrollShadow>
 

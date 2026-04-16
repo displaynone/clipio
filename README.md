@@ -54,11 +54,14 @@ eas build --profile development --platform ios
 - Ajustes de color fondo, gap y border radius
 - Estructura limpia: components/features/hooks/types/services
 
-### Integración futura (FFmpeg / export nativo)
+### FFmpeg Android
 
-- `services/videoExportService.ts` contiene una capa de abstracción para la futura exportación y renderizado nativo
-- `expo-file-system` ya está instalado para manejo de archivos
-- Plantillas declarativas por datos (`features/templates/templates.ts`)
+- `FFmpegExportModule` ya existe como módulo nativo Android
+- el binario debe empaquetarse en `android/app/src/main/jniLibs/<abi>/libffmpeg.so`
+- documentación detallada en `docs/ffmpeg-android-setup.md`
+- scripts disponibles:
+  - `npm run ffmpeg:build:android`
+  - `npm run ffmpeg:doctor`
 
 ## Get a fresh project
 

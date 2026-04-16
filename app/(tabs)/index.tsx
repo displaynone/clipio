@@ -6,18 +6,73 @@ import { useVideoSelection } from '@/hooks/useVideoSelection';
 import { Tabs, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
+import { MediaAsset } from '@/types/media';
+
+const VIDEO_IMPORT_CHUNK_SIZE = 6;
+
+function chunkAssets(assets: MediaAsset[], chunkSize: number) {
+  const chunks: MediaAsset[][] = [];
+
+  for (let index = 0; index < assets.length; index += chunkSize) {
+    chunks.push(assets.slice(index, index + chunkSize));
+  }
+
+  return chunks;
+}
+
+function yieldToUI() {
+  return new Promise<void>((resolve) => {
+    requestAnimationFrame(() => resolve());
+  });
+}
 
 export default function HomeScreen() {
-  const { libraryUris, selectedUris, addUri, removeUri, toggleUriSelection } = useVideoSelection();
+  const {
+    libraryUris,
+    selectedUris,
+    addUri,
+    removeUri,
+    toggleUriSelection,
+    setTrimForUri,
+  } = useVideoSelection();
   const [isPickLoading, setIsPickLoading] = useState(false);
   const router = useRouter();
+
+  const appendAssetChunk = (assets: MediaAsset[]) => {
+    if (assets.length === 0) {
+      return;
+    }
+
+    addUri(assets.map((asset) => asset.uri));
+
+    assets.forEach((asset) => {
+      if (asset.duration == null || asset.duration <= 0) {
+        return;
+      }
+
+      setTrimForUri(asset.uri, {
+        startMs: 0,
+        endMs: asset.duration,
+        durationMs: asset.duration,
+      });
+    });
+  };
 
   const handlePickVideo = async () => {
     try {
       setIsPickLoading(true);
-      const uris = await pickVideoFromLibrary();
-      if (uris.length > 0) {
-        addUri(uris);
+      const assets = await pickVideoFromLibrary();
+      if (assets.length > 0) {
+        const assetChunks = chunkAssets(assets, VIDEO_IMPORT_CHUNK_SIZE);
+        const [firstChunk, ...remainingChunks] = assetChunks;
+
+        appendAssetChunk(firstChunk ?? []);
+        await yieldToUI();
+
+        for (const chunk of remainingChunks) {
+          appendAssetChunk(chunk);
+          await yieldToUI();
+        }
       }
     } catch (error) {
       Alert.alert('Error al seleccionar video', `${error}`);
