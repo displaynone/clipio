@@ -134,7 +134,6 @@ function buildSequenceProject(
 ) {
   let currentStartMs = 0;
   const isSpeedRamp = instance.style.sequenceEffect === "speed-ramp";
-  const isPixelate = instance.style.sequenceEffect === "pixelate";
   const configuredTransitionMs = Math.max(
     0,
     Math.round(
@@ -149,7 +148,7 @@ function buildSequenceProject(
       ? resolveSpeedRampAdjustedDurationMs(sourceDurationMs)
       : sourceDurationMs;
     const transitionDurationMs =
-      isSpeedRamp || isPixelate
+      isSpeedRamp
         ? 0
         : index === 0
         ? 0

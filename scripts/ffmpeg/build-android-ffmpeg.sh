@@ -7,6 +7,8 @@ ANDROID_DIR="$PROJECT_ROOT/android"
 APP_JNI_LIBS_DIR="$ANDROID_DIR/app/src/main/jniLibs"
 FFMPEG_SOURCE_DIR="${FFMPEG_SOURCE_DIR:-$ANDROID_DIR/ffmpeg/source}"
 FFMPEG_BUILD_DIR="${FFMPEG_BUILD_DIR:-$ANDROID_DIR/ffmpeg/build}"
+FFMPEG_REPOSITORY="${FFMPEG_REPOSITORY:-https://github.com/FFmpeg/FFmpeg.git}"
+FFMPEG_REF="${FFMPEG_REF:-b47a4598677f009cafc860803aef1bfa1ffd1a71}"
 HOST_TAG="${ANDROID_NDK_HOST_TAG:-linux-x86_64}"
 NDK_ROOT="${ANDROID_NDK_ROOT:-${ANDROID_NDK_HOME:-}}"
 API_LEVEL="${ANDROID_API_LEVEL:-24}"
@@ -37,10 +39,29 @@ if [[ -z "$NDK_ROOT" ]]; then
   exit 1
 fi
 
+ensure_ffmpeg_source() {
+  if [[ ! -d "$FFMPEG_SOURCE_DIR/.git" ]]; then
+    echo "No existe FFMPEG_SOURCE_DIR: $FFMPEG_SOURCE_DIR"
+    echo "Clonando FFmpeg desde $FFMPEG_REPOSITORY..."
+    rm -rf "$FFMPEG_SOURCE_DIR"
+    mkdir -p "$(dirname "$FFMPEG_SOURCE_DIR")"
+    git clone --filter=blob:none "$FFMPEG_REPOSITORY" "$FFMPEG_SOURCE_DIR"
+  fi
+
+  pushd "$FFMPEG_SOURCE_DIR" >/dev/null
+  git fetch --filter=blob:none origin "$FFMPEG_REF"
+  git checkout --detach "$FFMPEG_REF"
+  popd >/dev/null
+}
+
 if [[ ! -d "$FFMPEG_SOURCE_DIR" ]]; then
-  echo "No existe FFMPEG_SOURCE_DIR: $FFMPEG_SOURCE_DIR"
-  echo "Clona FFmpeg en android/ffmpeg/source o exporta FFMPEG_SOURCE_DIR."
+  ensure_ffmpeg_source
+elif [[ ! -d "$FFMPEG_SOURCE_DIR/.git" ]]; then
+  echo "FFMPEG_SOURCE_DIR existe pero no es un repo Git: $FFMPEG_SOURCE_DIR"
+  echo "Bórralo o exporta FFMPEG_SOURCE_DIR apuntando a un checkout válido de FFmpeg."
   exit 1
+else
+  ensure_ffmpeg_source
 fi
 
 mkdir -p "$APP_JNI_LIBS_DIR"

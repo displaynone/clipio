@@ -219,130 +219,6 @@ function buildSpeedRampAudioNodes(
 	];
 }
 
-function buildPixelateSequenceTransitionNodes(
-	currentVideoLabel: string,
-	nextVideoLabel: string,
-	currentDurationMs: number,
-	nextDurationMs: number,
-	transitionDurationMs: number,
-	canvasWidth: number,
-	canvasHeight: number,
-	outputLabel: string,
-): FFmpegFilterNode[] {
-	const safeTransitionMs = Math.max(
-		1,
-		Math.min(transitionDurationMs, currentDurationMs, nextDurationMs),
-	);
-	const currentMainDurationMs = Math.max(0, currentDurationMs - safeTransitionMs);
-	const incomingMainDurationMs = Math.max(0, nextDurationMs - safeTransitionMs);
-	const minWidth = 8;
-	const minHeight = 8;
-	const widthFactor = Math.max(1, canvasWidth / minWidth - 1);
-	const heightFactor = Math.max(1, canvasHeight / minHeight - 1);
-	const transitionSeconds = formatSeconds(safeTransitionMs);
-	const currentMainLabel = `${outputLabel}_current_main`;
-	const currentPixelLabel = `${outputLabel}_current_pixel`;
-	const nextPixelLabel = `${outputLabel}_next_pixel`;
-	const nextMainLabel = `${outputLabel}_next_main`;
-
-	return [
-		{
-			inputLabels: [currentVideoLabel],
-			filter: [
-				`trim=start=0:duration=${formatSeconds(currentMainDurationMs)}`,
-				"setpts=PTS-STARTPTS",
-				`scale=${canvasWidth}:${canvasHeight}:flags=bilinear`,
-				"setsar=1",
-			].join(","),
-			outputLabel: currentMainLabel,
-		},
-		{
-			inputLabels: [currentVideoLabel],
-			filter: [
-				`trim=start=${formatSeconds(currentMainDurationMs)}:duration=${transitionSeconds}`,
-				"setpts=PTS-STARTPTS",
-				`scale=w='max(${minWidth},trunc(${canvasWidth}/(1+${widthFactor}*t/${transitionSeconds})))':h='max(${minHeight},trunc(${canvasHeight}/(1+${heightFactor}*t/${transitionSeconds})))':flags=neighbor:eval=frame`,
-				`scale=${canvasWidth}:${canvasHeight}:flags=neighbor`,
-				"setsar=1",
-			].join(","),
-			outputLabel: currentPixelLabel,
-		},
-		{
-			inputLabels: [nextVideoLabel],
-			filter: [
-				`trim=start=0:duration=${transitionSeconds}`,
-				"setpts=PTS-STARTPTS",
-				`scale=w='max(${minWidth},trunc(${canvasWidth}/(${canvasWidth / minWidth}-${widthFactor}*t/${transitionSeconds})))':h='max(${minHeight},trunc(${canvasHeight}/(${canvasHeight / minHeight}-${heightFactor}*t/${transitionSeconds})))':flags=neighbor:eval=frame`,
-				`scale=${canvasWidth}:${canvasHeight}:flags=neighbor`,
-				"setsar=1",
-			].join(","),
-			outputLabel: nextPixelLabel,
-		},
-		{
-			inputLabels: [nextVideoLabel],
-			filter: [
-				`trim=start=${transitionSeconds}:duration=${formatSeconds(incomingMainDurationMs)}`,
-				"setpts=PTS-STARTPTS",
-				`scale=${canvasWidth}:${canvasHeight}:flags=bilinear`,
-				"setsar=1",
-			].join(","),
-			outputLabel: nextMainLabel,
-		},
-		{
-			inputLabels: [
-				currentMainLabel,
-				currentPixelLabel,
-				nextPixelLabel,
-				nextMainLabel,
-			],
-			filter: "concat=n=4:v=1:a=0",
-			outputLabel,
-		},
-	];
-}
-
-function buildPixelateOutSegmentFilter(
-	startMs: number,
-	durationMs: number,
-	canvasWidth: number,
-	canvasHeight: number,
-) {
-	const minWidth = 8;
-	const minHeight = 8;
-	const widthFactor = Math.max(1, canvasWidth / minWidth - 1);
-	const heightFactor = Math.max(1, canvasHeight / minHeight - 1);
-	const durationSeconds = formatSeconds(durationMs);
-
-	return [
-		`trim=start=${formatSeconds(startMs)}:duration=${durationSeconds}`,
-		"setpts=PTS-STARTPTS",
-		`scale=w='max(${minWidth},trunc(${canvasWidth}/(1+${widthFactor}*t/${durationSeconds})))':h='max(${minHeight},trunc(${canvasHeight}/(1+${heightFactor}*t/${durationSeconds})))':flags=neighbor:eval=frame`,
-		`scale=${canvasWidth}:${canvasHeight}:flags=neighbor`,
-		"setsar=1",
-	].join(",");
-}
-
-function buildPixelateInSegmentFilter(
-	startMs: number,
-	durationMs: number,
-	canvasWidth: number,
-	canvasHeight: number,
-) {
-	const minWidth = 8;
-	const minHeight = 8;
-	const widthFactor = Math.max(1, canvasWidth / minWidth - 1);
-	const heightFactor = Math.max(1, canvasHeight / minHeight - 1);
-	const durationSeconds = formatSeconds(durationMs);
-
-	return [
-		`trim=start=${formatSeconds(startMs)}:duration=${durationSeconds}`,
-		"setpts=PTS-STARTPTS",
-		`scale=w='max(${minWidth},trunc(${canvasWidth}/(${canvasWidth / minWidth}-${widthFactor}*t/${durationSeconds})))':h='max(${minHeight},trunc(${canvasHeight}/(${canvasHeight / minHeight}-${heightFactor}*t/${durationSeconds})))':flags=neighbor:eval=frame`,
-		`scale=${canvasWidth}:${canvasHeight}:flags=neighbor`,
-		"setsar=1",
-	].join(",");
-}
-
 function getTrackItems<T extends VideoTrackItem | AudioTrackItem>(
 	tracks: ProjectTrack[],
 	type: "video" | "audio",
@@ -403,20 +279,20 @@ function buildSequenceVideoTransitionFilter(
 	}
 
 	if (effect === "pixelate") {
-		const end = formatSeconds(offsetMs + transitionDurationMs);
-		const mid = formatSeconds(offsetMs + transitionDurationMs / 2);
-		const halfDuration = Math.max(0.001, transitionDurationMs / 2000);
-		const peakExpr = `if(lt(t,${offset}),0,if(lt(t,${mid}),(t-${offset})/${halfDuration},if(lt(t,${end}),(${end}-t)/${halfDuration},0)))`;
-		const fadeDurationMs = Math.max(80, Math.min(220, transitionDurationMs * 0.25));
-		const fadeDuration = formatSeconds(fadeDurationMs);
-		const fadeOffset = formatSeconds(Math.max(offsetMs, offsetMs + transitionDurationMs - fadeDurationMs));
-		const minWidth = Math.max(24, Math.round(canvasWidth * 0.08));
-		const minHeight = Math.max(24, Math.round(canvasHeight * 0.08));
+		const maxBlockSize = Math.max(
+			8,
+			Math.round(Math.min(canvasWidth, canvasHeight) * 0.08),
+		);
+		const peakExpr = "if(lt(P,0.5),2*P,2*(1-P))";
+		const blockExpr = `max(1,1+${maxBlockSize}*${peakExpr})`;
+		const sampleX = `X-mod(X,${blockExpr})`;
+		const sampleY = `Y-mod(Y,${blockExpr})`;
+		const sourceSample = (prefix: "a" | "b") =>
+			`if(eq(PLANE,0),${prefix}0(${sampleX},${sampleY}),if(eq(PLANE,1),${prefix}1(${sampleX},${sampleY}),if(eq(PLANE,2),${prefix}2(${sampleX},${sampleY}),${prefix}3(${sampleX},${sampleY}))))`;
+		const pixelateExpr = `if(gt(P,0.5),${sourceSample("a")},${sourceSample("b")})`;
 
 		return [
-			`xfade=transition=fade:duration=${fadeDuration}:offset=${fadeOffset}`,
-			`scale=w='max(${minWidth},${canvasWidth}*(1-0.92*(${peakExpr})))':h='max(${minHeight},${canvasHeight}*(1-0.92*(${peakExpr})))':flags=neighbor:eval=frame`,
-			`scale=${canvasWidth}:${canvasHeight}:flags=neighbor`,
+			`xfade=transition=custom:expr='${pixelateExpr}':duration=${duration}:offset=${offset}`,
 		].join(",");
 	}
 
@@ -480,7 +356,6 @@ function buildSequenceVideoTransitionFilter(
 function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	const sequenceEffect = resolveSequenceTransitionEffect(project);
 	const isSpeedRamp = sequenceEffect === "speed-ramp";
-	const isPixelate = sequenceEffect === "pixelate";
 	const shouldUseSequenceCoverCrop = shouldUseCoverCropInSequence(sequenceEffect);
 	const visualItems = getTrackItems<VideoTrackItem>(
 		project.tracks,
@@ -573,137 +448,6 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 			);
 	});
 
-	if (isPixelate) {
-		const pixelateDurationMs = Math.max(
-			1,
-			Math.round((project.metadata?.template?.sequenceTransitionSeconds ?? 1) * 1000),
-		);
-		const pixelateSegmentLabels: string[] = [];
-
-		visualItems.forEach((item, index) => {
-			const clipDurationMs = item.durationMs;
-			const safeTransitionMs = Math.max(
-				1,
-				Math.min(pixelateDurationMs, clipDurationMs),
-			);
-			const hasPrevious = index > 0;
-			const hasNext = index < visualItems.length - 1;
-			const incomingLabel = `v_pixel_in_${index}`;
-			const mainLabel = `v_pixel_main_${index}`;
-			const outgoingLabel = `v_pixel_out_${index}`;
-
-			if (hasPrevious) {
-				filters.push({
-					inputLabels: [`v_seq_${index}`],
-					filter: buildPixelateInSegmentFilter(
-						0,
-						safeTransitionMs,
-						project.canvas.width,
-						project.canvas.height,
-					),
-					outputLabel: incomingLabel,
-				});
-				pixelateSegmentLabels.push(incomingLabel);
-			}
-
-			const mainStartMs = hasPrevious ? safeTransitionMs : 0;
-			const mainDurationMs = hasNext
-				? Math.max(0, clipDurationMs - safeTransitionMs - mainStartMs)
-				: Math.max(0, clipDurationMs - mainStartMs);
-
-			if (mainDurationMs > 0) {
-				filters.push({
-					inputLabels: [`v_seq_${index}`],
-					filter: [
-						`trim=start=${formatSeconds(mainStartMs)}:duration=${formatSeconds(mainDurationMs)}`,
-						"setpts=PTS-STARTPTS",
-						`scale=${project.canvas.width}:${project.canvas.height}:flags=bilinear`,
-						"setsar=1",
-					].join(","),
-					outputLabel: mainLabel,
-				});
-				pixelateSegmentLabels.push(mainLabel);
-			}
-
-			if (hasNext) {
-				filters.push({
-					inputLabels: [`v_seq_${index}`],
-					filter: buildPixelateOutSegmentFilter(
-						Math.max(0, clipDurationMs - safeTransitionMs),
-						safeTransitionMs,
-						project.canvas.width,
-						project.canvas.height,
-					),
-					outputLabel: outgoingLabel,
-				});
-				pixelateSegmentLabels.push(outgoingLabel);
-			}
-		});
-
-		const pixelateVideoOutputLabel = "v_pixelate_concat";
-		filters.push({
-			inputLabels: pixelateSegmentLabels,
-			filter: `concat=n=${pixelateSegmentLabels.length}:v=1:a=0`,
-			outputLabel: pixelateVideoOutputLabel,
-		});
-
-		const audioConcatLabels = visualItems.map((_, index) => `a_seq_${index}`);
-		const pixelateAudioOutputLabel = "a_pixelate_concat";
-		filters.push({
-			inputLabels: audioConcatLabels,
-			filter: `concat=n=${audioConcatLabels.length}:v=0:a=1`,
-			outputLabel: pixelateAudioOutputLabel,
-		});
-
-		const filterComplex = filters
-			.map((node) => {
-				const inputsPart = node.inputLabels.map((label) => `[${label}]`).join("");
-				return node.outputLabel
-					? `${inputsPart}${node.filter}[${node.outputLabel}]`
-					: `${inputsPart}${node.filter}`;
-			})
-			.join(";");
-
-		const outputArgs = [
-			"-filter_complex",
-			filterComplex,
-			"-map",
-			`[${pixelateVideoOutputLabel}]`,
-			"-map",
-			`[${pixelateAudioOutputLabel}]`,
-			"-t",
-			formatSeconds(project.canvas.durationMs),
-			"-r",
-			String(project.canvas.fps),
-			"-c:v",
-			"h264_mediacodec",
-			"-b:v",
-			"8M",
-			"-maxrate",
-			"12M",
-			"-bufsize",
-			"16M",
-			"-pix_fmt",
-			"yuv420p",
-			"-c:a",
-			"aac",
-			"-movflags",
-			"+faststart",
-		];
-
-		return {
-			inputs,
-			filterGraph: filters,
-			outputArgs,
-			command: [
-				"-y",
-				...inputs.flatMap((input) => input.args),
-				...outputArgs,
-				"<output-path>",
-			],
-		};
-	}
-
 	let currentVideoLabel = "v_seq_0";
 	let currentVideoDurationMs = visualItems[0]?.durationMs ?? 0;
 	for (let index = 1; index < visualItems.length; index += 1) {
@@ -711,49 +455,27 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		const transitionDurationMs =
 			currentItem?.transition?.type === "fade"
 				? currentItem.transition.durationMs
-				: isPixelate
-					? Math.max(
-							0,
-							Math.round(
-								(project.metadata?.template?.sequenceTransitionSeconds ?? 1) * 1000,
-							),
-					  )
-					: 0;
+				: 0;
 		const outputLabel = `v_xfade_${index}`;
 		const nextDurationMs = visualItems[index]?.durationMs ?? 0;
 
-		if (isPixelate && transitionDurationMs > 0) {
-			filters.push(
-				...buildPixelateSequenceTransitionNodes(
-					currentVideoLabel,
-					`v_seq_${index}`,
-					currentVideoDurationMs,
-					nextDurationMs,
-					transitionDurationMs,
-					project.canvas.width,
-					project.canvas.height,
-					outputLabel,
-				),
-			);
-		} else {
-			filters.push({
-				inputLabels: [currentVideoLabel, `v_seq_${index}`],
-				filter:
-					transitionDurationMs > 0
-						? buildSequenceVideoTransitionFilter(
-								sequenceEffect,
-								transitionDurationMs,
-								currentItem?.startMs ?? 0,
-								project.canvas.width,
-								project.canvas.height,
-							)
-						: `concat=n=2:v=1:a=0`,
-				outputLabel,
-			});
-		}
+		filters.push({
+			inputLabels: [currentVideoLabel, `v_seq_${index}`],
+			filter:
+				transitionDurationMs > 0
+					? buildSequenceVideoTransitionFilter(
+							sequenceEffect,
+							transitionDurationMs,
+							Math.max(0, currentVideoDurationMs - transitionDurationMs),
+							project.canvas.width,
+							project.canvas.height,
+						)
+					: `concat=n=2:v=1:a=0`,
+			outputLabel,
+		});
 
 		currentVideoLabel = outputLabel;
-		currentVideoDurationMs += nextDurationMs;
+		currentVideoDurationMs += Math.max(0, nextDurationMs - transitionDurationMs);
 	}
 
 	let finalAudioLabel = "a_seq_0";
@@ -762,9 +484,7 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		const transitionDurationMs =
 			currentItem?.transition?.type === "fade"
 				? currentItem.transition.durationMs
-				: isPixelate
-					? 0
-					: 0;
+				: 0;
 		const outputLabel = `a_xfade_${index}`;
 
 		filters.push({

@@ -40,4 +40,9 @@ app-example
 
 # generated native folders
 /ios
-/android
+
+# Android FFmpeg generated artifacts
+/android/ffmpeg/build/
+/android/ffmpeg/source/
+/android/app/src/main/jniLibs/*/libffmpeg.so
+/android/app/src/main/assets/ffmpeg/*/ffmpeg
