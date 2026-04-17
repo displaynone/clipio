@@ -19,6 +19,21 @@ function escapeFilterText(value: string) {
 	return value.replace(/:/g, "\\:").replace(/'/g, "\\'");
 }
 
+function buildMediaInputArgs(item: VideoTrackItem) {
+	if (item.sourceType === "image") {
+		return [
+			"-loop",
+			"1",
+			"-t",
+			formatSeconds(item.durationMs),
+			"-i",
+			item.sourceUri,
+		];
+	}
+
+	return ["-i", item.sourceUri];
+}
+
 function buildCoverCropFilter(width: number, height: number) {
 	const targetWidth = Math.max(1, Math.round(width));
 	const targetHeight = Math.max(1, Math.round(height));
@@ -32,21 +47,6 @@ function buildCoverCropFilter(width: number, height: number) {
 
 function isPortraitTarget(width: number, height: number) {
 	return height > width;
-}
-
-function shouldUseCoverCropInSequence(effect: TemplateSequenceEffect) {
-	return (
-		effect === "pixelate" ||
-		effect === "hlslice" ||
-		effect === "hrslice" ||
-		effect === "fadeblack" ||
-		effect === "diagtl" ||
-		effect === "flash-shake" ||
-		effect === "rgb-split" ||
-		effect === "glow" ||
-		effect === "speed-ramp" ||
-		effect === "vhs-retro"
-	);
 }
 
 function buildBlurBackgroundVideoNodes(
@@ -108,117 +108,6 @@ function buildBlurBackgroundVideoNodes(
 	return nodes;
 }
 
-const SPEED_RAMP_START_MS = 1_000;
-const SPEED_RAMP_SEGMENT_MS = 1_000;
-const SPEED_RAMP_FACTOR = 2;
-
-function shouldUseSpeedRamp(durationMs: number) {
-	return durationMs >= SPEED_RAMP_START_MS + SPEED_RAMP_SEGMENT_MS;
-}
-
-function buildSpeedRampVideoNodes(
-	inputLabel: string,
-	outputLabel: string,
-	durationMs: number,
-): FFmpegFilterNode[] {
-	if (!shouldUseSpeedRamp(durationMs)) {
-		return [
-			{
-				inputLabels: [inputLabel],
-				filter: "null",
-				outputLabel,
-			},
-		];
-	}
-
-	const rampStart = formatSeconds(SPEED_RAMP_START_MS);
-	const rampDuration = formatSeconds(SPEED_RAMP_SEGMENT_MS);
-	const rampOutputFactor = (1 / SPEED_RAMP_FACTOR).toFixed(3);
-	const tailStartMs = SPEED_RAMP_START_MS + SPEED_RAMP_SEGMENT_MS;
-	const tailDurationMs = Math.max(1, durationMs - tailStartMs);
-	const firstLabel = `${outputLabel}_lead`;
-	const rampLabel = `${outputLabel}_ramp`;
-	const tailLabel = `${outputLabel}_tail`;
-
-	return [
-		{
-			inputLabels: [inputLabel],
-			filter: `split=3[${firstLabel}_src][${rampLabel}_src][${tailLabel}_src]`,
-		},
-		{
-			inputLabels: [`${firstLabel}_src`],
-			filter: `trim=start=0:duration=${rampStart},setpts=PTS-STARTPTS`,
-			outputLabel: firstLabel,
-		},
-		{
-			inputLabels: [`${rampLabel}_src`],
-			filter: `trim=start=${rampStart}:duration=${rampDuration},setpts=${rampOutputFactor}*(PTS-STARTPTS)`,
-			outputLabel: rampLabel,
-		},
-		{
-			inputLabels: [`${tailLabel}_src`],
-			filter: `trim=start=${formatSeconds(tailStartMs)}:duration=${formatSeconds(tailDurationMs)},setpts=PTS-STARTPTS`,
-			outputLabel: tailLabel,
-		},
-		{
-			inputLabels: [firstLabel, rampLabel, tailLabel],
-			filter: "concat=n=3:v=1:a=0",
-			outputLabel,
-		},
-	];
-}
-
-function buildSpeedRampAudioNodes(
-	inputLabel: string,
-	outputLabel: string,
-	durationMs: number,
-): FFmpegFilterNode[] {
-	if (!shouldUseSpeedRamp(durationMs)) {
-		return [
-			{
-				inputLabels: [inputLabel],
-				filter: "anull",
-				outputLabel,
-			},
-		];
-	}
-
-	const rampStart = formatSeconds(SPEED_RAMP_START_MS);
-	const rampDuration = formatSeconds(SPEED_RAMP_SEGMENT_MS);
-	const tailStartMs = SPEED_RAMP_START_MS + SPEED_RAMP_SEGMENT_MS;
-	const tailDurationMs = Math.max(1, durationMs - tailStartMs);
-	const firstLabel = `${outputLabel}_lead`;
-	const rampLabel = `${outputLabel}_ramp`;
-	const tailLabel = `${outputLabel}_tail`;
-
-	return [
-		{
-			inputLabels: [inputLabel],
-			filter: `asplit=3[${firstLabel}_src][${rampLabel}_src][${tailLabel}_src]`,
-		},
-		{
-			inputLabels: [`${firstLabel}_src`],
-			filter: `atrim=start=0:duration=${rampStart},asetpts=PTS-STARTPTS`,
-			outputLabel: firstLabel,
-		},
-		{
-			inputLabels: [`${rampLabel}_src`],
-			filter: `atrim=start=${rampStart}:duration=${rampDuration},asetpts=PTS-STARTPTS,atempo=${SPEED_RAMP_FACTOR.toFixed(1)}`,
-			outputLabel: rampLabel,
-		},
-		{
-			inputLabels: [`${tailLabel}_src`],
-			filter: `atrim=start=${formatSeconds(tailStartMs)}:duration=${formatSeconds(tailDurationMs)},asetpts=PTS-STARTPTS`,
-			outputLabel: tailLabel,
-		},
-		{
-			inputLabels: [firstLabel, rampLabel, tailLabel],
-			filter: "concat=n=3:v=0:a=1",
-			outputLabel,
-		},
-	];
-}
-
 function getTrackItems<T extends VideoTrackItem | AudioTrackItem>(
 	tracks: ProjectTrack[],
 	type: "video" | "audio",
@@ -232,7 +121,30 @@ function getTrackItems<T extends VideoTrackItem | AudioTrackItem>(
 function resolveSequenceTransitionEffect(
 	project: VideoProject,
 ): TemplateSequenceEffect {
-	return project.metadata?.template?.sequenceEffect ?? "fade";
+	const effect = project.metadata?.template?.sequenceEffect as string | undefined;
+
+	switch (effect) {
+		case "blur":
+		case "zoom":
+		case "contrast-pop":
+		case "pixelate":
+		case "hlslice":
+		case "hrslice":
+		case "fadeblack":
+		case "diagtl":
+		case "flash-shake":
+		case "rgb-split":
+		case "glow":
+		case "vhs-retro":
+		case "light-point":
+		case "wipe-left":
+		case "wipe-up":
+		case "circle-close":
+			return effect;
+		case "fade":
+		default:
+			return "fade";
+	}
 }
 
 function buildSequenceVideoTransitionFilter(
@@ -247,7 +159,7 @@ function buildSequenceVideoTransitionFilter(
 	const transitionByEffect: Record<
 		Exclude<
 			TemplateSequenceEffect,
-			"contrast-pop" | "pixelate" | "flash-shake" | "rgb-split" | "glow" | "speed-ramp" | "vhs-retro"
+			"contrast-pop" | "pixelate" | "flash-shake" | "rgb-split" | "glow" | "vhs-retro"
 		>,
 		string
 	> = {
@@ -334,10 +246,6 @@ function buildSequenceVideoTransitionFilter(
 		].join(",");
 	}
 
-	if (effect === "speed-ramp") {
-		return `xfade=transition=fade:duration=${duration}:offset=${offset}`;
-	}
-
 	if (effect === "vhs-retro") {
 		const end = formatSeconds(offsetMs + transitionDurationMs);
 
@@ -355,8 +263,6 @@ function buildSequenceVideoTransitionFilter(
 
 function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	const sequenceEffect = resolveSequenceTransitionEffect(project);
-	const isSpeedRamp = sequenceEffect === "speed-ramp";
-	const shouldUseSequenceCoverCrop = shouldUseCoverCropInSequence(sequenceEffect);
 	const visualItems = getTrackItems<VideoTrackItem>(
 		project.tracks,
 		"video",
@@ -369,16 +275,19 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	const inputs: FFmpegInputSpec[] = visualItems.map((item, index) => ({
 		id: `sequence_${index}`,
 		uri: item.sourceUri,
-		args: ["-i", item.sourceUri],
+		args: buildMediaInputArgs(item),
 	}));
 	const filters: FFmpegFilterNode[] = [];
 
 	visualItems.forEach((item, index) => {
-		const trimStartMs = item.trimStartMs ?? 0;
-		const trimDurationMs = Math.max(
-			1,
-			(item.trimEndMs ?? trimStartMs + item.durationMs) - trimStartMs,
-		);
+		const isImage = item.sourceType === "image";
+		const trimStartMs = isImage ? 0 : item.trimStartMs ?? 0;
+		const trimDurationMs = isImage
+			? Math.max(1, item.durationMs)
+			: Math.max(
+					1,
+					(item.trimEndMs ?? trimStartMs + item.durationMs) - trimStartMs,
+			  );
 		const baseOutputLabel = `v_seq_base_${index}`;
 		const outputLabel = `v_seq_${index}`;
 		const baseFilters = [
@@ -386,66 +295,50 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 			"setpts=PTS-STARTPTS",
 		];
 
-		if (
-			isPortraitTarget(project.canvas.width, project.canvas.height) &&
-			!shouldUseSequenceCoverCrop
-		) {
-			filters.push(
-				...buildBlurBackgroundVideoNodes(
-					`${index}:v`,
-					baseOutputLabel,
-					baseFilters,
-					project.canvas.width,
-					project.canvas.height,
-					project.canvas.fps,
-				),
-			);
+		filters.push({
+			inputLabels: [`${index}:v`],
+			filter: [
+				...baseFilters,
+				`fps=${project.canvas.fps}`,
+				...buildCoverCropFilter(project.canvas.width, project.canvas.height),
+			].join(","),
+			outputLabel: baseOutputLabel,
+		});
+
+		filters.push(
+			{
+				inputLabels: [baseOutputLabel],
+				filter: "null",
+				outputLabel,
+			},
+		);
+
+		const audioBaseLabel = `a_seq_base_${index}`;
+		if (isImage) {
+			filters.push({
+				inputLabels: [],
+				filter: `anullsrc=channel_layout=stereo:sample_rate=44100:d=${formatSeconds(trimDurationMs)}`,
+				outputLabel: audioBaseLabel,
+			});
 		} else {
 			filters.push({
-				inputLabels: [`${index}:v`],
+				inputLabels: [`${index}:a`],
 				filter: [
-					...baseFilters,
-					`fps=${project.canvas.fps}`,
-					...buildCoverCropFilter(project.canvas.width, project.canvas.height),
+					`atrim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
+					"asetpts=PTS-STARTPTS",
+					"aresample=async=1:first_pts=0",
 				].join(","),
-				outputLabel: baseOutputLabel,
+				outputLabel: audioBaseLabel,
 			});
 		}
 
 		filters.push(
-			...(isSpeedRamp
-				? buildSpeedRampVideoNodes(baseOutputLabel, outputLabel, trimDurationMs)
-				: [
-						{
-							inputLabels: [baseOutputLabel],
-							filter: "null",
-							outputLabel,
-						},
-				  ]),
+			{
+				inputLabels: [audioBaseLabel],
+				filter: "anull",
+				outputLabel: `a_seq_${index}`,
+			},
 		);
-
-		const audioBaseLabel = `a_seq_base_${index}`;
-		filters.push({
-			inputLabels: [`${index}:a`],
-			filter: [
-				`atrim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
-				"asetpts=PTS-STARTPTS",
-				"aresample=async=1:first_pts=0",
-			].join(","),
-			outputLabel: audioBaseLabel,
-		});
-
-		filters.push(
-			...(isSpeedRamp
-				? buildSpeedRampAudioNodes(audioBaseLabel, `a_seq_${index}`, trimDurationMs)
-				: [
-						{
-							inputLabels: [audioBaseLabel],
-							filter: "anull",
-							outputLabel: `a_seq_${index}`,
-						},
-				  ]),
-			);
 	});
 
 	let currentVideoLabel = "v_seq_0";
@@ -549,7 +442,10 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 }
 
 export function buildFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
-	if (project.templateId === "vertical-sequence") {
+	if (
+		project.templateId === "vertical-sequence" ||
+		project.templateId === "landscape-sequence"
+	) {
 		return buildSequenceFFmpegCommand(project);
 	}
 
@@ -581,16 +477,19 @@ export function buildFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		inputs.push({
 			id: inputId,
 			uri: item.sourceUri,
-			args: ["-i", item.sourceUri],
+			args: buildMediaInputArgs(item),
 		});
 
 		const preparedLabel = `${inputId}_prepared`;
 
-		const trimStartMs = item.trimStartMs ?? 0;
-		const trimDurationMs = Math.max(
-			1,
-			(item.trimEndMs ?? trimStartMs + item.durationMs) - trimStartMs,
-		);
+		const isImage = item.sourceType === "image";
+		const trimStartMs = isImage ? 0 : item.trimStartMs ?? 0;
+		const trimDurationMs = isImage
+			? Math.max(1, item.durationMs)
+			: Math.max(
+					1,
+					(item.trimEndMs ?? trimStartMs + item.durationMs) - trimStartMs,
+			  );
 
 		const baseFilters = [
 			`trim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
@@ -603,7 +502,11 @@ export function buildFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 			);
 		}
 
-		if (isPortraitTarget(item.layout.width, item.layout.height)) {
+		if (
+			!isImage &&
+			isPortraitTarget(canvas.width, canvas.height) &&
+			isPortraitTarget(item.layout.width, item.layout.height)
+		) {
 			filters.push(
 				...buildBlurBackgroundVideoNodes(
 					`${index}:v`,
@@ -687,7 +590,9 @@ export function buildFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	const filterComplex = filters
 		.map((node) => {
 			const inputsPart = node.inputLabels.map((label) => `[${label}]`).join("");
-			return `${inputsPart}${node.filter}[${node.outputLabel}]`;
+			return node.outputLabel
+				? `${inputsPart}${node.filter}[${node.outputLabel}]`
+				: `${inputsPart}${node.filter}`;
 		})
 		.join(";");
 

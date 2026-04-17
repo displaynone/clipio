@@ -64,16 +64,16 @@ export default function ProjectPreviewPlayer({ project, className }: Props) {
         <View
           className="h-2 overflow-hidden rounded-full bg-surface-tertiary"
           onLayout={handleTimelineLayout}
-          onTouchStart={() => setIsScrubbing(true)}
+          onTouchStart={(event) => {
+            setIsScrubbing(true);
+            handleTimelinePress(event.nativeEvent.locationX);
+          }}
           onTouchEnd={() => setIsScrubbing(false)}
           onTouchCancel={() => setIsScrubbing(false)}
           onTouchMove={(event) => {
             if (!isScrubbing) {
               return;
             }
-            handleTimelinePress(event.nativeEvent.locationX);
-          }}
-          onTouchStartCapture={(event) => {
             handleTimelinePress(event.nativeEvent.locationX);
           }}
         >

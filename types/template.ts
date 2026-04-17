@@ -19,7 +19,6 @@ export type TemplateSequenceEffect =
 	| "flash-shake"
 	| "rgb-split"
 	| "glow"
-	| "speed-ramp"
 	| "vhs-retro"
 	| "light-point"
 	| "wipe-left"

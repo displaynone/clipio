@@ -3,7 +3,7 @@ import ReorderableClipList from "@/components/templates/ReorderableClipList";
 import TemplateThumbnailLoadingIndicator from "@/components/templates/TemplateThumbnailLoadingIndicator";
 import { useVideoThumbnailPrefetch } from "@/hooks/useVideoThumbnailPrefetch";
 import { useMemo } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { TemplateViewProps } from "./template-view.types";
 
 export default function Grid2x2TemplateView({
@@ -15,6 +15,17 @@ export default function Grid2x2TemplateView({
 	onSetAudioSource,
 }: TemplateViewProps) {
 	const orderedUris = useMemo(() => selectedUris, [selectedUris]);
+	const mediaTypesByUri = useMemo(
+		() =>
+			new Map(
+				project.tracks
+					.filter((track) => track.type === "video")
+					.flatMap((track) => track.items)
+					.filter((item) => item.kind === "video")
+					.map((item) => [item.sourceUri, item.sourceType ?? "video"]),
+			),
+		[project],
+	);
 	const thumbnailLoading = useVideoThumbnailPrefetch(orderedUris);
 
 	return (
@@ -47,6 +58,7 @@ export default function Grid2x2TemplateView({
 									{uri ? (
 										<VideoThumbnail
 											uri={uri}
+											mediaType={mediaTypesByUri.get(uri) ?? "video"}
 											className="h-full w-full rounded-none"
 										/>
 									) : (

@@ -1,4 +1,5 @@
 import VideoThumbnail from "@/components/VideoThumbnail";
+import { useEditorStore } from "@/stores/editorStore";
 import { LinearGradient } from "expo-linear-gradient";
 import { PressableFeedback, useThemeColor } from "heroui-native";
 import { Text, View } from "react-native";
@@ -18,6 +19,7 @@ export default function LibrarySelectionFooter({
 	const primaryDimColor = useThemeColor("accent");
 	const warningForegroundColor = useThemeColor("warning-foreground");
 	const insets = useSafeAreaInsets();
+	const mediaByUri = useEditorStore((state) => state.mediaByUri);
 
 	return (
 		<View
@@ -44,6 +46,7 @@ export default function LibrarySelectionFooter({
 								>
 									<VideoThumbnail
 										uri={uri}
+										mediaType={mediaByUri[uri]?.type ?? "video"}
 										className="h-full w-full rounded-full"
 									/>
 								</View>

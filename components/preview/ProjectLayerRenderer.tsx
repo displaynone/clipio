@@ -6,6 +6,7 @@ import {
   VideoTrackItem,
   isItemActiveAtTime,
 } from "@/features/video-editor/domain/video-project";
+import { Image } from "expo-image";
 import { VideoView, useVideoPlayer } from "expo-video";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
@@ -23,10 +24,10 @@ function formatVideoTime(item: VideoTrackItem, currentTimeMs: number) {
 }
 
 function VideoLayerRenderer({
-  item,
-  currentTimeMs,
-  isPlaying,
-  previewScale,
+	item,
+	currentTimeMs,
+	isPlaying,
+	previewScale,
 }: { item: VideoTrackItem } & Omit<Props, "item">) {
   const isActive = isItemActiveAtTime(item, currentTimeMs);
   const player = useVideoPlayer(item.sourceUri, (videoPlayer) => {
@@ -91,9 +92,47 @@ function VideoLayerRenderer({
       <VideoView
         player={player}
         nativeControls={false}
-        allowsFullscreen={false}
         contentFit="cover"
         style={{ width: "100%", height: "100%" }}
+      />
+    </View>
+  );
+}
+
+function ImageLayerRenderer({
+  item,
+  currentTimeMs,
+  previewScale,
+}: {
+  item: VideoTrackItem;
+  currentTimeMs: number;
+  previewScale: number;
+}) {
+  const isActive = isItemActiveAtTime(item, currentTimeMs);
+
+  return (
+    <View
+      className="absolute overflow-hidden"
+      style={{
+        left: item.layout.x * previewScale,
+        top: item.layout.y * previewScale,
+        width: item.layout.width * previewScale,
+        height: item.layout.height * previewScale,
+        opacity: isActive ? item.opacity : 0,
+        transform: [
+          { translateX: item.transform.translateX * previewScale },
+          { translateY: item.transform.translateY * previewScale },
+          { scaleX: item.transform.scaleX },
+          { scaleY: item.transform.scaleY },
+          { rotate: `${item.rotation}deg` },
+        ],
+        zIndex: item.zIndex,
+      }}
+    >
+      <Image
+        source={{ uri: item.sourceUri }}
+        style={{ width: "100%", height: "100%" }}
+        contentFit="cover"
       />
     </View>
   );
@@ -222,6 +261,16 @@ export default function ProjectLayerRenderer({
 }: Props) {
   switch (item.kind) {
     case "video":
+      if (item.sourceType === "image") {
+        return (
+          <ImageLayerRenderer
+            item={item}
+            currentTimeMs={currentTimeMs}
+            previewScale={previewScale}
+          />
+        );
+      }
+
       return (
         <VideoLayerRenderer
           item={item}

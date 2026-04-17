@@ -3,10 +3,11 @@ import ReorderableClipList from "@/components/templates/ReorderableClipList";
 import TemplateThumbnailLoadingIndicator from "@/components/templates/TemplateThumbnailLoadingIndicator";
 import { useVideoThumbnailPrefetch } from "@/hooks/useVideoThumbnailPrefetch";
 import { useMemo } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { TemplateViewProps } from "./template-view.types";
 
 export default function FocusTopTemplateView({
+	template,
 	project,
 	selectedUris,
 	audioSourceUri,
@@ -15,7 +16,27 @@ export default function FocusTopTemplateView({
 	onSetAudioSource,
 }: TemplateViewProps) {
 	const orderedUris = useMemo(() => selectedUris, [selectedUris]);
+	const mediaTypesByUri = useMemo(
+		() =>
+			new Map(
+				project.tracks
+					.filter((track) => track.type === "video")
+					.flatMap((track) => track.items)
+					.filter((item) => item.kind === "video")
+					.map((item) => [item.sourceUri, item.sourceType ?? "video"]),
+			),
+		[project],
+	);
 	const thumbnailLoading = useVideoThumbnailPrefetch(orderedUris);
+	const visualItems = useMemo(
+		() =>
+			project.tracks
+				.filter((track) => track.type === "video")
+				.flatMap((track) => track.items)
+				.filter((item) => item.kind === "video")
+				.sort((left, right) => left.zIndex - right.zIndex),
+		[project],
+	);
 
 	return (
 		<ScrollView
@@ -35,49 +56,32 @@ export default function FocusTopTemplateView({
 						loadedCount={thumbnailLoading.loadedCount}
 						totalCount={thumbnailLoading.totalCount}
 					/>
-					<View className="h-1/2 w-full border border-background">
-						{orderedUris[0] ? (
-							<VideoThumbnail
-								uri={orderedUris[0]}
-								className="h-full w-full rounded-none"
-							/>
-						) : (
-							<View className="h-full w-full bg-surface-secondary" />
-						)}
-					</View>
-					<View className="h-1/2 w-full flex-row">
-						<View className="h-full w-1/2 border border-background">
-							{orderedUris[1] ? (
-								<VideoThumbnail
-									uri={orderedUris[1]}
-									className="h-full w-full rounded-none"
-								/>
-							) : (
-								<View className="h-full w-full bg-surface-secondary" />
-							)}
-						</View>
-						<View className="w-1/2 h-full flex-col">
-							{Array.from({ length: 2 }).map((_, index) => {
-								const uri = orderedUris[index + 2];
+					{template.slots.map((slot) => {
+						const item = visualItems.find((visualItem) => visualItem.slotId === slot.id);
 
-								return (
-									<View
-										key={`preview-slot-${index + 2}`}
-										className="h-full flex-1 border border-background"
-									>
-										{uri ? (
-											<VideoThumbnail
-												uri={uri}
-												className="h-full w-full rounded-none"
-											/>
-										) : (
-											<View className="h-full w-full bg-surface-secondary" />
-										)}
-									</View>
-								);
-							})}
-						</View>
-					</View>
+						return (
+							<View
+								key={`preview-slot-${slot.id}`}
+								className="absolute border border-background bg-surface-secondary"
+								style={{
+									left: `${slot.x}%`,
+									top: `${slot.y}%`,
+									width: `${slot.width}%`,
+									height: `${slot.height}%`,
+								}}
+							>
+								{item ? (
+									<VideoThumbnail
+										uri={item.sourceUri}
+										mediaType={item.sourceType ?? mediaTypesByUri.get(item.sourceUri) ?? "video"}
+										className="h-full w-full rounded-none"
+									/>
+								) : (
+									<View className="h-full w-full bg-surface-secondary" />
+								)}
+							</View>
+						);
+					})}
 				</View>
 			</View>
 

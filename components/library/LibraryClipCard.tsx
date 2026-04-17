@@ -1,14 +1,14 @@
 import VideoThumbnail from "@/components/VideoThumbnail";
 import { useEditorStore } from "@/stores/editorStore";
 import { useRouter } from "expo-router";
-import { useVideoPlayer } from "expo-video";
 import type { MenuTriggerRef } from "heroui-native";
 import { Menu, PressableFeedback, useThemeColor } from "heroui-native";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Text, View } from "react-native";
 import {
 	CheckIcon,
 	EllipsisVerticalIcon,
+	PhotoIcon,
 	ScissorsIcon,
 	XMarkIcon,
 } from "react-native-heroicons/solid";
@@ -46,28 +46,10 @@ export default function LibraryClipCard({
 	const accentForegroundColor = useThemeColor("accent-foreground");
 	const dangerColor = useThemeColor("danger");
 	const trim = useEditorStore((state) => state.trimsByUri[uri]);
-	const [videoDurationMs, setVideoDurationMs] = useState<number | null>(
-		trim?.durationMs ?? null,
-	);
-	const player = useVideoPlayer(uri, (videoPlayer) => {
-		videoPlayer.loop = false;
-		videoPlayer.pause();
-	});
-
-	useEffect(() => {
-		if (trim?.durationMs != null) {
-			setVideoDurationMs(trim.durationMs);
-			return;
-		}
-
-		const loadSubscription = player.addListener("sourceLoad", ({ duration }) => {
-			setVideoDurationMs(Math.max(0, Math.round(duration * 1000)));
-		});
-
-		return () => {
-			loadSubscription.remove();
-		};
-	}, [player, trim?.durationMs]);
+	const media = useEditorStore((state) => state.mediaByUri[uri]);
+	const mediaType = media?.type ?? "video";
+	const videoDurationMs =
+		mediaType === "image" ? media?.durationMs ?? null : trim?.durationMs ?? null;
 
 	const handleOpenMenu = () => {
 		menuTriggerRef.current?.open();
@@ -94,7 +76,11 @@ export default function LibraryClipCard({
 				borderColor: isSelected ? accentColor : "transparent",
 			}}
 		>
-			<VideoThumbnail uri={uri} className="aspect-9/16 w-full rounded-none" />
+			<VideoThumbnail
+				uri={uri}
+				mediaType={mediaType}
+				className="aspect-9/16 w-full rounded-none"
+			/>
 
 			<Menu isOpen={isMenuOpen} onOpenChange={setIsMenuOpen} className="absolute top-0 left-0">
 				<View className="absolute top-3 left-3 z-10 h-8 w-8">
@@ -123,10 +109,12 @@ export default function LibraryClipCard({
 						width={164}
 						className="border border-border bg-background p-1"
 					>
-						<Menu.Item onPress={handleTrim}>
-							<ScissorsIcon width={14} height={14} color={accentColor} />
-							<Menu.ItemTitle>Cortar</Menu.ItemTitle>
-						</Menu.Item>
+						{mediaType === "video" ? (
+							<Menu.Item onPress={handleTrim}>
+								<ScissorsIcon width={14} height={14} color={accentColor} />
+								<Menu.ItemTitle>Cortar</Menu.ItemTitle>
+							</Menu.Item>
+						) : null}
 						<Menu.Item variant="danger" onPress={handleRemove}>
 							<XMarkIcon width={14} height={14} color={dangerColor} />
 							<Menu.ItemTitle>Eliminar</Menu.ItemTitle>
@@ -166,6 +154,14 @@ export default function LibraryClipCard({
 				<Text className="text-[10px] font-bold uppercase tracking-[0.08em] text-foreground">
 					{formatDuration(videoDurationMs)}
 				</Text>
+				{mediaType === "image" ? (
+					<View className="mt-1 flex-row items-center gap-1">
+						<PhotoIcon width={10} height={10} color="#f1dfff" />
+						<Text className="text-[9px] font-bold uppercase tracking-[0.08em] text-foreground">
+							Imagen
+						</Text>
+					</View>
+				) : null}
 			</View>
 		</View>
 	);

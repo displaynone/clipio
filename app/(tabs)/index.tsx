@@ -1,7 +1,7 @@
 import HomeEmptyState from '@/components/home/HomeEmptyState';
 import SelectedLibraryScreen from '@/components/library/SelectedLibraryScreen';
 import HeaderLoadVideosButton from '@/components/navigation/HeaderLoadVideosButton';
-import { pickVideoFromLibrary } from '@/features/media/mediaPicker';
+import { pickMediaFromLibrary } from '@/features/media/mediaPicker';
 import { useVideoSelection } from '@/hooks/useVideoSelection';
 import { Tabs, useRouter } from 'expo-router';
 import { useState } from 'react';
@@ -30,10 +30,9 @@ export default function HomeScreen() {
   const {
     libraryUris,
     selectedUris,
-    addUri,
+    addMediaAssets,
     removeUri,
     toggleUriSelection,
-    setTrimForUri,
   } = useVideoSelection();
   const [isPickLoading, setIsPickLoading] = useState(false);
   const router = useRouter();
@@ -43,25 +42,13 @@ export default function HomeScreen() {
       return;
     }
 
-    addUri(assets.map((asset) => asset.uri));
-
-    assets.forEach((asset) => {
-      if (asset.duration == null || asset.duration <= 0) {
-        return;
-      }
-
-      setTrimForUri(asset.uri, {
-        startMs: 0,
-        endMs: asset.duration,
-        durationMs: asset.duration,
-      });
-    });
+    addMediaAssets(assets);
   };
 
   const handlePickVideo = async () => {
     try {
       setIsPickLoading(true);
-      const assets = await pickVideoFromLibrary();
+      const assets = await pickMediaFromLibrary();
       if (assets.length > 0) {
         const assetChunks = chunkAssets(assets, VIDEO_IMPORT_CHUNK_SIZE);
         const [firstChunk, ...remainingChunks] = assetChunks;
@@ -75,7 +62,7 @@ export default function HomeScreen() {
         }
       }
     } catch (error) {
-      Alert.alert('Error al seleccionar video', `${error}`);
+      Alert.alert('Error al seleccionar medios', `${error}`);
     } finally {
       setIsPickLoading(false);
     }
@@ -83,7 +70,7 @@ export default function HomeScreen() {
 
   const handleContinue = () => {
     if (selectedUris.length === 0) {
-      Alert.alert('Selecciona videos', 'Debes seleccionar al menos un video para continuar.');
+      Alert.alert('Selecciona medios', 'Debes seleccionar al menos un video o imagen para continuar.');
       return;
     }
     router.push('/select-template');

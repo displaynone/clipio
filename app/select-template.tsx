@@ -57,7 +57,7 @@ export default function SelectTemplateScreen() {
 	const [orientationFilter, setOrientationFilter] =
 		useState<TemplateOrientation>("vertical");
 
-	// Filtrar plantillas que puedan acomodar la cantidad de videos seleccionados
+	// Filtrar plantillas que puedan acomodar la cantidad de elementos seleccionados
 	const availableTemplates = templateRegistry.filter(
 		(template) => getTemplateCapacity(template) >= selectedUris.length,
 	);
@@ -110,7 +110,7 @@ export default function SelectTemplateScreen() {
 							Choose a cinematic layout to set how your project looks.
 						</Text>
 						<Text className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-accent">
-							{selectedUris.length} video{selectedUris.length !== 1 ? "s" : ""}{" "}
+							{selectedUris.length} elemento{selectedUris.length !== 1 ? "s" : ""}{" "}
 							seleccionado{selectedUris.length !== 1 ? "s" : ""}
 							{filteredTemplates.some((template) => isUnlimitedTemplate(template))
 								? " · Incluye secuencia ilimitada"
@@ -214,12 +214,12 @@ export default function SelectTemplateScreen() {
 							</Text>
 							<Text className="mb-6 text-center text-base leading-6 text-muted">
 								No tienes plantillas que puedan acomodar {selectedUris.length}{" "}
-								video{selectedUris.length !== 1 ? "s" : ""}.{"\n\n"}
-								Regresa y selecciona menos videos o contacta al desarrollador
+								elemento{selectedUris.length !== 1 ? "s" : ""}.{"\n\n"}
+								Regresa y selecciona menos elementos o contacta al desarrollador
 								para agregar más plantillas.
 							</Text>
 							<Button onPress={() => router.back()}>
-								<Button.Label>Volver a seleccionar videos</Button.Label>
+								<Button.Label>Volver a seleccionar medios</Button.Label>
 							</Button>
 						</View>
 					)}

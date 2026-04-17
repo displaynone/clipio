@@ -1,6 +1,8 @@
 import { TemplateData, TemplateInstance, TemplateStylePreset } from '@/types/template';
-import { VideoTrim } from '@/types/media';
+import { MediaAsset, MediaItemMetadata, VideoTrim } from '@/types/media';
 import { create } from 'zustand';
+
+const DEFAULT_IMAGE_DURATION_MS = 3_000;
 
 type TemplateEditorSlice = {
   instance: TemplateInstance | null;
@@ -18,9 +20,12 @@ type MediaSelectionSlice = {
   libraryUris: string[];
   selectedUris: string[];
   trimsByUri: Record<string, VideoTrim>;
+  mediaByUri: Record<string, MediaItemMetadata>;
   setLibraryUris: (uris: string[]) => void;
   setSelectedUris: (uris: string[]) => void;
   addUri: (uri: string | string[]) => void;
+  addMediaAssets: (assets: MediaAsset[]) => void;
+  registerMediaAssets: (assets: MediaAsset[]) => void;
   removeUri: (index: number) => void;
   clearUris: () => void;
   swapUris: (index: number, direction: -1 | 1) => void;
@@ -30,6 +35,7 @@ type MediaSelectionSlice = {
   insertTrimmedUriAfter: (sourceUri: string, trimmedUri: string) => void;
   setTrimForUri: (uri: string, trim: VideoTrim) => void;
   clearTrimForUri: (uri: string) => void;
+  setImageDurationForUri: (uri: string, durationMs: number) => void;
 };
 
 type EditorStore = MediaSelectionSlice & TemplateEditorSlice;
@@ -87,6 +93,7 @@ export const useEditorStore = create<EditorStore>((set) => ({
   libraryUris: [],
   selectedUris: [],
   trimsByUri: {},
+  mediaByUri: {},
   instance: null,
 
   setLibraryUris: (uris) => set({ libraryUris: uris, selectedUris: uris, instance: null }),
@@ -104,21 +111,98 @@ export const useEditorStore = create<EditorStore>((set) => ({
       };
     }),
 
-  removeUri: (index) =>
+  addMediaAssets: (assets) =>
     set((state) => {
-      const removedUri = state.libraryUris[index];
+      const nextUris = assets.map((asset) => asset.uri);
+      const nextMediaByUri = { ...state.mediaByUri };
       const nextTrimsByUri = { ...state.trimsByUri };
-      delete nextTrimsByUri[removedUri];
+
+      assets.forEach((asset) => {
+        const durationMs =
+          typeof asset.duration === "number" && asset.duration > 0
+            ? asset.duration
+            : asset.type === "image"
+              ? DEFAULT_IMAGE_DURATION_MS
+              : null;
+
+        nextMediaByUri[asset.uri] = {
+          type: asset.type,
+          durationMs,
+          width: asset.width,
+          height: asset.height,
+        };
+
+        if (asset.type === "video" && durationMs != null) {
+          nextTrimsByUri[asset.uri] = {
+            startMs: 0,
+            endMs: durationMs,
+            durationMs,
+          };
+        }
+      });
 
       return {
-        libraryUris: state.libraryUris.filter((_, i) => i !== index),
-        selectedUris: state.selectedUris.filter((uri) => uri !== removedUri),
+        libraryUris: normalizeAppend(state.libraryUris, nextUris),
+        selectedUris: normalizeAppend(state.selectedUris, nextUris),
+        mediaByUri: nextMediaByUri,
         trimsByUri: nextTrimsByUri,
         instance: null,
       };
     }),
 
-  clearUris: () => set({ libraryUris: [], selectedUris: [], trimsByUri: {}, instance: null }),
+  registerMediaAssets: (assets) =>
+    set((state) => {
+      const nextMediaByUri = { ...state.mediaByUri };
+      const nextTrimsByUri = { ...state.trimsByUri };
+
+      assets.forEach((asset) => {
+        const durationMs =
+          typeof asset.duration === "number" && asset.duration > 0
+            ? asset.duration
+            : asset.type === "image"
+              ? DEFAULT_IMAGE_DURATION_MS
+              : null;
+
+        nextMediaByUri[asset.uri] = {
+          type: asset.type,
+          durationMs,
+          width: asset.width,
+          height: asset.height,
+        };
+
+        if (asset.type === "video" && durationMs != null) {
+          nextTrimsByUri[asset.uri] = {
+            startMs: 0,
+            endMs: durationMs,
+            durationMs,
+          };
+        }
+      });
+
+      return {
+        mediaByUri: nextMediaByUri,
+        trimsByUri: nextTrimsByUri,
+      };
+    }),
+
+  removeUri: (index) =>
+    set((state) => {
+      const removedUri = state.libraryUris[index];
+      const nextTrimsByUri = { ...state.trimsByUri };
+      const nextMediaByUri = { ...state.mediaByUri };
+      delete nextTrimsByUri[removedUri];
+      delete nextMediaByUri[removedUri];
+
+      return {
+        libraryUris: state.libraryUris.filter((_, i) => i !== index),
+        selectedUris: state.selectedUris.filter((uri) => uri !== removedUri),
+        trimsByUri: nextTrimsByUri,
+        mediaByUri: nextMediaByUri,
+        instance: null,
+      };
+    }),
+
+  clearUris: () => set({ libraryUris: [], selectedUris: [], trimsByUri: {}, mediaByUri: {}, instance: null }),
 
   swapUris: (index, direction) =>
     set((state) => ({
@@ -165,10 +249,16 @@ export const useEditorStore = create<EditorStore>((set) => ({
       const nextSelectedUris = state.selectedUris.includes(sourceUri)
         ? [...state.selectedUris, trimmedUri]
         : state.selectedUris;
+      const nextMediaByUri = { ...state.mediaByUri };
+
+      if (state.mediaByUri[sourceUri]) {
+        nextMediaByUri[trimmedUri] = state.mediaByUri[sourceUri];
+      }
 
       return {
         libraryUris: nextLibraryUris,
         selectedUris: nextSelectedUris,
+        mediaByUri: nextMediaByUri,
         instance: null,
       };
     }),
@@ -188,6 +278,23 @@ export const useEditorStore = create<EditorStore>((set) => ({
 
       return {
         trimsByUri: nextTrimsByUri,
+      };
+    }),
+
+  setImageDurationForUri: (uri, durationMs) =>
+    set((state) => {
+      const previous = state.mediaByUri[uri];
+
+      return {
+        mediaByUri: {
+          ...state.mediaByUri,
+          [uri]: {
+            type: previous?.type ?? "image",
+            durationMs: Math.max(1, Math.round(durationMs)),
+            width: previous?.width,
+            height: previous?.height,
+          },
+        },
       };
     }),
 

@@ -6,7 +6,7 @@ import {
 import { PressableFeedback, useThemeColor } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
-import { VideoCameraIcon } from 'react-native-heroicons/outline';
+import { PhotoIcon, VideoCameraIcon } from 'react-native-heroicons/outline';
 
 function scheduleWhenIdle(task: () => void) {
   const handle = requestIdleCallback(task);
@@ -15,21 +15,29 @@ function scheduleWhenIdle(task: () => void) {
 
 type Props = {
   uri: string;
+  mediaType?: "video" | "image";
   style?: StyleProp<ViewStyle>;
   className?: string;
   onPress?: () => void;
   label?: string;
 };
 
-export default function VideoThumbnail({ uri, style, className, onPress, label }: Props) {
+export default function VideoThumbnail({ uri, mediaType = "video", style, className, onPress, label }: Props) {
   const [thumbnailUri, setThumbnailUri] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const mutedColor = useThemeColor('muted');
+  const displayUri = mediaType === "image" ? uri : thumbnailUri;
 
   // Extraer nombre del archivo de la URI para mostrar como fallback
   const fileName = uri.split('/').pop()?.split('.')[0] || 'Video';
 
   useEffect(() => {
+    if (mediaType === "image") {
+      setThumbnailUri(null);
+      setIsGenerating(false);
+      return;
+    }
+
     let isMounted = true;
 
     const generateThumbnail = async () => {
@@ -61,7 +69,7 @@ export default function VideoThumbnail({ uri, style, className, onPress, label }
       isMounted = false;
       cancelTask();
     };
-  }, [thumbnailUri, uri]);
+  }, [mediaType, thumbnailUri, uri]);
 
   return (
     <PressableFeedback
@@ -69,11 +77,15 @@ export default function VideoThumbnail({ uri, style, className, onPress, label }
       style={style}
       className={`relative overflow-hidden rounded-lg bg-surface-secondary ${className ?? ''}`}
     >
-      {thumbnailUri ? (
-        <Image source={{ uri: thumbnailUri }} style={{ width: '100%', height: '100%' }} contentFit="cover" />
+      {displayUri ? (
+        <Image source={{ uri: displayUri }} style={{ width: '100%', height: '100%' }} contentFit="cover" />
       ) : (
         <View className="flex-1 items-center justify-center p-2">
-          <VideoCameraIcon color={mutedColor} width={32} height={32} />
+          {mediaType === "image" ? (
+            <PhotoIcon color={mutedColor} width={32} height={32} />
+          ) : (
+            <VideoCameraIcon color={mutedColor} width={32} height={32} />
+          )}
           <Text className="mt-2 text-center text-xs leading-4 text-muted" numberOfLines={2}>
             {fileName}
           </Text>

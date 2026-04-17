@@ -1,8 +1,9 @@
 import VideoThumbnail from "@/components/VideoThumbnail";
 import { VideoProject } from "@/features/video-editor/domain/video-project";
+import { useEditorStore } from "@/stores/editorStore";
 import { Accordion, PressableFeedback } from "heroui-native";
 import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
-import { Text, View } from "react-native";
+import { Text, TextInput, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import {
 	Bars2Icon,
@@ -48,6 +49,8 @@ type RenderItemContentParams = {
 	uri: string;
 	index: number;
 	durationLabel: string;
+	mediaType: "video" | "image";
+	durationMs: number;
 	isAudioSelected: boolean;
 };
 
@@ -55,6 +58,8 @@ type DraggableClipItemProps = {
 	uri: string;
 	index: number;
 	durationLabel: string;
+	mediaType: "video" | "image";
+	durationMs: number;
 	foregroundColor: string;
 	isActive: boolean;
 	isAudioSelected: boolean;
@@ -63,6 +68,7 @@ type DraggableClipItemProps = {
 	onDragUpdate: (translationY: number) => void;
 	onDragEnd: () => void;
 	onSelectAudio?: (uri: string) => void;
+	onSetImageDuration?: (uri: string, durationMs: number) => void;
 	renderItemTitle?: (params: RenderItemContentParams) => string;
 	renderItemSubtitle?: (params: RenderItemContentParams) => string;
 };
@@ -71,6 +77,8 @@ function DraggableClipItem({
 	uri,
 	index,
 	durationLabel,
+	mediaType,
+	durationMs,
 	foregroundColor,
 	isActive,
 	isAudioSelected,
@@ -79,6 +87,7 @@ function DraggableClipItem({
 	onDragUpdate,
 	onDragEnd,
 	onSelectAudio,
+	onSetImageDuration,
 	renderItemTitle,
 	renderItemSubtitle,
 }: DraggableClipItemProps) {
@@ -107,7 +116,24 @@ function DraggableClipItem({
 		uri,
 		index,
 		durationLabel,
+		mediaType,
+		durationMs,
 		isAudioSelected,
+	};
+	const [durationInput, setDurationInput] = useState(
+		String(Math.max(0.1, Math.round((durationMs / 1000) * 10) / 10)),
+	);
+
+	useEffect(() => {
+		setDurationInput(String(Math.max(0.1, Math.round((durationMs / 1000) * 10) / 10)));
+	}, [durationMs]);
+
+	const commitImageDuration = () => {
+		const parsed = Number(durationInput.replace(",", "."));
+		const seconds = Number.isFinite(parsed) ? Math.min(120, Math.max(0.1, parsed)) : durationMs / 1000;
+
+		onSetImageDuration?.(uri, Math.round(seconds * 1000));
+		setDurationInput(String(Math.round(seconds * 10) / 10));
 	};
 
 	return (
@@ -118,7 +144,7 @@ function DraggableClipItem({
 				className="mb-4 flex-row items-center gap-4 rounded-xl bg-surface-secondary p-4"
 			>
 				<View className="relative h-16 w-16 shrink-0 overflow-hidden rounded-lg ring-1 ring-outline-variant/20">
-					<VideoThumbnail uri={uri} className="h-full w-full object-cover" />
+					<VideoThumbnail uri={uri} mediaType={mediaType} className="h-full w-full object-cover" />
 				</View>
 				<View className="grow">
 					<Text className="font-bold tracking-tight text-surface-secondary-foreground">
@@ -128,9 +154,28 @@ function DraggableClipItem({
 						{renderItemSubtitle?.(content) ??
 							(isAudioSelected ? "Audio final activo" : "Audio silenciado")}
 					</Text>
+					{mediaType === "image" ? (
+						<View className="mt-3 flex-row items-center gap-2">
+							<Text className="text-xs font-bold text-surface-secondary-foreground/70">
+								Duración
+							</Text>
+							<TextInput
+								value={durationInput}
+								onChangeText={setDurationInput}
+								onBlur={commitImageDuration}
+								onEndEditing={commitImageDuration}
+								keyboardType="decimal-pad"
+								returnKeyType="done"
+								className="min-w-14 rounded-lg bg-background px-2 py-1 text-right text-xs font-bold text-foreground"
+							/>
+							<Text className="text-xs font-bold text-surface-secondary-foreground/70">
+								s
+							</Text>
+						</View>
+					) : null}
 				</View>
 				<View className="flex-row items-center gap-2">
-					{onSelectAudio ? (
+					{onSelectAudio && mediaType === "video" ? (
 						<PressableFeedback
 							onPress={() => onSelectAudio(uri)}
 							className={`rounded-full border p-2 active:scale-95 ${
@@ -184,19 +229,27 @@ export default function ReorderableClipList({
 }: ReorderableClipListProps) {
 	const [orderedUris, setOrderedUris] = useState(selectedUris);
 	const [activeUri, setActiveUri] = useState<string | null>(null);
+	const setImageDurationForUri = useEditorStore((state) => state.setImageDurationForUri);
 	const activeUriRef = useRef<string | null>(null);
 	const startIndexRef = useRef(-1);
 	const currentIndexRef = useRef(-1);
 	const activeOffset = useSharedValue(0);
 
-	const clipDurationsByUri = useMemo(
+	const clipMetadataByUri = useMemo(
 		() =>
 			new Map(
 				project.tracks
 					.filter((track) => track.type === "video")
 					.flatMap((track) => track.items)
 					.filter((item) => item.kind === "video")
-					.map((item) => [item.sourceUri, formatClipDuration(item.durationMs)]),
+					.map((item) => [
+						item.sourceUri,
+						{
+							durationLabel: formatClipDuration(item.durationMs),
+							durationMs: item.durationMs,
+							mediaType: item.sourceType ?? "video",
+						},
+					]),
 			),
 		[project],
 	);
@@ -288,24 +341,31 @@ export default function ReorderableClipList({
 				<Accordion.Content className="bg-transparent px-0 pb-0 pt-0">
 					{infoBox}
 					<View>
-						{orderedUris.map((uri, index) => (
-							<DraggableClipItem
-								key={uri}
-								uri={uri}
-								index={index}
-								durationLabel={clipDurationsByUri.get(uri) ?? "00:00"}
-								foregroundColor={foregroundColor}
-								isActive={activeUri === uri}
-								isAudioSelected={audioSourceUri === uri}
-								activeOffset={activeOffset}
-								onDragStart={handleDragStart}
-								onDragUpdate={handleDragUpdate}
-								onDragEnd={handleDragEnd}
-								onSelectAudio={onSelectAudio}
-								renderItemTitle={renderItemTitle}
-								renderItemSubtitle={renderItemSubtitle}
-							/>
-						))}
+						{orderedUris.map((uri, index) => {
+							const metadata = clipMetadataByUri.get(uri);
+
+							return (
+								<DraggableClipItem
+									key={uri}
+									uri={uri}
+									index={index}
+									durationLabel={metadata?.durationLabel ?? "00:00"}
+									durationMs={metadata?.durationMs ?? 0}
+									mediaType={metadata?.mediaType ?? "video"}
+									foregroundColor={foregroundColor}
+									isActive={activeUri === uri}
+									isAudioSelected={audioSourceUri === uri}
+									activeOffset={activeOffset}
+									onDragStart={handleDragStart}
+									onDragUpdate={handleDragUpdate}
+									onDragEnd={handleDragEnd}
+									onSelectAudio={onSelectAudio}
+									onSetImageDuration={setImageDurationForUri}
+									renderItemTitle={renderItemTitle}
+									renderItemSubtitle={renderItemSubtitle}
+								/>
+							);
+						})}
 					</View>
 				</Accordion.Content>
 			</Accordion.Item>

@@ -1,14 +1,14 @@
-import { useThemeColor } from 'heroui-native';
-import { Text, View } from 'react-native';
-import { FilmIcon } from 'react-native-heroicons/outline';
+import { Image, Text, View } from 'react-native';
 
 export default function ClipioHeaderTitle() {
-  const primary = useThemeColor('link');
-
   return (
     <View className="flex-row items-center gap-3">
-      <View className="h-11 w-11 items-center justify-center rounded-xl bg-default">
-        <FilmIcon width={22} height={22} color={primary} />
+      <View className="h-11 w-11 items-center justify-center overflow-hidden rounded-xl bg-default">
+        <Image
+          source={require("@/assets/images/icon.png")}
+          style={{ width: 38, height: 38, borderRadius: 9 }}
+          resizeMode="contain"
+        />
       </View>
       <View>
         <Text className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">

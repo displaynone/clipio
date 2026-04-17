@@ -10,7 +10,7 @@ export default function HeaderLoadVideosButton({ onPress, isLoading = false }: P
   return (
     <PressableFeedback onPress={onPress} className="rounded-full bg-surface-secondary px-4 py-3">
       <Text className="text-xs font-bold uppercase tracking-[0.08em] text-link">
-        {isLoading ? 'Loading...' : 'Load videos'}
+        {isLoading ? 'Loading...' : 'Load media'}
       </Text>
     </PressableFeedback>
   );

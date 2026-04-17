@@ -1,6 +1,6 @@
 import TemplateTemplateView from "@/components/templates/TemplateTemplateView";
 import { validateTemplateReady } from "@/features/editor/editorManager";
-import { pickVideoFromLibrary } from "@/features/media/mediaPicker";
+import { pickMediaFromLibrary } from "@/features/media/mediaPicker";
 import { getTemplate, templateRegistry } from "@/features/templates/templates";
 import { useEditorProject } from "@/hooks/useEditorProject";
 import { useTemplateInstance } from "@/hooks/useTemplateInstance";
@@ -9,12 +9,20 @@ import { useEditorStore } from "@/stores/editorStore";
 import { getTemplateCapacity, isUnlimitedTemplate, TemplateInstance } from "@/types/template";
 import { LinearGradient } from "expo-linear-gradient";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { PressableFeedback, ScrollShadow, useThemeColor } from "heroui-native";
+import { Alert as HeroAlert, Button, PressableFeedback, ScrollShadow, useThemeColor } from "heroui-native";
 import { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Alert as NativeAlert, Text, View } from "react-native";
 import {
   ArrowLeftIcon,
+  XMarkIcon,
 } from "react-native-heroicons/outline";
+
+type ExportAlertState = {
+	status: "success" | "danger" | "warning";
+	title: string;
+	description: string;
+	outputUri?: string;
+};
 
 export default function TemplateDetailScreen() {
 	const params = useLocalSearchParams<{ templateId: string }>();
@@ -22,6 +30,7 @@ export default function TemplateDetailScreen() {
 	const [isPickLoading, setIsPickLoading] = useState(false);
 	const [isExporting, setIsExporting] = useState(false);
 	const [exportProgress, setExportProgress] = useState(0);
+	const [exportAlert, setExportAlert] = useState<ExportAlertState | null>(null);
   const foregroundColor = useThemeColor('foreground');
   const accentColor = useThemeColor('accent');
 
@@ -44,11 +53,11 @@ export default function TemplateDetailScreen() {
 		setSequenceTransitionSeconds,
 	} = useTemplateInstance(template ?? templateRegistry[0]);
 	const project = useEditorProject(template ?? templateRegistry[0], instance as TemplateInstance);
-	const setTrimForUri = useEditorStore((state) => state.setTrimForUri);
+	const registerMediaAssets = useEditorStore((state) => state.registerMediaAssets);
 
 	useEffect(() => {
 		if (!template) {
-			Alert.alert(
+			NativeAlert.alert(
 				"Plantilla no encontrada",
 				"El id de plantilla no es válido",
 				[{ text: "Volver", onPress: () => router.back() }],
@@ -63,43 +72,36 @@ export default function TemplateDetailScreen() {
 	const handlePick = async () => {
 		try {
 			setIsPickLoading(true);
-			const assets = await pickVideoFromLibrary();
+			const assets = await pickMediaFromLibrary();
 			if (assets.length > 0) {
 				const availableSlots = isUnlimitedTemplate(template)
 					? Number.POSITIVE_INFINITY
 					: (template.maxSlots ?? 0) - selectedUris.length;
 				if (availableSlots <= 0) {
-					Alert.alert(
+					NativeAlert.alert(
 						"Límite alcanzado",
-						`Esta plantilla solo permite ${getTemplateCapacity(template)} videos.`,
+						`Esta plantilla solo permite ${getTemplateCapacity(template)} elementos.`,
 					);
 					return;
 				}
 
-				// El hook addUri ahora maneja automáticamente los límites
-				addUri(assets.map((asset) => asset.uri));
-				assets.forEach((asset) => {
-					if (asset.duration == null || asset.duration <= 0) {
-						return;
-					}
-
-					setTrimForUri(asset.uri, {
-						startMs: 0,
-						endMs: asset.duration,
-						durationMs: asset.duration,
-					});
-				});
+				const assetsToAdd = assets.slice(
+					0,
+					Number.isFinite(availableSlots) ? availableSlots : assets.length,
+				);
+				addUri(assetsToAdd.map((asset) => asset.uri));
+				registerMediaAssets(assetsToAdd);
 
 				const addedCount = Math.min(assets.length, availableSlots);
 				if (Number.isFinite(availableSlots) && assets.length > availableSlots) {
-					Alert.alert(
-						"Algunos videos no se agregaron",
-						`Solo se pudieron agregar ${addedCount} video${addedCount !== 1 ? "s" : ""} de los ${assets.length} seleccionados.`,
+					NativeAlert.alert(
+						"Algunos elementos no se agregaron",
+						`Solo se pudieron agregar ${addedCount} elemento${addedCount !== 1 ? "s" : ""} de los ${assets.length} seleccionados.`,
 					);
 				}
 			}
 		} catch (error) {
-			Alert.alert("Error al seleccionar video", `${error}`);
+			NativeAlert.alert("Error al seleccionar medios", `${error}`);
 		} finally {
 			setIsPickLoading(false);
 		}
@@ -113,16 +115,19 @@ export default function TemplateDetailScreen() {
 				template.maxSlots == null
 					? 1 - selectedUris.length
 					: template.maxSlots - selectedUris.length;
-			Alert.alert(
-				"Exportación deshabilitada",
-				template.maxSlots == null
-					? "Selecciona al menos un video para poder exportar."
-					: `Selecciona ${remainingCount} videos más para poder exportar.`,
-			);
+			setExportAlert({
+				status: "warning",
+				title: "Exportación deshabilitada",
+				description:
+					template.maxSlots == null
+						? "Selecciona al menos un video o imagen para poder exportar."
+						: `Selecciona ${remainingCount} elemento${remainingCount !== 1 ? "s" : ""} más para poder exportar.`,
+			});
 			return;
 		}
 
 		try {
+			setExportAlert(null);
 			setIsExporting(true);
 			setExportProgress(0);
 			const result = await videoExportService.exportToFile(project, (event) => {
@@ -133,14 +138,20 @@ export default function TemplateDetailScreen() {
 				throw new Error(result.error ?? "No se pudo exportar el video.");
 			}
 
-			Alert.alert(
-				"Exportación completada",
-				`Video guardado en:\n${result.outputUri}`,
-			);
+			setExportAlert({
+				status: "success",
+				title: "Exportación completada",
+				description: `Video guardado en:\n${result.outputUri}`,
+				outputUri: result.outputUri,
+			});
 		} catch (error) {
 			console.log("[video-export] Export failed", error);
 			console.error("[video-export] Export failed", error);
-			Alert.alert("Error de export", `${error}`);
+			setExportAlert({
+				status: "danger",
+				title: "Error de export",
+				description: `${error}`,
+			});
 		} finally {
 			setIsExporting(false);
 		}
@@ -213,6 +224,53 @@ export default function TemplateDetailScreen() {
 					onSetSequenceTransitionSeconds={setSequenceTransitionSeconds}
 				/>
 			</ScrollShadow>
+
+			{exportAlert ? (
+				<View className="absolute left-4 right-4 top-4 z-20">
+					<HeroAlert
+						status={exportAlert.status}
+						className="items-start border border-[#d9c3ff] bg-[#cdb4ff]"
+						style={{
+							shadowColor: "#000",
+							shadowOffset: { width: 0, height: 8 },
+							shadowOpacity: 0.36,
+							shadowRadius: 22,
+							elevation: 12,
+						}}
+					>
+						<HeroAlert.Indicator iconProps={{ color: "#16052a" }} />
+						<HeroAlert.Content>
+							<HeroAlert.Title className="text-[#16052a]">
+								{exportAlert.title}
+							</HeroAlert.Title>
+							<HeroAlert.Description className="text-[#4a3862]">
+								{exportAlert.description}
+							</HeroAlert.Description>
+							{exportAlert.outputUri ? (
+								<Button
+									onPress={() =>
+										router.push({
+											pathname: "/export-preview",
+											params: { uri: encodeURIComponent(exportAlert.outputUri ?? "") },
+										})
+									}
+									className="mt-3 self-start bg-[#16052a]"
+								>
+									<Button.Label className="text-[#f8efff]">
+										Ver video
+									</Button.Label>
+								</Button>
+							) : null}
+						</HeroAlert.Content>
+						<PressableFeedback
+							onPress={() => setExportAlert(null)}
+							className="ml-2 rounded-full p-1 active:scale-95"
+						>
+							<XMarkIcon width={16} height={16} color="#16052a" />
+						</PressableFeedback>
+					</HeroAlert>
+				</View>
+			) : null}
 
 			{isExporting ? (
 				<View className="absolute inset-0 items-center justify-center bg-background/85 px-6">

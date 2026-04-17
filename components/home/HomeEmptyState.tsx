@@ -3,12 +3,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { PressableFeedback, useThemeColor } from "heroui-native";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 import {
-	PaintBrushIcon,
-	SparklesIcon,
-	VideoCameraIcon,
+	VideoCameraIcon
 } from "react-native-heroicons/outline";
 
-import HomeEmptyFeatureCard from "@/components/home/HomeEmptyFeatureCard";
 import HomeEmptyIllustration from "@/components/home/HomeEmptyIllustration";
 
 type Props = {
@@ -32,7 +29,7 @@ export default function HomeEmptyState({
 			contentContainerClassName="flex-grow px-5 pt-6 pb-8"
 			showsVerticalScrollIndicator={false}
 		>
-			<View className="flex-1 items-center justify-center">
+			<View className="flex-1 items-center justify-start">
 				<HomeEmptyIllustration />
 
 				<View className="mb-8 items-center w-full">
@@ -46,8 +43,8 @@ export default function HomeEmptyState({
 							colors={[primary, primaryDim]}
 						/>
 					<Text className="mt-5 max-w-[320px] text-center text-base leading-7 text-muted">
-						No videos loaded yet. Start your cinematic journey by adding some
-						clips.
+						No media loaded yet. Start your cinematic journey by adding videos
+						or images.
 					</Text>
 				</View>
 
@@ -63,25 +60,10 @@ export default function HomeEmptyState({
 					>
 						<VideoCameraIcon width={20} height={20} color={onPrimaryFixed} />
 						<Text className="text-base font-bold uppercase tracking-[0.08em] text-warning-foreground">
-							{isLoading ? "Loading..." : "Load Videos"}
+							{isLoading ? "Loading..." : "Load Media"}
 						</Text>
 					</LinearGradient>
 				</PressableFeedback>
-
-				<View className="mt-14 w-full gap-4">
-					<HomeEmptyFeatureCard
-						icon={SparklesIcon}
-						iconColor={accent}
-						title="Smart Trim"
-						description="Let Clipio pick stronger highlights from your footage before you build the cut."
-					/>
-					<HomeEmptyFeatureCard
-						icon={PaintBrushIcon}
-						iconColor={primary}
-						title="Color Grades"
-						description="Start from cinematic palettes and keep the visual tone consistent across clips."
-					/>
-				</View>
 			</View>
 		</ScrollView>
 	);

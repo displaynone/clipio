@@ -1,7 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { MediaAsset } from "@/types/media";
 
-export async function pickVideoFromLibrary(): Promise<MediaAsset[]> {
+export async function pickMediaFromLibrary(): Promise<MediaAsset[]> {
 	const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
 	if (permission.status !== "granted") {
@@ -9,7 +9,7 @@ export async function pickVideoFromLibrary(): Promise<MediaAsset[]> {
 	}
 
 	const result = await ImagePicker.launchImageLibraryAsync({
-		mediaTypes: ["videos"],
+		mediaTypes: ["images", "videos"],
 		allowsMultipleSelection: true,
 		quality: 0.7,
 	});
@@ -22,7 +22,7 @@ export async function pickVideoFromLibrary(): Promise<MediaAsset[]> {
 		.map((asset, index) => ({
 			id: asset.assetId ?? `${asset.uri}-${index}`,
 			uri: asset.uri,
-			type: "video" as const,
+			type: asset.type === "video" ? "video" as const : "image" as const,
 			duration:
 				typeof asset.duration === "number" && asset.duration > 0
 					? Math.round(asset.duration)
@@ -32,3 +32,5 @@ export async function pickVideoFromLibrary(): Promise<MediaAsset[]> {
 		}))
 		.filter((asset) => asset.uri != null);
 }
+
+export const pickVideoFromLibrary = pickMediaFromLibrary;

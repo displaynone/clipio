@@ -4,7 +4,10 @@ export function useVideoSelection() {
 	const libraryUris = useEditorStore((state) => state.libraryUris);
 	const selectedUris = useEditorStore((state) => state.selectedUris);
 	const trimsByUri = useEditorStore((state) => state.trimsByUri);
+	const mediaByUri = useEditorStore((state) => state.mediaByUri);
 	const addUri = useEditorStore((state) => state.addUri);
+	const addMediaAssets = useEditorStore((state) => state.addMediaAssets);
+	const registerMediaAssets = useEditorStore((state) => state.registerMediaAssets);
 	const removeUri = useEditorStore((state) => state.removeUri);
 	const clearUris = useEditorStore((state) => state.clearUris);
 	const swapUris = useEditorStore((state) => state.swapUris);
@@ -19,7 +22,10 @@ export function useVideoSelection() {
 		libraryUris,
 		selectedUris,
 		trimsByUri,
+		mediaByUri,
 		addUri,
+		addMediaAssets,
+		registerMediaAssets,
 		removeUri,
 		clearUris,
 		swapUris,

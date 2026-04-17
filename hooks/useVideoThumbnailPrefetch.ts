@@ -50,7 +50,14 @@ export function useVideoThumbnailPrefetch(uris: string[]) {
 						});
 					})
 					.catch(() => {
-						// Cada thumbnail ya resuelve su fallback visual por separado.
+						if (!isMounted) {
+							return;
+						}
+
+						setLoadedUris((current) => ({
+							...current,
+							[uri]: true,
+						}));
 					});
 			});
 

@@ -9,9 +9,10 @@ export function useEditorProject(
   instance: TemplateInstance,
 ): VideoProject {
   const trimsByUri = useEditorStore((state) => state.trimsByUri);
+  const mediaByUri = useEditorStore((state) => state.mediaByUri);
 
   return useMemo(
-    () => buildProjectFromTemplate(template, instance, trimsByUri),
-    [instance, template, trimsByUri],
+    () => buildProjectFromTemplate(template, instance, trimsByUri, mediaByUri),
+    [instance, template, trimsByUri, mediaByUri],
   );
 }
