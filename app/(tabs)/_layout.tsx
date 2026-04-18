@@ -6,6 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { HapticTab } from "@/components/haptic-tab";
 import ClipioHeaderTitle from "@/components/navigation/ClipioHeaderTitle";
 import { IconSymbol } from "@/components/ui/icon-symbol";
+import { t } from "@lingui/core/macro";
 
 export default function TabLayout() {
 	const insets = useSafeAreaInsets();
@@ -59,7 +60,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="index"
 				options={{
-					title: "Library",
+					title: t`Library`,
 					tabBarIcon: ({ color }) => (
 						<IconSymbol size={30} name="video-library" color={color} />
 					),

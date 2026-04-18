@@ -9,6 +9,8 @@
     "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "expo lint",
+    "extract": "lingui extract",
+    "compile": "lingui compile",
     "ffmpeg:doctor": "bash scripts/ffmpeg/check-android-ffmpeg.sh",
     "ffmpeg:build:android": "bash scripts/ffmpeg/build-android-ffmpeg.sh"
   },
@@ -16,6 +18,8 @@
     "@expo-google-fonts/manrope": "^0.4.2",
     "@expo/vector-icons": "^15.0.3",
     "@gorhom/bottom-sheet": "^5.2.8",
+    "@lingui/core": "^5.9.5",
+    "@lingui/react": "^5.9.5",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-navigation/bottom-tabs": "^7.4.0",
     "@react-navigation/elements": "^2.6.3",
@@ -32,6 +36,7 @@
     "expo-image-picker": "~55.0.14",
     "expo-linear-gradient": "^55.0.9",
     "expo-linking": "~55.0.9",
+    "expo-localization": "^55.0.13",
     "expo-router": "~55.0.8",
     "expo-splash-screen": "~55.0.13",
     "expo-status-bar": "~55.0.4",
@@ -59,7 +64,10 @@
     "zustand": "^5.0.12"
   },
   "devDependencies": {
+    "@lingui/cli": "^5.9.5",
+    "@lingui/macro": "^5.9.5",
     "@types/react": "~19.2.10",
+    "babel-plugin-macros": "^3.1.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~55.0.0",
     "typescript": "~5.9.2"

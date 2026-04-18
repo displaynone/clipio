@@ -4,6 +4,8 @@ import { videoTrimService } from '@/services/videoTrimService';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
+import { Trans } from '@lingui/react/macro';
+import { t } from '@lingui/core/macro';
 
 export default function TrimScreen() {
   const params = useLocalSearchParams<{ uri?: string }>();
@@ -52,7 +54,7 @@ export default function TrimScreen() {
             console.log('Trim completed successfully, new URI:', result.outputUri);
             router.back();
           } catch (error) {
-            Alert.alert('Trim no disponible', `${error}`);
+            Alert.alert(t`Trim unavailable`, `${error}`);
           } finally {
             setIsProcessing(false);
           }
@@ -62,9 +64,11 @@ export default function TrimScreen() {
       {isProcessing ? (
         <View className="absolute inset-0 items-center justify-center bg-background/80 px-6">
           <View className="w-full max-w-xs rounded-2xl bg-surface-secondary px-5 py-5">
-            <Text className="mb-2 text-lg font-bold text-foreground">Procesando trim</Text>
+            <Text className="mb-2 text-lg font-bold text-foreground">
+              <Trans>Processing trim</Trans>
+            </Text>
             <Text className="mb-4 text-sm text-muted">
-              FFmpeg está generando un nuevo clip.
+              <Trans>FFmpeg is generating a new clip.</Trans>
             </Text>
             <View className="h-2 overflow-hidden rounded-full bg-background">
               <View

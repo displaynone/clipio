@@ -7,6 +7,7 @@ import { Tabs, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { Alert, View } from 'react-native';
 import { MediaAsset } from '@/types/media';
+import { t } from '@lingui/core/macro';
 
 const VIDEO_IMPORT_CHUNK_SIZE = 6;
 
@@ -62,7 +63,7 @@ export default function HomeScreen() {
         }
       }
     } catch (error) {
-      Alert.alert('Error al seleccionar medios', `${error}`);
+      Alert.alert(t`Media selection failed`, `${error}`);
     } finally {
       setIsPickLoading(false);
     }
@@ -70,7 +71,7 @@ export default function HomeScreen() {
 
   const handleContinue = () => {
     if (selectedUris.length === 0) {
-      Alert.alert('Selecciona medios', 'Debes seleccionar al menos un video o imagen para continuar.');
+      Alert.alert(t`Select media`, t`Select at least one video or image to continue.`);
       return;
     }
     router.push('/select-template');

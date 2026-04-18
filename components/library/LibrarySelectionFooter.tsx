@@ -5,6 +5,8 @@ import { PressableFeedback, useThemeColor } from "heroui-native";
 import { Text, View } from "react-native";
 import { ArrowRightIcon } from "react-native-heroicons/outline";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 
 type Props = {
 	selectedUris: string[];
@@ -20,6 +22,10 @@ export default function LibrarySelectionFooter({
 	const warningForegroundColor = useThemeColor("warning-foreground");
 	const insets = useSafeAreaInsets();
 	const mediaByUri = useEditorStore((state) => state.mediaByUri);
+	const selectedLabel =
+		selectedUris.length === 1
+			? t`1 clip selected`
+			: t`${selectedUris.length} clips selected`;
 
 	return (
 		<View
@@ -29,11 +35,10 @@ export default function LibrarySelectionFooter({
 			<View className="rounded-[2rem] bg-default/90 px-5 py-5 gap-2">
 				<View className="">
 					<Text className="text-base font-bold text-foreground">
-						{selectedUris.length} clip{selectedUris.length !== 1 ? "s" : ""}{" "}
-						selected
+						{selectedLabel}
 					</Text>
 					<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
-						Ready to choose a template
+						<Trans>Ready to choose a template</Trans>
 					</Text>
 				</View>
 				<View className="flex-row items-center justify-between gap-4">
@@ -72,7 +77,7 @@ export default function LibrarySelectionFooter({
 							className="flex-row items-center gap-2 px-5 py-4"
 						>
 							<Text className="font-bold text-warning-foreground">
-								Continue
+								<Trans>Continue</Trans>
 							</Text>
 							<ArrowRightIcon
 								width={18}

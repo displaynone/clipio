@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:13+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: fil\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr "· May kasamang walang limitasyong pagkakasunod-sunod"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "{0} clip na naka-link sa {selectedEffectLabelLower}."
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "{0} na mga clip ang napili"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "{0} item ang napili"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "Napili ang {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "{count} clip"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "{count} Mga Pinili na Clip"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}s sa susunod na clip"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} handa na"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "1 clip"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "1 clip na naka-link sa {selectedEffectLabelLower}."
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "1 clip ang napili"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "1 Pinili ang Clip"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "1 item ang napili"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "2x2 grid"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "2x2 grid na pahalang"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "Bumalik"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "Bumalik sa pagpili ng media"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "Malabo"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "Pumili ng cinematic na layout para itakda ang hitsura ng iyong proyekto."
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "Pabilog na pagsara"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "Klip {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "Sunod-sunod na pag-export ng mga clip"
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "Pagpapalakas ng Kulay"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "Magpatuloy"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "Dayagonal TL"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "Tagal"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "Epekto"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "Tapusin"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "Tapusin ang {0}"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "I-export"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "Nakumpleto ang pag-export"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "Hindi pinagana ang pag-export"
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "Error sa pag-export"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "I-export ang Proyekto"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "Ini-export ang video"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "Ini-export..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "Pag-fade"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "Fade sa itim"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "Ang FFmpeg ay bumubuo ng isang bagong clip."
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "Hindi naka-install ang FFmpegExportModule. Ang pag-export ay hindi na gumagamit ng Media3/Transformer bilang default. Upang mag-export gamit ang FFmpeg nang walang mga third-party na serbisyo, dapat na direktang isama ang native na FFmpeg sa Android."
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "Flash + alog"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "Layout ng Focus"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "Focus layout na pahalang"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "Binubuo..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "kumikinang"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "HL na hiwa"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "HR na hiwa"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "Imahe"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "Pahalang"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "Landscape 16:9 na komposisyon na may 4 na video sa isang grid."
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "Landscape 16:9 na komposisyon na may isang pangunahing clip sa kaliwa at tatlong clip sa kanan."
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "Aklatan"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "Punto ng liwanag"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "Naabot na ang limitasyon"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "Mag-load ng media"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "Mag-load ng Media"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "Nilo-load ang mga thumbnail"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "Naglo-load..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "Markahan"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "Tinanggihan ang pahintulot ng media library"
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "Nabigo ang pagpili ng media"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "Walang mga template ng {orientationFilter}"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "Wala pang na-load na media. Simulan ang iyong cinematic na paglalakbay sa pamamagitan ng pagdaragdag ng mga video o larawan."
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "Walang magagamit na mga template"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:78
+msgid ""
+"No templates can fit {0} selected items.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"Walang mga template ang maaaring magkasya sa {0} napiling mga item.\n"
+"\n"
+"Bumalik at pumili ng mas kaunting item, o makipag-ugnayan sa developer upang magdagdag ng higit pang mga template."
+
+#: app/select-template.tsx:75
+msgid ""
+"No templates can fit 1 selected item.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"Walang mga template ang maaaring magkasya sa 1 napiling item.\n"
+"\n"
+"Bumalik at pumili ng mas kaunting item, o makipag-ugnayan sa developer upang magdagdag ng higit pang mga template."
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "Ang {addedCount} lang ng {0} napiling mga item ang maaaring maidagdag."
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "{addedCount} lang sa 1 napiling item ang maaaring maidagdag."
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "Gawing pixelated"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "Mag-play ng anumang bilang ng mga clip nang sunud-sunod at samahan sila ng 1 segundong fade sa pagitan ng mga video."
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "Mag-play ng anumang bilang ng mga landscape clip nang sunud-sunod na may 1 segundong fade."
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "Silipin"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "Pinoproseso ang trim"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "Handa nang pumili ng template"
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "Alisin"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "Muling ayusin ang mga Clip"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "I-reset"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "Paghihiwalay ng RGB"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "Mga segundo"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "Piliin ang {remainingCount} higit pang mga item bago i-export."
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "Pumili ng 1 pang item bago i-export."
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "Pumili ng kahit isang video o larawan bago i-export."
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "Pumili ng kahit isang video o larawan upang magpatuloy."
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "Piliin ang Mga Clip"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "Pumili ng media"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "Piliin ang Template"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "Pagkakasunod-sunod"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "Itakda kung gaano karaming segundo ang tatagal ng paglipat sa pagitan ng mga clip. Gamitin ang `0` para sa isang hard cut."
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "Hugis"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "Gilid na wipe"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "Ang ilang mga item ay hindi naidagdag"
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "Magsimula"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "Simulan ang {0}"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "nagsisimula dito"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "Ilipat ang filter para makita ang iba pang available na komposisyon."
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "Hindi nahanap ang template"
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "Ang na-export na landas ng file ay hindi magagamit."
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "Ang panghuling pag-edit ay binubuo sa 9:16 na format."
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "Ang proyekto ay hindi naglalaman ng mga na-export na layer ng video."
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "Ang template ID ay hindi wasto."
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "Hindi ma-export ang video."
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "Hindi mabuksan ang video"
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "Ang visual na pagsali ay gumagamit ng {selectedEffectLabelLower}. Ayusin muli ang listahan upang baguhin ang panghuling pag-edit."
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "Walang nakikitang mga clip na ie-export."
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "Ang template na ito ay nagbibigay-daan lamang sa {capacity} na mga item."
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "Pinapayagan lamang ng template na ito ang 1 item."
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "Segment ng Timeline"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "Putulin"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "Hindi available ang trim"
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "Patayo"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "Vertical 9:16 na komposisyon sa dalawang seksyon: isang clip sa itaas at tatlong pantay na clip sa ibaba."
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "Vertical 9:16 na komposisyon na may 4 na video sa isang grid."
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "Patayong Punasan"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "Retro na VHS"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "Hindi handa ang video"
+
+#. placeholder {0}: result.outputUri
+#: app/template/[templateId].tsx:153
+msgid ""
+"Video saved to:\n"
+"{0}"
+msgstr ""
+"Na-save ang video sa:\n"
+"{0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "Pagkakasunod-sunod ng Video"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "Landscape ng Pagkakasunud-sunod ng Video"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "Hindi naka-install ang VideoExportModule sa Android."
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "Hindi naka-install ang VideoTrimModule sa Android."
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "Tingnan"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "Panoorin ang video"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "Hintaying matapos ang paglo-load ng video."
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "iyong kwento"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "Iyong kwento"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "Mag-zoom"

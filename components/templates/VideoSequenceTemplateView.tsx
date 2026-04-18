@@ -3,6 +3,11 @@ import ReorderableClipList from "@/components/templates/ReorderableClipList";
 import TemplateThumbnailLoadingIndicator from "@/components/templates/TemplateThumbnailLoadingIndicator";
 import { useVideoThumbnailPrefetch } from "@/hooks/useVideoThumbnailPrefetch";
 import { TemplateSequenceEffect } from "@/types/template";
+import type { MessageDescriptor } from "@lingui/core";
+import { msg, t } from "@lingui/core/macro";
+import { useLingui } from "@lingui/react";
+import { Trans } from "@lingui/react/macro";
+import { Image } from "expo-image";
 import { VideoView, useVideoPlayer } from "expo-video";
 import { PressableFeedback } from "heroui-native";
 import { useEffect, useState } from "react";
@@ -29,87 +34,105 @@ const EFFECT_PREVIEW_VIDEOS = {
 	"circle-close": require("../../assets/videos/effects/circle-close.mp4"),
 } satisfies Record<TemplateSequenceEffect, number>;
 
+const EFFECT_PREVIEW_THUMBS = {
+	fade: require("../../assets/videos/effects/thumbs/fade.jpg"),
+	blur: require("../../assets/videos/effects/thumbs/blur.jpg"),
+	zoom: require("../../assets/videos/effects/thumbs/zoom.jpg"),
+	"contrast-pop": require("../../assets/videos/effects/thumbs/contrast-pop.jpg"),
+	pixelate: require("../../assets/videos/effects/thumbs/pixelate.jpg"),
+	hlslice: require("../../assets/videos/effects/thumbs/hlslice.jpg"),
+	hrslice: require("../../assets/videos/effects/thumbs/hrslice.jpg"),
+	fadeblack: require("../../assets/videos/effects/thumbs/fadeblack.jpg"),
+	diagtl: require("../../assets/videos/effects/thumbs/diagtl.jpg"),
+	"flash-shake": require("../../assets/videos/effects/thumbs/flash-shake.jpg"),
+	"rgb-split": require("../../assets/videos/effects/thumbs/rgb-split.jpg"),
+	glow: require("../../assets/videos/effects/thumbs/glow.jpg"),
+	"vhs-retro": require("../../assets/videos/effects/thumbs/vhs-retro.jpg"),
+	"light-point": require("../../assets/videos/effects/thumbs/light-point.jpg"),
+	"wipe-left": require("../../assets/videos/effects/thumbs/wipe-left.jpg"),
+	"wipe-up": require("../../assets/videos/effects/thumbs/wipe-up.jpg"),
+	"circle-close": require("../../assets/videos/effects/thumbs/circle-close.jpg"),
+} satisfies Record<TemplateSequenceEffect, number>;
+
 const EFFECT_PREVIEW_START_SECONDS = 1.5;
 
 const EFFECT_OPTIONS = [
 	{
 		id: "fade",
-		label: "Fundido",
+		label: msg`Fade`,
 	},
 	{
 		id: "blur",
-		label: "Blur",
+		label: msg`Blur`,
 	},
 	{
 		id: "zoom",
-		label: "Zoom",
+		label: msg`Zoom`,
 	},
 	{
 		id: "contrast-pop",
-		label: "Color Boost",
+		label: msg`Color Boost`,
 	},
 	{
 		id: "pixelate",
-		label: "Pixelate",
+		label: msg`Pixelate`,
 	},
 	{
 		id: "hlslice",
-		label: "HL Slice",
+		label: msg`HL Slice`,
 	},
 	{
 		id: "hrslice",
-		label: "HR Slice",
+		label: msg`HR Slice`,
 	},
 	{
 		id: "fadeblack",
-		label: "Fade Black",
+		label: msg`Fade Black`,
 	},
 	{
 		id: "diagtl",
-		label: "Diag TL",
+		label: msg`Diag TL`,
 	},
 	{
 		id: "flash-shake",
-		label: "Flash + Shake",
+		label: msg`Flash + Shake`,
 	},
 	{
 		id: "rgb-split",
-		label: "RGB Split",
+		label: msg`RGB Split`,
 	},
 	{
 		id: "glow",
-		label: "Glow",
+		label: msg`Glow`,
 	},
 	{
 		id: "vhs-retro",
-		label: "VHS Retro",
+		label: msg`VHS Retro`,
 	},
 	{
 		id: "light-point",
-		label: "Punto de luz",
+		label: msg`Light Point`,
 	},
 	{
 		id: "wipe-left",
-		label: "Barrido lateral",
+		label: msg`Side Wipe`,
 	},
 	{
 		id: "wipe-up",
-		label: "Barrido vertical",
+		label: msg`Vertical Wipe`,
 	},
 	{
 		id: "circle-close",
-		label: "Cierre circular",
+		label: msg`Circle Close`,
 	},
 ] as const satisfies {
 	id: TemplateSequenceEffect;
-	label: string;
+	label: MessageDescriptor;
 }[];
 
 function EffectPreviewVideo({
-	isSelected,
 	source,
 }: {
-	isSelected: boolean;
 	source: number;
 }) {
 	const player = useVideoPlayer(source, (videoPlayer) => {
@@ -119,15 +142,9 @@ function EffectPreviewVideo({
 	});
 
 	useEffect(() => {
-		if (isSelected) {
-			player.currentTime = EFFECT_PREVIEW_START_SECONDS;
-			player.play();
-			return;
-		}
-
-		player.pause();
 		player.currentTime = EFFECT_PREVIEW_START_SECONDS;
-	}, [isSelected, player]);
+		player.play();
+	}, [player]);
 
 	return (
 		<VideoView
@@ -139,6 +156,28 @@ function EffectPreviewVideo({
 	);
 }
 
+function EffectPreviewSurface({
+	isSelected,
+	source,
+	thumbSource,
+}: {
+	isSelected: boolean;
+	source: number;
+	thumbSource: number;
+}) {
+	if (!isSelected) {
+		return (
+			<Image
+				source={thumbSource}
+				contentFit="cover"
+				style={{ width: "100%", height: "100%" }}
+			/>
+		);
+	}
+
+	return <EffectPreviewVideo source={source} />;
+}
+
 export default function VideoSequenceTemplateView({
 	instance,
 	project,
@@ -148,6 +187,7 @@ export default function VideoSequenceTemplateView({
 	onSetSequenceEffect,
 	onSetSequenceTransitionSeconds,
 }: TemplateViewProps) {
+	const { i18n } = useLingui();
 	const orderedUris = selectedUris;
 	const previewUris = orderedUris.slice(0, 2);
 	const [primaryPreviewUri, secondaryPreviewUri] = previewUris;
@@ -162,7 +202,12 @@ export default function VideoSequenceTemplateView({
 	const transitionSeconds = Math.max(0, instance.style.sequenceTransitionSeconds ?? 1);
 	const [transitionInput, setTransitionInput] = useState(String(transitionSeconds));
 	const selectedEffectLabel =
-		EFFECT_OPTIONS.find((effect) => effect.id === selectedEffect)?.label ?? "Fundido";
+		i18n._(EFFECT_OPTIONS.find((effect) => effect.id === selectedEffect)?.label ?? msg`Fade`);
+	const selectedEffectLabelLower = selectedEffectLabel.toLowerCase();
+	const sequenceSummary =
+		orderedUris.length === 1
+			? t`1 clip linked with ${selectedEffectLabelLower}.`
+			: t`${orderedUris.length} clips linked with ${selectedEffectLabelLower}.`;
 	const thumbnailLoading = useVideoThumbnailPrefetch(previewUris);
 
 	useEffect(() => {
@@ -236,10 +281,10 @@ export default function VideoSequenceTemplateView({
 					) : null}
 					<View className="absolute bottom-4 left-4 right-4 rounded-xl bg-background/70 px-4 py-3">
 						<Text className="text-[10px] font-bold uppercase tracking-[0.14em] text-accent">
-							Video Sequence
+							<Trans>Video Sequence</Trans>
 						</Text>
 						<Text className="mt-1 text-sm leading-5 text-foreground">
-							{`${orderedUris.length} clips enlazados con ${selectedEffectLabel.toLowerCase()}.`}
+							{sequenceSummary}
 						</Text>
 					</View>
 				</View>
@@ -248,7 +293,7 @@ export default function VideoSequenceTemplateView({
 			<View className="mb-6 rounded-2xl bg-surface-secondary p-4">
 				<View className="mb-4 flex-row items-center justify-between gap-4">
 					<Text className="text-[10px] font-bold uppercase tracking-[0.15em] text-muted">
-						Efecto
+						<Trans>Effect</Trans>
 					</Text>
 					<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent">
 						{selectedEffectLabel}
@@ -278,14 +323,15 @@ export default function VideoSequenceTemplateView({
 										pointerEvents="none"
 										style={{ aspectRatio: 1 }}
 									>
-										<EffectPreviewVideo
+										<EffectPreviewSurface
 											isSelected={isSelected}
 											source={EFFECT_PREVIEW_VIDEOS[effect.id]}
+											thumbSource={EFFECT_PREVIEW_THUMBS[effect.id]}
 										/>
 									</View>
 									<View className="px-2 py-1">
 										<Text className="text-[10px] text-foreground text-center">
-											{effect.label}
+											{i18n._(effect.label)}
 										</Text>
 									</View>
 								</View>
@@ -297,17 +343,19 @@ export default function VideoSequenceTemplateView({
 					<View className="mt-5 rounded-xl bg-background px-4 py-4">
 						<View className="mb-2 flex-row items-center justify-between gap-4">
 							<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
-								Duración
+								<Trans>Duration</Trans>
 							</Text>
 							<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent">
 								{`${transitionSeconds}s`}
 							</Text>
 						</View>
 						<Text className="mb-3 text-sm leading-6 text-muted">
-							Indica cuántos segundos dura la transición entre clips. Usa `0` para cortar sin efecto.
+							<Trans>Set how many seconds the transition between clips lasts. Use `0` for a hard cut.</Trans>
 						</Text>
 						<View className="flex-row items-center justify-between rounded-xl border border-border bg-surface-secondary px-4 py-3">
-							<Text className="text-sm font-bold text-foreground">Segundos</Text>
+							<Text className="text-sm font-bold text-foreground">
+								<Trans>Seconds</Trans>
+							</Text>
 							<View className="min-w-20 flex-row items-center justify-end gap-2">
 								<TextInput
 									value={transitionInput}
@@ -332,21 +380,21 @@ export default function VideoSequenceTemplateView({
 				foregroundColor={foregroundColor}
 				onMove={onMove}
 				accordionValue="sequence-clips"
-				accordionTitle="Sequence Order"
-				countLabel={(count) => `${count} Clips`}
+				accordionTitle={t`Sequence Order`}
+				countLabel={(count) => (count === 1 ? t`1 Clip` : t`${count} Clips`)}
 				infoBox={
 					<View className="mb-5 rounded-xl bg-surface-secondary px-4 py-4">
 						<Text className="text-sm font-bold text-foreground">
-							Los clips se exportan uno tras otro
+							<Trans>Clips export one after another</Trans>
 						</Text>
 						<Text className="mt-1 text-sm leading-6 text-muted">
-							{`La unión visual usa ${selectedEffectLabel.toLowerCase()}. Reordena la lista para cambiar el montaje final.`}
+							<Trans>The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit.</Trans>
 						</Text>
 					</View>
 				}
-				renderItemTitle={({ index }) => `Clip ${index + 1}`}
+				renderItemTitle={({ index }) => t`Clip ${index + 1}`}
 				renderItemSubtitle={({ durationLabel }) =>
-					`${durationLabel} · ${selectedEffectLabel.toLowerCase()} ${transitionSeconds}s con el siguiente`
+					`${durationLabel}`
 				}
 			/>
 		</ScrollView>

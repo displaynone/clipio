@@ -11,10 +11,7 @@ export default function ClipioHeaderTitle() {
         />
       </View>
       <View>
-        <Text className="text-[11px] font-bold uppercase tracking-[0.18em] text-muted">
-          Director Mode
-        </Text>
-        <Text className="text-2xl font-extrabold tracking-[-0.03em] text-foreground">
+        <Text className="text-3xl font-extrabold tracking-[-0.03em] text-foreground">
           Clipio
         </Text>
       </View>

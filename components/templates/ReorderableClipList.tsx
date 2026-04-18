@@ -152,12 +152,12 @@ function DraggableClipItem({
 					</Text>
 					<Text className="text-xs text-surface-secondary-foreground/70">
 						{renderItemSubtitle?.(content) ??
-							(isAudioSelected ? "Audio final activo" : "Audio silenciado")}
+							(isAudioSelected ? "Final audio active" : "Audio muted")}
 					</Text>
 					{mediaType === "image" ? (
 						<View className="mt-3 flex-row items-center gap-2">
 							<Text className="text-xs font-bold text-surface-secondary-foreground/70">
-								Duración
+								Duration
 							</Text>
 							<TextInput
 								value={durationInput}

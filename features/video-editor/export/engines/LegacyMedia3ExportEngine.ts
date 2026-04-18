@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { NativeEventEmitter, NativeModules } from "react-native";
 import { VideoProject, VideoTrackItem } from "../../domain/video-project";
 import { ExportEngine, ExportResult } from "../contracts";
@@ -71,7 +72,7 @@ export class LegacyMedia3ExportEngine implements ExportEngine {
   private buildLegacyPlan(project: VideoProject): LegacyExportPlan {
     const videoItems = getTemplateVideoItems(project);
     if (videoItems.length === 0) {
-      throw new Error("No hay clips visibles para exportar.");
+      throw new Error(t`There are no visible clips to export.`);
     }
 
     const style = {
@@ -109,7 +110,7 @@ export class LegacyMedia3ExportEngine implements ExportEngine {
     if (!nativeModule?.exportTemplateVideo) {
       return {
         success: false,
-        error: "VideoExportModule no está instalado en Android.",
+        error: t`VideoExportModule is not installed on Android.`,
         engineId: this.id,
       };
     }

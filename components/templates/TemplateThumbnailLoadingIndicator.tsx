@@ -1,4 +1,5 @@
 import { ActivityIndicator, Text, View } from "react-native";
+import { Trans } from "@lingui/react/macro";
 
 type Props = {
 	loadedCount: number;
@@ -19,10 +20,10 @@ export default function TemplateThumbnailLoadingIndicator({
 				<ActivityIndicator size="small" color="#ffffff" />
 				<View>
 					<Text className="text-[10px] font-bold uppercase tracking-[0.14em] text-accent">
-						Cargando miniaturas
+						<Trans>Loading thumbnails</Trans>
 					</Text>
 					<Text className="mt-1 text-xs text-foreground">
-						{loadedCount}/{totalCount} listas
+						<Trans>{loadedCount}/{totalCount} ready</Trans>
 					</Text>
 				</View>
 			</View>

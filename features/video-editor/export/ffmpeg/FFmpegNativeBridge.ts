@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { NativeEventEmitter, NativeModules } from "react-native";
 import { VideoProject } from "../../domain/video-project";
 import { ExportProgressEvent } from "../contracts";
@@ -35,7 +36,7 @@ export class FFmpegNativeBridge {
     const nativeModule = this.module;
     if (!nativeModule) {
       throw new Error(
-        "FFmpegExportModule no está instalado. El export ya no usa Media3/Transformer por defecto. Para exportar con FFmpeg sin terceros hay que integrar FFmpeg nativo directamente en Android.",
+        t`FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android.`,
       );
     }
 

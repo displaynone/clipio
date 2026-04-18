@@ -8,9 +8,9 @@ import { useEffect, useState } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 import { PhotoIcon, VideoCameraIcon } from 'react-native-heroicons/outline';
 
-function scheduleWhenIdle(task: () => void) {
-  const handle = requestIdleCallback(task);
-  return () => cancelIdleCallback(handle);
+function scheduleThumbnailGeneration(task: () => void) {
+  const handle = setTimeout(task, 80);
+  return () => clearTimeout(handle);
 }
 
 type Props = {
@@ -52,7 +52,7 @@ function LazyVideoSlot({ uri, mediaType = "video", style, className, gap = 0}: A
       }
     };
 
-    const cancelTask = scheduleWhenIdle(() => {
+    const cancelTask = scheduleThumbnailGeneration(() => {
       void generateThumbnail();
     });
 

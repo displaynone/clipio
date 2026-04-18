@@ -1,4 +1,5 @@
 import { TemplateData } from "@/types/template";
+import { msg } from "@lingui/core/macro";
 import FocusLandscapeTemplateIcon from "./icons/FocusLandscapeTemplateIcon";
 import FocusTopTemplateIcon from "./icons/FocusTopTemplateIcon";
 import Grid2x2LandscapeTemplateIcon from "./icons/Grid2x2LandscapeTemplateIcon";
@@ -9,9 +10,9 @@ import VideoSequenceTemplateIcon from "./icons/VideoSequenceTemplateIcon";
 export const templateRegistry: TemplateData[] = [
 	{
 		id: "vertical-sequence",
-		name: "Video Sequence",
+		name: msg`Video Sequence`,
 		description:
-			"Reproduce cualquier cantidad de clips uno tras otro y los une con un fundido de 1 segundo entre cada video.",
+			msg`Play any number of clips one after another and join them with a 1-second fade between videos.`,
 		kind: "sequence",
 		orientation: "vertical",
 		maxSlots: null,
@@ -31,9 +32,9 @@ export const templateRegistry: TemplateData[] = [
 	},
 	{
 		id: "landscape-sequence",
-		name: "Video Sequence Landscape",
+		name: msg`Video Sequence Landscape`,
 		description:
-			"Reproduce cualquier cantidad de clips landscape uno tras otro con un fundido de 1 segundo.",
+			msg`Play any number of landscape clips one after another with a 1-second fade.`,
 		kind: "sequence",
 		orientation: "landscape",
 		maxSlots: null,
@@ -53,8 +54,8 @@ export const templateRegistry: TemplateData[] = [
 	},
 	{
 		id: "grid-2x2",
-		name: "2x2 Grid",
-		description: "Composición vertical 9:16 con 4 videos en cuadrícula.",
+		name: msg`2x2 Grid`,
+		description: msg`Vertical 9:16 composition with 4 videos in a grid.`,
 		kind: "grid",
 		orientation: "vertical",
 		maxSlots: 4,
@@ -79,8 +80,8 @@ export const templateRegistry: TemplateData[] = [
 	},
 	{
 		id: "landscape-grid-2x2",
-		name: "2x2 Grid Landscape",
-		description: "Composición landscape 16:9 con 4 videos en cuadrícula.",
+		name: msg`2x2 Grid Landscape`,
+		description: msg`Landscape 16:9 composition with 4 videos in a grid.`,
 		kind: "grid",
 		orientation: "landscape",
 		maxSlots: 4,
@@ -105,9 +106,9 @@ export const templateRegistry: TemplateData[] = [
 	},
 	{
 		id: "focus-top",
-		name: "Focus Layout",
+		name: msg`Focus Layout`,
 		description:
-			"Composición vertical 9:16 en dos secciones: un clip arriba y tres clips iguales abajo.",
+			msg`Vertical 9:16 composition in two sections: one clip on top and three equal clips below.`,
 		kind: "grid",
 		orientation: "vertical",
 		maxSlots: 4,
@@ -132,9 +133,9 @@ export const templateRegistry: TemplateData[] = [
 	},
 	{
 		id: "landscape-focus",
-		name: "Focus Layout Landscape",
+		name: msg`Focus Layout Landscape`,
 		description:
-			"Composición landscape 16:9 con un clip principal a la izquierda y tres clips a la derecha.",
+			msg`Landscape 16:9 composition with one main clip on the left and three clips on the right.`,
 		kind: "grid",
 		orientation: "landscape",
 		maxSlots: 4,

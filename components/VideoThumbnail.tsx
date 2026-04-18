@@ -7,10 +7,11 @@ import { PressableFeedback, useThemeColor } from 'heroui-native';
 import { useEffect, useState } from 'react';
 import { StyleProp, Text, View, ViewStyle } from 'react-native';
 import { PhotoIcon, VideoCameraIcon } from 'react-native-heroicons/outline';
+import { Trans } from '@lingui/react/macro';
 
-function scheduleWhenIdle(task: () => void) {
-  const handle = requestIdleCallback(task);
-  return () => cancelIdleCallback(handle);
+function scheduleThumbnailGeneration(task: () => void) {
+  const handle = setTimeout(task, 80);
+  return () => clearTimeout(handle);
 }
 
 type Props = {
@@ -28,7 +29,7 @@ export default function VideoThumbnail({ uri, mediaType = "video", style, classN
   const mutedColor = useThemeColor('muted');
   const displayUri = mediaType === "image" ? uri : thumbnailUri;
 
-  // Extraer nombre del archivo de la URI para mostrar como fallback
+  // Extract the file name from the URI to display as a fallback.
   const fileName = uri.split('/').pop()?.split('.')[0] || 'Video';
 
   useEffect(() => {
@@ -61,7 +62,7 @@ export default function VideoThumbnail({ uri, mediaType = "video", style, classN
       }
     };
 
-    const cancelTask = scheduleWhenIdle(() => {
+    const cancelTask = scheduleThumbnailGeneration(() => {
       void generateThumbnail();
     });
 
@@ -90,7 +91,9 @@ export default function VideoThumbnail({ uri, mediaType = "video", style, classN
             {fileName}
           </Text>
           {isGenerating && (
-            <Text className="mt-1 text-[10px] text-accent">Generando...</Text>
+            <Text className="mt-1 text-[10px] text-accent">
+              <Trans>Generating...</Trans>
+            </Text>
           )}
         </View>
       )}

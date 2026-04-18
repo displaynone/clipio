@@ -60,7 +60,7 @@ export type VideoTrackItem = BaseTrackItem & {
   kind: "video";
   sourceUri: string;
   sourceType?: "video" | "image";
-  sourceDurationMs?: number;
+  sourceDurationMs?: number | null;
   trimStartMs: number;
   trimEndMs: number | null;
   volume: number;

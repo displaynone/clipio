@@ -1,10 +1,12 @@
 import GradientMaskedText from "@/components/ui/GradientMaskedText";
 import { LinearGradient } from "expo-linear-gradient";
 import { PressableFeedback, useThemeColor } from "heroui-native";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import {
 	VideoCameraIcon
 } from "react-native-heroicons/outline";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 
 import HomeEmptyIllustration from "@/components/home/HomeEmptyIllustration";
 
@@ -21,7 +23,6 @@ export default function HomeEmptyState({
 	const primaryDim = "#7e51ff";
 
 	const onPrimaryFixed = useThemeColor("warning-foreground");
-	const accent = useThemeColor("accent");
 
 	return (
 		<ScrollView
@@ -35,16 +36,17 @@ export default function HomeEmptyState({
 				<View className="mb-8 items-center w-full">
 					<View className="w-full items-center justify-center">
 						<Text className="text-center text-3xl font-extrabold text-foreground">
-							Your story
+							<Trans>Your story</Trans>
 						</Text>
 					</View>
 						<GradientMaskedText
-							text="starts here"
+							text={t`starts here`}
 							colors={[primary, primaryDim]}
 						/>
 					<Text className="mt-5 max-w-[320px] text-center text-base leading-7 text-muted">
-						No media loaded yet. Start your cinematic journey by adding videos
-						or images.
+						<Trans>
+							No media loaded yet. Start your cinematic journey by adding videos or images.
+						</Trans>
 					</Text>
 				</View>
 
@@ -60,7 +62,7 @@ export default function HomeEmptyState({
 					>
 						<VideoCameraIcon width={20} height={20} color={onPrimaryFixed} />
 						<Text className="text-base font-bold uppercase tracking-[0.08em] text-warning-foreground">
-							{isLoading ? "Loading..." : "Load Media"}
+							{isLoading ? t`Loading...` : t`Load Media`}
 						</Text>
 					</LinearGradient>
 				</PressableFeedback>
@@ -68,5 +70,3 @@ export default function HomeEmptyState({
 		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({});

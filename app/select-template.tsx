@@ -14,6 +14,8 @@ import {
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { ArrowLeftIcon } from "react-native-heroicons/outline";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 
 function OrientationIcon({
 	orientation,
@@ -57,13 +59,25 @@ export default function SelectTemplateScreen() {
 	const [orientationFilter, setOrientationFilter] =
 		useState<TemplateOrientation>("vertical");
 
-	// Filtrar plantillas que puedan acomodar la cantidad de elementos seleccionados
+	// Filter templates that can fit the selected item count.
 	const availableTemplates = templateRegistry.filter(
 		(template) => getTemplateCapacity(template) >= selectedUris.length,
 	);
 	const filteredTemplates = availableTemplates.filter(
 		(template) => template.orientation === orientationFilter,
 	);
+	const selectedCountLabel =
+		selectedUris.length === 1
+			? t`1 item selected`
+			: t`${selectedUris.length} items selected`;
+	const noTemplatesMessage =
+		selectedUris.length === 1
+			? t`No templates can fit 1 selected item.
+
+Go back and select fewer items, or contact the developer to add more templates.`
+			: t`No templates can fit ${selectedUris.length} selected items.
+
+Go back and select fewer items, or contact the developer to add more templates.`;
 
 	return (
 		<View className="h-full bg-background">
@@ -86,7 +100,7 @@ export default function SelectTemplateScreen() {
 								<ArrowLeftIcon width={20} height={20} color="#b6a0ff" />
 							</PressableFeedback>
 							<Text className="font-manrope text-lg font-bold tracking-tight text-[#f1dfff]">
-								Select Template
+								<Trans>Select Template</Trans>
 							</Text>
 						</View>
 					),
@@ -100,20 +114,19 @@ export default function SelectTemplateScreen() {
 				>
 					<View className="pb-2">
 						<Text className="text-center font-headline text-4xl font-bold leading-none tracking-[-0.04em] text-foreground">
-							Shape
+							<Trans>Shape</Trans>
 						</Text>
 						<GradientMaskedText
-							text="your story"
+							text={t`your story`}
 							colors={[gradientFromColor, gradientToColor]}
 						/>
 						<Text className="mt-4 max-w-sm text-sm font-medium leading-6 text-muted">
-							Choose a cinematic layout to set how your project looks.
+							<Trans>Choose a cinematic layout to set how your project looks.</Trans>
 						</Text>
 						<Text className="mt-2 text-xs font-bold uppercase tracking-[0.14em] text-accent">
-							{selectedUris.length} elemento{selectedUris.length !== 1 ? "s" : ""}{" "}
-							seleccionado{selectedUris.length !== 1 ? "s" : ""}
+							{selectedCountLabel}
 							{filteredTemplates.some((template) => isUnlimitedTemplate(template))
-								? " · Incluye secuencia ilimitada"
+								? t` · Includes unlimited sequence`
 								: ""}
 						</Text>
 					</View>
@@ -148,7 +161,7 @@ export default function SelectTemplateScreen() {
 										<Text
 											className={`font-manrope text-sm font-bold uppercase tracking-[0.12em] ${orientationFilter === "vertical" ? "text-field-placeholder" : "text-muted"}`}
 										>
-											Vertical
+											<Trans>Vertical</Trans>
 										</Text>
 									</View>
 								</PressableFeedback>
@@ -186,7 +199,7 @@ export default function SelectTemplateScreen() {
 											}}
 											className="font-manrope text-sm font-bold uppercase tracking-[0.12em]"
 										>
-											Landscape
+											<Trans>Landscape</Trans>
 										</Text>
 									</View>
 								</PressableFeedback>
@@ -199,10 +212,10 @@ export default function SelectTemplateScreen() {
 							) : (
 								<View className="items-center rounded-2xl border border-dashed border-outline/40 px-5 py-10">
 									<Text className="text-center text-lg font-bold text-foreground">
-										No hay plantillas {orientationFilter}
+										<Trans>No {orientationFilter} templates</Trans>
 									</Text>
 									<Text className="mt-2 text-center text-sm leading-6 text-muted">
-										Cambia el filtro para ver otras composiciones disponibles.
+										<Trans>Switch the filter to see other available compositions.</Trans>
 									</Text>
 								</View>
 							)}
@@ -210,16 +223,15 @@ export default function SelectTemplateScreen() {
 					) : (
 						<View className="flex-1 items-center justify-center px-5 py-16">
 							<Text className="mb-3 text-xl font-bold text-foreground">
-								No hay plantillas disponibles
+								<Trans>No templates available</Trans>
 							</Text>
 							<Text className="mb-6 text-center text-base leading-6 text-muted">
-								No tienes plantillas que puedan acomodar {selectedUris.length}{" "}
-								elemento{selectedUris.length !== 1 ? "s" : ""}.{"\n\n"}
-								Regresa y selecciona menos elementos o contacta al desarrollador
-								para agregar más plantillas.
+								{noTemplatesMessage}
 							</Text>
 							<Button onPress={() => router.back()}>
-								<Button.Label>Volver a seleccionar medios</Button.Label>
+								<Button.Label>
+									<Trans>Back to media selection</Trans>
+								</Button.Label>
 							</Button>
 						</View>
 					)}

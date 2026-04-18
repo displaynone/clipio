@@ -5,6 +5,7 @@ import { useVideoThumbnailPrefetch } from "@/hooks/useVideoThumbnailPrefetch";
 import { useMemo } from "react";
 import { ScrollView, View } from "react-native";
 import { TemplateViewProps } from "./template-view.types";
+import { t } from "@lingui/core/macro";
 
 export default function Grid2x2TemplateView({
 	project,
@@ -80,8 +81,10 @@ export default function Grid2x2TemplateView({
 					audioSourceUri={audioSourceUri}
 					onSelectAudio={onSetAudioSource}
 					accordionValue="reorder-clips"
-					accordionTitle="Reorder Clips"
-					countLabel={(count) => `${count} Clips Selected`}
+					accordionTitle={t`Reorder Clips`}
+					countLabel={(count) =>
+						count === 1 ? t`1 Clip Selected` : t`${count} Clips Selected`
+					}
 				/>
 			</View>
 		</ScrollView>

@@ -1,8 +1,9 @@
-import { TemplateData } from "@/types/template";
+import { TemplateData, TranslatableText } from "@/types/template";
 import { Link } from "expo-router";
 import { PressableFeedback, useThemeColor } from "heroui-native";
 import { Text, View } from "react-native";
 import { CheckIcon } from "react-native-heroicons/outline";
+import { useLingui } from "@lingui/react";
 
 type Props = {
 	template: TemplateData;
@@ -18,7 +19,15 @@ function TemplateMiniPreview({ template }: { template: TemplateData }) {
 	);
 }
 
+function translateTemplateText(
+	i18n: ReturnType<typeof useLingui>["i18n"],
+	value: TranslatableText,
+) {
+	return typeof value === "string" ? i18n._(value) : i18n._(value);
+}
+
 export default function TemplateCard({ template }: Props) {
+	const { i18n } = useLingui();
 	const borderColor = useThemeColor("border");
 	const accentColor = useThemeColor("accent");
 
@@ -38,10 +47,10 @@ export default function TemplateCard({ template }: Props) {
 						<View className="flex-row items-start justify-between gap-3 px-1 pb-1">
 							<View className="flex-1">
 								<Text className="font-headline text-lg font-bold tracking-tight text-foreground">
-									{template.name}
+									{translateTemplateText(i18n, template.name)}
 								</Text>
 								<Text className="mt-1 text-sm leading-5 text-muted">
-									{template.description}
+									{translateTemplateText(i18n, template.description)}
 								</Text>
 							</View>
 

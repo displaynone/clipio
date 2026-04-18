@@ -5,8 +5,8 @@ import {
 import { useEffect, useMemo, useState } from "react";
 
 function scheduleWhenIdle(task: () => void) {
-	const handle = requestIdleCallback(task);
-	return () => cancelIdleCallback(handle);
+	const handle = setTimeout(task, 120);
+	return () => clearTimeout(handle);
 }
 
 export function useVideoThumbnailPrefetch(uris: string[]) {

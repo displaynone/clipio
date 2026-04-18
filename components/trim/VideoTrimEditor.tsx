@@ -21,6 +21,8 @@ import {
   ScissorsIcon,
 } from "react-native-heroicons/solid";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 
 type Props = {
 	uri: string;
@@ -240,7 +242,7 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 
 	const handleSave = () => {
 		if (!durationMs) {
-			Alert.alert("Video no listo", "Espera a que el video termine de cargar.");
+			Alert.alert(t`Video not ready`, t`Wait for the video to finish loading.`);
 			return;
 		}
 
@@ -404,10 +406,10 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 				<View className="mx-auto w-full max-w-4xl">
 					<View className="mb-3 flex-row items-center justify-between">
 						<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-muted">
-							Timeline Segment
+							<Trans>Timeline Segment</Trans>
 						</Text>
 						<Text className="text-[10px] font-bold uppercase tracking-[0.12em] text-accent">
-							{formatSeconds(trimDurationMs)} selected
+							<Trans>{formatSeconds(trimDurationMs)} selected</Trans>
 						</Text>
 					</View>
 
@@ -469,11 +471,15 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 					<View className="mt-4 flex-row gap-2">
 						<Button onPress={handleSetStart} variant="ghost" className="flex-1">
 							<ScissorsIcon width={16} height={16} color={accentColor} />
-							<Button.Label>Start {formatClock(startMs)}</Button.Label>
+							<Button.Label>
+								<Trans>Start {formatClock(startMs)}</Trans>
+							</Button.Label>
 						</Button>
 						<Button onPress={handleSetEnd} variant="ghost" className="flex-1">
 							<ScissorsIcon width={16} height={16} color={accentColor} />
-							<Button.Label>End {formatClock(effectiveEndMs)}</Button.Label>
+							<Button.Label>
+								<Trans>End {formatClock(effectiveEndMs)}</Trans>
+							</Button.Label>
 						</Button>
 					</View>
 
@@ -484,7 +490,7 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 						>
 							<BackwardIcon width={20} height={20} color={foregroundColor} />
 							<Text className="text-[10px] font-bold uppercase tracking-tight text-muted">
-								Start
+								<Trans>Start</Trans>
 							</Text>
 						</PressableFeedback>
 						<PressableFeedback
@@ -493,7 +499,7 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 						>
 							<ArrowPathIcon width={20} height={20} color={foregroundColor} />
 							<Text className="text-[10px] font-bold uppercase tracking-tight text-muted">
-								Reset
+								<Trans>Reset</Trans>
 							</Text>
 						</PressableFeedback>
 						<PressableFeedback
@@ -512,7 +518,7 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 						>
 							<ForwardIcon width={20} height={20} color={foregroundColor} />
 							<Text className="text-[10px] font-bold uppercase tracking-tight text-muted">
-								End
+								<Trans>End</Trans>
 							</Text>
 						</PressableFeedback>
 						<PressableFeedback
@@ -521,7 +527,7 @@ export default function VideoTrimEditor({ uri, initialTrim, onSave }: Props) {
 						>
 							<PlayIcon width={20} height={20} color={foregroundColor} />
 							<Text className="text-[10px] font-bold uppercase tracking-tight text-muted">
-								Mark
+								<Trans>Mark</Trans>
 							</Text>
 						</PressableFeedback>
 					</View>

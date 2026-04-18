@@ -3,6 +3,8 @@ import { Alert as HeroAlert } from "heroui-native";
 import { LayoutChangeEvent, View } from "react-native";
 import { VideoView, useVideoPlayer } from "expo-video";
 import { useEffect, useState } from "react";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 
 type VideoSize = {
 	width: number;
@@ -56,7 +58,7 @@ export default function ExportPreviewScreen() {
 		>
 			<Stack.Screen
 				options={{
-					title: "Preview",
+					title: t`Preview`,
 					headerTintColor: "#f1dfff",
 					headerStyle: { backgroundColor: "#16052a" },
 					headerShadowVisible: false,
@@ -82,9 +84,11 @@ export default function ExportPreviewScreen() {
 				<HeroAlert status="danger">
 					<HeroAlert.Indicator />
 					<HeroAlert.Content>
-						<HeroAlert.Title>No se pudo abrir el video</HeroAlert.Title>
+						<HeroAlert.Title>
+							<Trans>The video could not be opened</Trans>
+						</HeroAlert.Title>
 						<HeroAlert.Description>
-							La ruta del archivo exportado no está disponible.
+							<Trans>The exported file path is not available.</Trans>
 						</HeroAlert.Description>
 					</HeroAlert.Content>
 				</HeroAlert>

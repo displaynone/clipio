@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { NativeEventEmitter, NativeModules } from "react-native";
 
 type TrimToFileInput = {
@@ -46,9 +47,7 @@ class VideoTrimService {
 		const nativeModule = this.nativeModule;
 
 		if (!nativeModule?.trimToFile) {
-			throw new Error(
-				"VideoTrimModule no está instalado en Android.",
-			);
+			throw new Error(t`VideoTrimModule is not installed on Android.`);
 		}
 
 		const emitter = new NativeEventEmitter(NativeModules.VideoTrimModule);

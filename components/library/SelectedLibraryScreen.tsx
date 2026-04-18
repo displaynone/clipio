@@ -1,6 +1,7 @@
 import LibraryClipCard from '@/components/library/LibraryClipCard';
 import LibrarySelectionFooter from '@/components/library/LibrarySelectionFooter';
 import { FlatList, Text, View } from 'react-native';
+import { Trans } from '@lingui/react/macro';
 
 type Props = {
   libraryUris: string[];
@@ -34,10 +35,10 @@ export default function SelectedLibraryScreen({
           <View className="mb-10 flex-row items-end justify-between gap-4">
             <View>
               <Text className="mb-2 text-xs font-bold uppercase tracking-[0.08em] text-accent">
-                Library
+                <Trans>Library</Trans>
               </Text>
               <Text className="text-4xl font-extrabold tracking-[-0.03em] text-foreground">
-                Select Clips
+                <Trans>Select Clips</Trans>
               </Text>
             </View>
           </View>

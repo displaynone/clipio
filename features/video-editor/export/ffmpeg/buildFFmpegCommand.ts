@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import { TemplateSequenceEffect } from "@/types/template";
 import {
   AudioTrackItem,
@@ -269,7 +270,7 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	).sort((left, right) => left.startMs - right.startMs);
 
 	if (visualItems.length === 0) {
-		throw new Error("El proyecto no contiene capas de video exportables.");
+		throw new Error(t`The project does not contain exportable video layers.`);
 	}
 
 	const inputs: FFmpegInputSpec[] = visualItems.map((item, index) => ({
@@ -278,22 +279,33 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		args: buildMediaInputArgs(item),
 	}));
 	const filters: FFmpegFilterNode[] = [];
+	const sequenceDurationsMs: Array<number | null> = [];
+	const hasUnknownVideoDuration = visualItems.some(
+		(item) =>
+			item.sourceType !== "image" &&
+			item.sourceDurationMs == null &&
+			item.trimEndMs == null,
+	);
 
 	visualItems.forEach((item, index) => {
 		const isImage = item.sourceType === "image";
 		const trimStartMs = isImage ? 0 : item.trimStartMs ?? 0;
 		const trimDurationMs = isImage
 			? Math.max(1, item.durationMs)
-			: Math.max(
-					1,
-					(item.trimEndMs ?? trimStartMs + item.durationMs) - trimStartMs,
-			  );
+			: item.trimEndMs != null
+				? Math.max(1, item.trimEndMs - trimStartMs)
+				: item.sourceDurationMs != null
+					? Math.max(1, item.durationMs)
+					: null;
 		const baseOutputLabel = `v_seq_base_${index}`;
 		const outputLabel = `v_seq_${index}`;
 		const baseFilters = [
-			`trim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
+			trimDurationMs == null
+				? `trim=start=${formatSeconds(trimStartMs)}`
+				: `trim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
 			"setpts=PTS-STARTPTS",
 		];
+		sequenceDurationsMs[index] = trimDurationMs;
 
 		filters.push({
 			inputLabels: [`${index}:v`],
@@ -317,14 +329,16 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		if (isImage) {
 			filters.push({
 				inputLabels: [],
-				filter: `anullsrc=channel_layout=stereo:sample_rate=44100:d=${formatSeconds(trimDurationMs)}`,
+				filter: `anullsrc=channel_layout=stereo:sample_rate=44100:d=${formatSeconds(trimDurationMs ?? item.durationMs)}`,
 				outputLabel: audioBaseLabel,
 			});
 		} else {
 			filters.push({
 				inputLabels: [`${index}:a`],
 				filter: [
-					`atrim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
+					trimDurationMs == null
+						? `atrim=start=${formatSeconds(trimStartMs)}`
+						: `atrim=start=${formatSeconds(trimStartMs)}:duration=${formatSeconds(trimDurationMs)}`,
 					"asetpts=PTS-STARTPTS",
 					"aresample=async=1:first_pts=0",
 				].join(","),
@@ -342,33 +356,38 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	});
 
 	let currentVideoLabel = "v_seq_0";
-	let currentVideoDurationMs = visualItems[0]?.durationMs ?? 0;
+	let currentVideoDurationMs: number | null = sequenceDurationsMs[0] ?? null;
 	for (let index = 1; index < visualItems.length; index += 1) {
 		const currentItem = visualItems[index];
+		const currentDurationMs = currentVideoDurationMs;
 		const transitionDurationMs =
-			currentItem?.transition?.type === "fade"
+			currentDurationMs != null && currentItem?.transition?.type === "fade"
 				? currentItem.transition.durationMs
 				: 0;
 		const outputLabel = `v_xfade_${index}`;
-		const nextDurationMs = visualItems[index]?.durationMs ?? 0;
+		const nextDurationMs = sequenceDurationsMs[index] ?? null;
+		const transitionFilter =
+			transitionDurationMs > 0 && currentDurationMs != null
+				? buildSequenceVideoTransitionFilter(
+						sequenceEffect,
+						transitionDurationMs,
+						Math.max(0, currentDurationMs - transitionDurationMs),
+						project.canvas.width,
+						project.canvas.height,
+					)
+				: `concat=n=2:v=1:a=0`;
 
 		filters.push({
 			inputLabels: [currentVideoLabel, `v_seq_${index}`],
-			filter:
-				transitionDurationMs > 0
-					? buildSequenceVideoTransitionFilter(
-							sequenceEffect,
-							transitionDurationMs,
-							Math.max(0, currentVideoDurationMs - transitionDurationMs),
-							project.canvas.width,
-							project.canvas.height,
-						)
-					: `concat=n=2:v=1:a=0`,
+			filter: transitionFilter,
 			outputLabel,
 		});
 
 		currentVideoLabel = outputLabel;
-		currentVideoDurationMs += Math.max(0, nextDurationMs - transitionDurationMs);
+		currentVideoDurationMs =
+			currentDurationMs != null && nextDurationMs != null
+				? currentDurationMs + Math.max(0, nextDurationMs - transitionDurationMs)
+				: null;
 	}
 
 	let finalAudioLabel = "a_seq_0";
@@ -408,8 +427,7 @@ function buildSequenceFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 		`[${currentVideoLabel}]`,
 		"-map",
 		`[${finalAudioLabel}]`,
-		"-t",
-		formatSeconds(project.canvas.durationMs),
+		...(hasUnknownVideoDuration ? [] : ["-t", formatSeconds(project.canvas.durationMs)]),
 		"-r",
 		String(project.canvas.fps),
 		"-c:v",
@@ -456,7 +474,7 @@ export function buildFFmpegCommand(project: VideoProject): FFmpegCommandSpec {
 	const audioItems = getTrackItems<AudioTrackItem>(project.tracks, "audio");
 
 	if (visualItems.length === 0) {
-		throw new Error("El proyecto no contiene capas de video exportables.");
+		throw new Error(t`The project does not contain exportable video layers.`);
 	}
 
 	const inputs: FFmpegInputSpec[] = [];

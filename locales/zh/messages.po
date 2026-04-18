@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:12+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr "· 包含无限顺序"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "{0} 剪辑与 {selectedEffectLabelLower} 链接。"
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "已选择 {0} 剪辑"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "{0} 已选择项目"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "{0} 已选择"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "{count} 夹子"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "{count} 已选择剪辑"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}s 进入下一个剪辑"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} 就绪"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "1 剪辑"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "1 个与 {selectedEffectLabelLower} 链接的剪辑。"
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "已选择 1 个剪辑"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "已选择 1 个剪辑"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "已选择 1 项"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "2x2 网格"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "2x2 网格景观"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "后退"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "返回媒体选择"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "模糊"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "选择电影布局来设置项目的外观。"
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "圈关闭"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "剪辑 {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "剪辑陆续导出"
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "色彩增强"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "继续"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "诊断TL"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "期间"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "影响"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "结尾"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "结束 {0}"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "出口"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "导出完成"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "禁用导出"
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "导出错误"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "出口项目"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "导出视频"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "出口..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "褪色"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "淡黑"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "FFmpeg 正在生成一个新剪辑。"
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "未安装 FFmpegExportModule。默认情况下，导出不再使用 Media3/Transformer。要在没有第三方服务的情况下使用 FFmpeg 导出，必须直接在 Android 上集成原生 FFmpeg。"
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "闪光+摇动"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "焦点布局"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "重点布局景观"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "生成..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "辉光"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "HL切片"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "人力资源切片"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "图像"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "景观"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "横向 16:9 构图，网格中包含 4 个视频。"
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "横向 16:9 构图，左侧有 1 个主剪辑，右侧有 3 个剪辑。"
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "图书馆"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "光点"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "达到限制"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "加载介质"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "加载媒体"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "加载缩略图"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "加载中..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "标记"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "媒体库权限被拒绝"
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "媒体选择失败"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "没有 {orientationFilter} 模板"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "尚未加载媒体。通过添加视频或图像开始您的电影之旅。"
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "没有可用的模板"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:78
+msgid ""
+"No templates can fit {0} selected items.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"没有模板可以适合 {0} 选定的项目。\n"
+"\n"
+"返回并选择较少的项目，或联系开发人员添加更多模板。"
+
+#: app/select-template.tsx:75
+msgid ""
+"No templates can fit 1 selected item.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"没有模板可以容纳 1 个选定项目。\n"
+"\n"
+"返回并选择较少的项目，或联系开发人员添加更多模板。"
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "只能添加 {0} 选定项目中的 {addedCount}。"
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "只能添加 1 个选定项目中的 {addedCount}。"
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "像素化"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "连续播放任意数量的剪辑，并在视频之间以 1 秒的淡入淡出方式将它们连接起来。"
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "以 1 秒淡入淡出的方式连续播放任意数量的风景剪辑。"
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "预览"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "加工边角料"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "准备好选择模板"
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "消除"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "重新排序剪辑"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "重置"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "RGB 分割"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "秒数"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "导出前选择 {remainingCount} 个以上项目。"
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "导出前再选择 1 项。"
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "导出前至少选择一个视频或图像。"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "至少选择一个视频或图像以继续。"
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "选择剪辑"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "选择媒体"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "选择模板"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "顺序"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "设置剪辑之间的过渡持续多少秒。使用“0”进行硬剪切。"
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "形状"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "侧擦"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "部分项目未添加"
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "开始"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "启动 {0}"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "从这里开始"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "切换过滤器以查看其他可用的组合。"
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "找不到模板"
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "导出的文件路径不可用。"
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "最终剪辑将以 9:16 格式生成。"
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "该项目不包含可导出的视频图层。"
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "模板 ID 无效。"
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "视频无法导出。"
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "视频无法打开"
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "视觉连接使用 {selectedEffectLabelLower}。重新排序列表以更改最终编辑。"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "没有可见的剪辑可供导出。"
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "该模板仅允许 {capacity} 项目。"
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "该模板仅允许 1 项。"
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "时间线部分"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "修剪"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "修剪不可用"
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "垂直的"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "垂直 9:16 构图分为两部分：顶部有一个剪辑，下面有三个相等的剪辑。"
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "垂直 9:16 构图，网格中包含 4 个视频。"
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "垂直擦拭"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "复古录像带"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "视频未准备好"
+
+#. placeholder {0}: result.outputUri
+#: app/template/[templateId].tsx:153
+msgid ""
+"Video saved to:\n"
+"{0}"
+msgstr ""
+"视频保存至：\n"
+"{0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "视频序列"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "视频序列风景"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "Android 上未安装 VideoExportModule。"
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "Android 上未安装 VideoTrimModule。"
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "查看"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "观看视频"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "等待视频加载完成。"
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "你的故事"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "你的故事"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "飞涨"

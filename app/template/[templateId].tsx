@@ -12,6 +12,8 @@ import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { Alert as HeroAlert, Button, PressableFeedback, ScrollShadow, useThemeColor } from "heroui-native";
 import { useEffect, useState } from "react";
 import { Alert as NativeAlert, Text, View } from "react-native";
+import { Trans } from "@lingui/react/macro";
+import { t } from "@lingui/core/macro";
 import {
   ArrowLeftIcon,
   XMarkIcon,
@@ -58,9 +60,9 @@ export default function TemplateDetailScreen() {
 	useEffect(() => {
 		if (!template) {
 			NativeAlert.alert(
-				"Plantilla no encontrada",
-				"El id de plantilla no es válido",
-				[{ text: "Volver", onPress: () => router.back() }],
+				t`Template not found`,
+				t`The template ID is not valid.`,
+				[{ text: t`Back`, onPress: () => router.back() }],
 			);
 		}
 	}, [template, router]);
@@ -78,9 +80,12 @@ export default function TemplateDetailScreen() {
 					? Number.POSITIVE_INFINITY
 					: (template.maxSlots ?? 0) - selectedUris.length;
 				if (availableSlots <= 0) {
+					const capacity = getTemplateCapacity(template);
 					NativeAlert.alert(
-						"Límite alcanzado",
-						`Esta plantilla solo permite ${getTemplateCapacity(template)} elementos.`,
+						t`Limit reached`,
+						capacity === 1
+							? t`This template only allows 1 item.`
+							: t`This template only allows ${capacity} items.`,
 					);
 					return;
 				}
@@ -95,13 +100,15 @@ export default function TemplateDetailScreen() {
 				const addedCount = Math.min(assets.length, availableSlots);
 				if (Number.isFinite(availableSlots) && assets.length > availableSlots) {
 					NativeAlert.alert(
-						"Algunos elementos no se agregaron",
-						`Solo se pudieron agregar ${addedCount} elemento${addedCount !== 1 ? "s" : ""} de los ${assets.length} seleccionados.`,
+						t`Some items were not added`,
+						assets.length === 1
+							? t`Only ${addedCount} of the 1 selected item could be added.`
+							: t`Only ${addedCount} of the ${assets.length} selected items could be added.`,
 					);
 				}
 			}
 		} catch (error) {
-			NativeAlert.alert("Error al seleccionar medios", `${error}`);
+			NativeAlert.alert(t`Media selection failed`, `${error}`);
 		} finally {
 			setIsPickLoading(false);
 		}
@@ -117,11 +124,13 @@ export default function TemplateDetailScreen() {
 					: template.maxSlots - selectedUris.length;
 			setExportAlert({
 				status: "warning",
-				title: "Exportación deshabilitada",
+				title: t`Export disabled`,
 				description:
 					template.maxSlots == null
-						? "Selecciona al menos un video o imagen para poder exportar."
-						: `Selecciona ${remainingCount} elemento${remainingCount !== 1 ? "s" : ""} más para poder exportar.`,
+						? t`Select at least one video or image before exporting.`
+						: remainingCount === 1
+							? t`Select 1 more item before exporting.`
+							: t`Select ${remainingCount} more items before exporting.`,
 			});
 			return;
 		}
@@ -135,13 +144,14 @@ export default function TemplateDetailScreen() {
 			});
 
 			if (!result.success || !result.outputUri) {
-				throw new Error(result.error ?? "No se pudo exportar el video.");
+				throw new Error(result.error ?? t`The video could not be exported.`);
 			}
 
 			setExportAlert({
 				status: "success",
-				title: "Exportación completada",
-				description: `Video guardado en:\n${result.outputUri}`,
+				title: t`Export completed`,
+				description: t`Video saved to:
+${result.outputUri}`,
 				outputUri: result.outputUri,
 			});
 		} catch (error) {
@@ -149,7 +159,7 @@ export default function TemplateDetailScreen() {
 			console.error("[video-export] Export failed", error);
 			setExportAlert({
 				status: "danger",
-				title: "Error de export",
+				title: t`Export error`,
 				description: `${error}`,
 			});
 		} finally {
@@ -178,7 +188,7 @@ export default function TemplateDetailScreen() {
 								<ArrowLeftIcon width={20} height={20} color="#b6a0ff" />
 							</PressableFeedback>
 							<Text className="font-manrope text-lg font-bold tracking-tight text-[#f1dfff]">
-								Export Project
+								<Trans>Export Project</Trans>
 							</Text>
 						</View>
 					),
@@ -195,7 +205,7 @@ export default function TemplateDetailScreen() {
 								style={{ paddingHorizontal: 24, paddingVertical: 10, borderRadius: 12 }}
 							>
 								<Text className="font-bold tracking-tight text-[#340090]">
-									{isExporting ? "Exporting..." : "Export"}
+									{isExporting ? t`Exporting...` : t`Export`}
 								</Text>
 							</LinearGradient>
 						</PressableFeedback>
@@ -257,7 +267,7 @@ export default function TemplateDetailScreen() {
 									className="mt-3 self-start bg-[#16052a]"
 								>
 									<Button.Label className="text-[#f8efff]">
-										Ver video
+										<Trans>View video</Trans>
 									</Button.Label>
 								</Button>
 							) : null}
@@ -275,9 +285,11 @@ export default function TemplateDetailScreen() {
 			{isExporting ? (
 				<View className="absolute inset-0 items-center justify-center bg-background/85 px-6">
 					<View className="w-full max-w-xs rounded-2xl bg-surface-secondary px-5 py-5">
-						<Text className="mb-2 text-lg font-bold text-foreground">Exportando video</Text>
+						<Text className="mb-2 text-lg font-bold text-foreground">
+							<Trans>Exporting video</Trans>
+						</Text>
 						<Text className="mb-4 text-sm text-muted">
-							Se está generando el montaje final en formato 9:16.
+							<Trans>The final edit is being generated in 9:16 format.</Trans>
 						</Text>
 						<View className="h-2 overflow-hidden rounded-full bg-background">
 							<View

@@ -1,0 +1,376 @@
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr " · Incluye secuencia ilimitada"
+
+#. placeholder {0}: orderedUris.length
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "{0} clips enlazados con {selectedEffectLabelLower}."
+
+#. placeholder {0}: selectedUris.length
+msgid "{0} clips selected"
+msgstr "{0} clips seleccionados"
+
+#. placeholder {0}: selectedUris.length
+msgid "{0} items selected"
+msgstr "{0} elementos seleccionados"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+msgid "{0} selected"
+msgstr "{0} seleccionado"
+
+msgid "{count} Clips"
+msgstr "{count} clips"
+
+msgid "{count} Clips Selected"
+msgstr "{count} clips seleccionados"
+
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}s antes del siguiente clip"
+
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} listos"
+
+msgid "1 Clip"
+msgstr "1 clip"
+
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "1 clip enlazado con {selectedEffectLabelLower}."
+
+msgid "1 clip selected"
+msgstr "1 clip seleccionado"
+
+msgid "1 Clip Selected"
+msgstr "1 clip seleccionado"
+
+msgid "1 item selected"
+msgstr "1 elemento seleccionado"
+
+msgid "2x2 Grid"
+msgstr "Cuadrícula 2x2"
+
+msgid "2x2 Grid Landscape"
+msgstr "Cuadrícula 2x2 horizontal"
+
+msgid "Back"
+msgstr "Atrás"
+
+msgid "Back to media selection"
+msgstr "Volver a la selección de medios"
+
+msgid "Blur"
+msgstr "Desenfoque"
+
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "Elige un diseño cinematográfico para definir el aspecto de tu proyecto."
+
+msgid "Circle Close"
+msgstr "Cierre circular"
+
+msgid "Clip {0}"
+msgstr "Clip {0}"
+
+msgid "Clips export one after another"
+msgstr "Los clips se exportan uno tras otro"
+
+msgid "Color Boost"
+msgstr "Refuerzo de color"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Diag TL"
+msgstr "Diagonal SI"
+
+msgid "Duration"
+msgstr "Duración"
+
+msgid "Effect"
+msgstr "Efecto"
+
+msgid "End"
+msgstr "Fin"
+
+msgid "End {0}"
+msgstr "Fin {0}"
+
+msgid "Export"
+msgstr "Exportar"
+
+msgid "Export completed"
+msgstr "Exportación completada"
+
+msgid "Export disabled"
+msgstr "Exportación deshabilitada"
+
+msgid "Export error"
+msgstr "Error de exportación"
+
+msgid "Export Project"
+msgstr "Exportar proyecto"
+
+msgid "Exporting video"
+msgstr "Exportando vídeo"
+
+msgid "Exporting..."
+msgstr "Exportando..."
+
+msgid "Fade"
+msgstr "Fundido"
+
+msgid "Fade Black"
+msgstr "Fundido a negro"
+
+msgid "FFmpeg is generating a new clip."
+msgstr "FFmpeg está generando un nuevo clip."
+
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "FFmpegExportModule no está instalado. La exportación ya no usa Media3/Transformer por defecto. Para exportar con FFmpeg sin servicios de terceros, FFmpeg nativo debe integrarse directamente en Android."
+
+msgid "Flash + Shake"
+msgstr "Flash + Sacudida"
+
+msgid "Focus Layout"
+msgstr "Diseño enfocado"
+
+msgid "Focus Layout Landscape"
+msgstr "Diseño enfocado horizontal"
+
+msgid "Generating..."
+msgstr "Generando..."
+
+msgid "Glow"
+msgstr "Brillo"
+
+msgid "HL Slice"
+msgstr "Corte HL"
+
+msgid "HR Slice"
+msgstr "Corte HR"
+
+msgid "Image"
+msgstr "Imagen"
+
+msgid "Landscape"
+msgstr "Horizontal"
+
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "Composición horizontal 16:9 con 4 vídeos en cuadrícula."
+
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "Composición horizontal 16:9 con un clip principal a la izquierda y tres clips a la derecha."
+
+msgid "Library"
+msgstr "Biblioteca"
+
+msgid "Light Point"
+msgstr "Punto de luz"
+
+msgid "Limit reached"
+msgstr "Límite alcanzado"
+
+msgid "Load media"
+msgstr "Cargar medios"
+
+msgid "Load Media"
+msgstr "Cargar medios"
+
+msgid "Loading thumbnails"
+msgstr "Cargando miniaturas"
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Mark"
+msgstr "Marcar"
+
+msgid "Media library permission denied"
+msgstr "Permiso denegado a la biblioteca multimedia"
+
+msgid "Media selection failed"
+msgstr "Falló la selección de medios"
+
+msgid "No {orientationFilter} templates"
+msgstr "No hay plantillas {orientationFilter}"
+
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "Aún no hay medios cargados. Comienza tu proyecto añadiendo vídeos o imágenes."
+
+msgid "No templates available"
+msgstr "No hay plantillas disponibles"
+
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "Solo se pudieron añadir {addedCount} de los {0} elementos seleccionados."
+
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "Solo se pudo añadir {addedCount} del elemento seleccionado."
+
+msgid "Pixelate"
+msgstr "Pixelado"
+
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "Reproduce cualquier número de clips uno tras otro y únelos con un fundido de 1 segundo entre vídeos."
+
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "Reproduce cualquier número de clips horizontales uno tras otro con un fundido de 1 segundo."
+
+msgid "Preview"
+msgstr "Vista previa"
+
+msgid "Processing trim"
+msgstr "Procesando recorte"
+
+msgid "Ready to choose a template"
+msgstr "Listo para elegir una plantilla"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Reorder Clips"
+msgstr "Reordenar clips"
+
+msgid "Reset"
+msgstr "Restablecer"
+
+msgid "RGB Split"
+msgstr "Separación RGB"
+
+msgid "Seconds"
+msgstr "Segundos"
+
+msgid "Select {remainingCount} more items before exporting."
+msgstr "Selecciona {remainingCount} elementos más antes de exportar."
+
+msgid "Select 1 more item before exporting."
+msgstr "Selecciona 1 elemento más antes de exportar."
+
+msgid "Select at least one video or image before exporting."
+msgstr "Selecciona al menos un vídeo o imagen antes de exportar."
+
+msgid "Select at least one video or image to continue."
+msgstr "Selecciona al menos un vídeo o imagen para continuar."
+
+msgid "Select Clips"
+msgstr "Seleccionar clips"
+
+msgid "Select media"
+msgstr "Seleccionar medios"
+
+msgid "Select Template"
+msgstr "Seleccionar plantilla"
+
+msgid "Sequence Order"
+msgstr "Orden de secuencia"
+
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "Define cuántos segundos dura la transición entre clips. Usa `0` para un corte directo."
+
+msgid "Shape"
+msgstr "Forma"
+
+msgid "Side Wipe"
+msgstr "Barrido lateral"
+
+msgid "Some items were not added"
+msgstr "Algunos elementos no se añadieron"
+
+msgid "Start"
+msgstr "Inicio"
+
+msgid "Start {0}"
+msgstr "Inicio {0}"
+
+msgid "starts here"
+msgstr "empieza aquí"
+
+msgid "Switch the filter to see other available compositions."
+msgstr "Cambia el filtro para ver otras composiciones disponibles."
+
+msgid "Template not found"
+msgstr "Plantilla no encontrada"
+
+msgid "The exported file path is not available."
+msgstr "La ruta del archivo exportado no está disponible."
+
+msgid "The final edit is being generated in 9:16 format."
+msgstr "La edición final se está generando en formato 9:16."
+
+msgid "The project does not contain exportable video layers."
+msgstr "El proyecto no contiene capas de vídeo exportables."
+
+msgid "The template ID is not valid."
+msgstr "El ID de la plantilla no es válido."
+
+msgid "The video could not be exported."
+msgstr "No se pudo exportar el vídeo."
+
+msgid "The video could not be opened"
+msgstr "No se pudo abrir el vídeo"
+
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "La unión visual usa {selectedEffectLabelLower}. Reordena la lista para cambiar la edición final."
+
+msgid "There are no visible clips to export."
+msgstr "No hay clips visibles para exportar."
+
+msgid "This template only allows {capacity} items."
+msgstr "Esta plantilla solo permite {capacity} elementos."
+
+msgid "This template only allows 1 item."
+msgstr "Esta plantilla solo permite 1 elemento."
+
+msgid "Timeline Segment"
+msgstr "Segmento de línea de tiempo"
+
+msgid "Trim"
+msgstr "Recortar"
+
+msgid "Trim unavailable"
+msgstr "Recorte no disponible"
+
+msgid "Vertical"
+msgstr "Vertical"
+
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "Composición vertical 9:16 en dos secciones: un clip arriba y tres clips iguales abajo."
+
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "Composición vertical 9:16 con 4 vídeos en cuadrícula."
+
+msgid "Vertical Wipe"
+msgstr "Barrido vertical"
+
+msgid "VHS Retro"
+msgstr "VHS retro"
+
+msgid "Video not ready"
+msgstr "Vídeo no listo"
+
+msgid "Video Sequence"
+msgstr "Secuencia de vídeo"
+
+msgid "Video Sequence Landscape"
+msgstr "Secuencia de vídeo horizontal"
+
+msgid "VideoExportModule is not installed on Android."
+msgstr "VideoExportModule no está instalado en Android."
+
+msgid "VideoTrimModule is not installed on Android."
+msgstr "VideoTrimModule no está instalado en Android."
+
+msgid "View"
+msgstr "Ver"
+
+msgid "View video"
+msgstr "Ver vídeo"
+
+msgid "Wait for the video to finish loading."
+msgstr "Espera a que el vídeo termine de cargarse."
+
+msgid "your story"
+msgstr "tu historia"
+
+msgid "Your story"
+msgstr "Tu historia"
+
+msgid "Zoom"
+msgstr "Zoom"

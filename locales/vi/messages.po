@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:13+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: vi\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr "· Bao gồm trình tự không giới hạn"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "Các clip {0} được liên kết với {selectedEffectLabelLower}."
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "Đã chọn clip {0}"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "Đã chọn mục {0}"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "Đã chọn {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "Clip {count}"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "Các clip {count} đã được chọn"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}s vào clip tiếp theo"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} đã sẵn sàng"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "1 clip"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "1 clip liên kết với {selectedEffectLabelLower}."
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "Đã chọn 1 clip"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "1 Clip Đã Chọn"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "Đã chọn 1 mục"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "Lưới 2x2"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "Cảnh quan lưới 2x2"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "Mặt sau"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "Quay lại lựa chọn phương tiện"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "Làm mờ"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "Chọn bố cục điện ảnh để thiết lập giao diện dự án của bạn."
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "Vòng tròn Đóng"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "Đoạn {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "Các clip xuất lần lượt"
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "Tăng cường màu sắc"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "Tiếp tục"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "Diadia TL"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "Khoảng thời gian"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "Tác dụng"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "Kết thúc"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "Kết thúc {0}"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "Xuất khẩu"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "Đã xuất xong"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "Xuất bị vô hiệu hóa"
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "Lỗi xuất"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "Dự án xuất khẩu"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "Xuất video"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "Đang xuất..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "Phai"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "Màu đen nhạt dần"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "FFmpeg đang tạo một clip mới."
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "FFmpegExportModule chưa được cài đặt. Xuất không còn sử dụng Media3/Transformer theo mặc định. Để xuất bằng FFmpeg mà không cần dịch vụ của bên thứ ba, FFmpeg gốc phải được tích hợp trực tiếp trên Android."
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "Nhấp nháy + Lắc"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "Bố cục tiêu điểm"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "Bố cục bố cục tập trung"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "Đang tạo..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "Ánh sáng"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "Lát HL"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "Phần nhân sự"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "Hình ảnh"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "Phong cảnh"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "Bố cục phong cảnh 16:9 với 4 video trong một lưới."
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "Bố cục phong cảnh 16:9 với một clip chính ở bên trái và ba clip ở bên phải."
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "Thư viện"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "Điểm sáng"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "Đã đạt đến giới hạn"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "Tải phương tiện"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "Tải phương tiện"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "Đang tải hình thu nhỏ"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "Đang tải..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "Đánh dấu"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "Quyền thư viện phương tiện bị từ chối"
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "Lựa chọn phương tiện không thành công"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "Không có mẫu {orientationFilter}"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "Chưa có phương tiện nào được tải. Bắt đầu hành trình điện ảnh của bạn bằng cách thêm video hoặc hình ảnh."
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "Không có sẵn mẫu nào"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:78
+msgid ""
+"No templates can fit {0} selected items.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"Không có mẫu nào có thể phù hợp với các mục đã chọn {0}.\n"
+"\n"
+"Quay lại và chọn ít mục hơn hoặc liên hệ với nhà phát triển để thêm nhiều mẫu hơn."
+
+#: app/select-template.tsx:75
+msgid ""
+"No templates can fit 1 selected item.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"Không có mẫu nào có thể vừa với 1 mục đã chọn.\n"
+"\n"
+"Quay lại và chọn ít mục hơn hoặc liên hệ với nhà phát triển để thêm nhiều mẫu hơn."
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "Chỉ có thể thêm {addedCount} trong số các mục đã chọn {0}."
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "Chỉ có thể thêm {addedCount} trong số 1 mục đã chọn."
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "Tạo điểm ảnh"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "Phát lần lượt nhiều clip bất kỳ và nối chúng với thời gian giảm dần 1 giây giữa các video."
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "Phát lần lượt nhiều clip ngang bất kỳ với độ mờ dần trong 1 giây."
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "Xem trước"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "Xử lý trang trí"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "Sẵn sàng chọn mẫu"
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "Di dời"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "Sắp xếp lại các clip"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "Cài lại"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "Tách RGB"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "Giây"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "Chọn thêm các mục {remainingCount} trước khi xuất."
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "Chọn thêm 1 mục nữa trước khi xuất."
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "Chọn ít nhất một video hoặc hình ảnh trước khi xuất."
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "Chọn ít nhất một video hoặc hình ảnh để tiếp tục."
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "Chọn clip"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "Chọn phương tiện"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "Chọn mẫu"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "Trình tự thứ tự"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "Đặt thời gian chuyển đổi giữa các clip kéo dài bao nhiêu giây. Sử dụng `0` để cắt cứng."
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "Hình dạng"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "Lau bên"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "Một số mặt hàng chưa được thêm vào"
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "Bắt đầu"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "Bắt đầu {0}"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "bắt đầu ở đây"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "Chuyển bộ lọc để xem các tác phẩm có sẵn khác."
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "Không tìm thấy mẫu"
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "Đường dẫn tệp đã xuất không có sẵn."
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "Bản chỉnh sửa cuối cùng đang được tạo ở định dạng 9:16."
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "Dự án không chứa các lớp video có thể xuất được."
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "ID mẫu không hợp lệ."
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "Không thể xuất video."
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "Không thể mở video"
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "Phép nối trực quan sử dụng {selectedEffectLabelLower}. Sắp xếp lại danh sách để thay đổi chỉnh sửa cuối cùng."
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "Không có clip hiển thị nào để xuất."
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "Mẫu này chỉ cho phép các mục {capacity}."
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "Bản mẫu này chỉ cho phép 1 mục."
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "Phân đoạn dòng thời gian"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "Cắt tỉa"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "Cắt không có sẵn"
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "Thẳng đứng"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "Bố cục dọc 9:16 thành hai phần: một clip ở trên và ba clip bằng nhau ở dưới."
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "Bố cục dọc 9:16 với 4 video trong một lưới."
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "Lau dọc"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "VHS cổ điển"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "Video chưa sẵn sàng"
+
+#. placeholder {0}: result.outputUri
+#: app/template/[templateId].tsx:153
+msgid ""
+"Video saved to:\n"
+"{0}"
+msgstr ""
+"Video đã lưu vào:\n"
+"{0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "Chuỗi video"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "Cảnh quan chuỗi video"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "VideoExportModule chưa được cài đặt trên Android."
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "VideoTrimModule chưa được cài đặt trên Android."
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "Xem"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "Xem video"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "Đợi video tải xong."
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "câu chuyện của bạn"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "Câu chuyện của bạn"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "Phóng"

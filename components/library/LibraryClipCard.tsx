@@ -8,10 +8,13 @@ import { Text, View } from "react-native";
 import {
 	CheckIcon,
 	EllipsisVerticalIcon,
+	EyeIcon,
 	PhotoIcon,
 	ScissorsIcon,
 	XMarkIcon,
 } from "react-native-heroicons/solid";
+import { t } from "@lingui/core/macro";
+import { Trans } from "@lingui/react/macro";
 
 type Props = {
 	uri: string;
@@ -50,6 +53,9 @@ export default function LibraryClipCard({
 	const mediaType = media?.type ?? "video";
 	const videoDurationMs =
 		mediaType === "image" ? media?.durationMs ?? null : trim?.durationMs ?? null;
+	const trimLabel = t`Trim`;
+	const viewLabel = t`View`;
+	const removeLabel = t`Remove`;
 
 	const handleOpenMenu = () => {
 		menuTriggerRef.current?.open();
@@ -59,6 +65,14 @@ export default function LibraryClipCard({
 		setIsMenuOpen(false);
 		router.push({
 			pathname: "/trim",
+			params: { uri: encodeURIComponent(uri) },
+		});
+	};
+
+	const handleView = () => {
+		setIsMenuOpen(false);
+		router.push({
+			pathname: "/export-preview",
 			params: { uri: encodeURIComponent(uri) },
 		});
 	};
@@ -112,12 +126,24 @@ export default function LibraryClipCard({
 						{mediaType === "video" ? (
 							<Menu.Item onPress={handleTrim}>
 								<ScissorsIcon width={14} height={14} color={accentColor} />
-								<Menu.ItemTitle>Cortar</Menu.ItemTitle>
+								<Menu.ItemTitle>
+									{trimLabel}
+								</Menu.ItemTitle>
+							</Menu.Item>
+						) : null}
+						{mediaType === "video" ? (
+							<Menu.Item onPress={handleView}>
+								<EyeIcon width={14} height={14} color={accentColor} />
+								<Menu.ItemTitle>
+									{viewLabel}
+								</Menu.ItemTitle>
 							</Menu.Item>
 						) : null}
 						<Menu.Item variant="danger" onPress={handleRemove}>
 							<XMarkIcon width={14} height={14} color={dangerColor} />
-							<Menu.ItemTitle>Eliminar</Menu.ItemTitle>
+							<Menu.ItemTitle>
+								{removeLabel}
+							</Menu.ItemTitle>
 						</Menu.Item>
 					</Menu.Content>
 				</Menu.Portal>
@@ -158,7 +184,7 @@ export default function LibraryClipCard({
 					<View className="mt-1 flex-row items-center gap-1">
 						<PhotoIcon width={10} height={10} color="#f1dfff" />
 						<Text className="text-[9px] font-bold uppercase tracking-[0.08em] text-foreground">
-							Imagen
+							<Trans>Image</Trans>
 						</Text>
 					</View>
 				) : null}

@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:13+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: th\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr "· รวมลำดับไม่จำกัด"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "คลิป {0} เชื่อมโยงกับ {selectedEffectLabelLower}"
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "เลือกคลิป {0} แล้ว"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "เลือก {0} รายการแล้ว"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "เลือก {0} แล้ว"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "{count} คลิป"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "เลือกคลิป {count} แล้ว"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}s ลงในคลิปถัดไป"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} พร้อมแล้ว"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "1 คลิป"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "1 คลิปเชื่อมโยงกับ {selectedEffectLabelLower}"
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "เลือกไว้ 1 คลิป"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "เลือกแล้ว 1 คลิป"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "เลือกแล้ว 1 รายการ"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "ตาราง 2x2"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "แนวนอนตาราง 2x2"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "กลับ"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "กลับไปที่การเลือกสื่อ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "เบลอ"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "เลือกเค้าโครงภาพยนตร์เพื่อกำหนดรูปลักษณ์ของโปรเจ็กต์ของคุณ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "วงกลมปิด"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "คลิป {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "คลิปส่งออกทีละรายการ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "เพิ่มสี"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "ดำเนินการต่อ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "ไดแอก ทีแอล"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "ระยะเวลา"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "ผล"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "จบ"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "สิ้นสุด {0}"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "ส่งออก"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "ส่งออกเสร็จแล้ว"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "ส่งออกถูกปิดใช้งาน"
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "ข้อผิดพลาดในการส่งออก"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "โครงการส่งออก"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "กำลังส่งออกวิดีโอ"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "กำลังส่งออก..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "จางลง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "จางดำ"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "FFmpeg กำลังสร้างคลิปใหม่"
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "ไม่ได้ติดตั้ง FFmpegExportModule การส่งออกไม่ใช้ Media3/Transformer ตามค่าเริ่มต้นอีกต่อไป หากต้องการส่งออกด้วย FFmpeg โดยไม่มีบริการของบุคคลที่สาม จะต้องผสานรวม FFmpeg แบบเนทีฟบน Android โดยตรง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "แฟลช + เขย่า"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "เค้าโครงโฟกัส"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "เค้าโครงโฟกัสแนวนอน"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "กำลังสร้าง..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "เรืองแสง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "เอชแอล สไลซ์"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "เอชอาร์ สไลซ์"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "ภาพ"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "ภูมิประเทศ"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "การจัดองค์ประกอบภาพแนวนอน 16:9 พร้อมวิดีโอ 4 รายการในตาราง"
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "การจัดองค์ประกอบภาพแนวนอน 16:9 โดยมีคลิปหลักหนึ่งคลิปทางด้านซ้าย และคลิปสามคลิปทางด้านขวา"
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "ห้องสมุด"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "จุดไฟ"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "ถึงขีดจำกัดแล้ว"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "ใส่สื่อ"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "โหลดสื่อ"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "กำลังโหลดภาพขนาดย่อ"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "กำลังโหลด..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "เครื่องหมาย"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "การอนุญาตห้องสมุดสื่อถูกปฏิเสธ"
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "การเลือกสื่อล้มเหลว"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "ไม่มีเทมเพลต {orientationFilter}"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "ยังไม่ได้โหลดสื่อ เริ่มต้นการเดินทางในโรงภาพยนตร์ของคุณด้วยการเพิ่มวิดีโอหรือรูปภาพ"
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "ไม่มีเทมเพลต"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:78
+msgid ""
+"No templates can fit {0} selected items.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"ไม่มีเทมเพลตที่สามารถใส่รายการที่เลือก {0} ได้\n"
+"\n"
+"ย้อนกลับและเลือกรายการน้อยลง หรือติดต่อนักพัฒนาซอฟต์แวร์เพื่อเพิ่มเทมเพลต"
+
+#: app/select-template.tsx:75
+msgid ""
+"No templates can fit 1 selected item.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"ไม่มีเทมเพลตที่สามารถใส่ได้ 1 รายการที่เลือก\n"
+"\n"
+"ย้อนกลับและเลือกรายการน้อยลง หรือติดต่อนักพัฒนาซอฟต์แวร์เพื่อเพิ่มเทมเพลต"
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "สามารถเพิ่มได้เฉพาะ {addedCount} จาก {0} รายการที่เลือกเท่านั้น"
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "สามารถเพิ่มได้เฉพาะ {addedCount} จาก 1 รายการที่เลือก"
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "พิกเซล"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "เล่นคลิปจำนวนเท่าใดก็ได้ทีละคลิปและรวมคลิปเหล่านั้นเข้าด้วยกันโดยค่อยๆ จางหายไป 1 วินาทีระหว่างวิดีโอ"
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "เล่นคลิปแนวนอนจำนวนเท่าใดก็ได้ทีละคลิปโดยค่อยๆ จางลง 1 วินาที"
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "ดูตัวอย่าง"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "กำลังประมวลผลการตัดแต่ง"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "พร้อมเลือกเทมเพลต"
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "ลบ"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "เรียงลำดับคลิปใหม่"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "รีเซ็ต"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "แยก RGB"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "วินาที"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "เลือก {remainingCount} รายการเพิ่มเติมก่อนที่จะส่งออก"
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "เลือกอีก 1 รายการก่อนส่งออก"
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "เลือกวิดีโอหรือรูปภาพอย่างน้อยหนึ่งรายการก่อนส่งออก"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "เลือกวิดีโอหรือรูปภาพอย่างน้อยหนึ่งรายการเพื่อดำเนินการต่อ"
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "เลือกคลิป"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "เลือกสื่อ"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "เลือกเทมเพลต"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "ลำดับ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "กำหนดจำนวนวินาทีที่การเปลี่ยนระหว่างคลิปจะคงอยู่ ใช้ `0` สำหรับการตัดแบบแข็ง"
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "รูปร่าง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "เช็ดข้าง"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "ไม่ได้เพิ่มบางรายการ"
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "เริ่ม"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "เริ่ม {0}"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "เริ่มต้นที่นี่"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "สลับตัวกรองเพื่อดูองค์ประกอบอื่นๆ ที่มีอยู่"
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "ไม่พบเทมเพลต"
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "เส้นทางไฟล์ที่ส่งออกไม่พร้อมใช้งาน"
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "การแก้ไขขั้นสุดท้ายกำลังสร้างในรูปแบบ 9:16"
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "โปรเจ็กต์ไม่มีเลเยอร์วิดีโอที่ส่งออกได้"
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "รหัสเทมเพลตไม่ถูกต้อง"
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "ไม่สามารถส่งออกวิดีโอได้"
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "ไม่สามารถเปิดวิดีโอได้"
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "การรวมด้วยภาพใช้ {selectedEffectLabelLower} เรียงลำดับรายการใหม่เพื่อเปลี่ยนแปลงการแก้ไขขั้นสุดท้าย"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "ไม่มีคลิปที่มองเห็นได้ให้ส่งออก"
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "เทมเพลตนี้อนุญาตเฉพาะรายการ {capacity}"
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "เทมเพลตนี้อนุญาตเพียง 1 รายการเท่านั้น"
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "ส่วนไทม์ไลน์"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "ตัดแต่ง"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "ตัดแต่งไม่พร้อมใช้งาน"
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "แนวตั้ง"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "การจัดองค์ประกอบภาพแนวตั้ง 9:16 แบ่งออกเป็นสองส่วน: หนึ่งคลิปอยู่ด้านบนและสามคลิปเท่ากันด้านล่าง"
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "องค์ประกอบแนวตั้ง 9:16 พร้อมวิดีโอ 4 รายการในตาราง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "เช็ดแนวตั้ง"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "วีเอชเอสเรโทร"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "วิดีโอไม่พร้อม"
+
+#. placeholder {0}: result.outputUri
+#: app/template/[templateId].tsx:153
+msgid ""
+"Video saved to:\n"
+"{0}"
+msgstr ""
+"บันทึกวิดีโอไปที่:\n"
+"{0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "ลำดับวิดีโอ"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "แนวนอนลำดับวิดีโอ"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "ไม่ได้ติดตั้ง VideoExportModule บน Android"
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "ไม่ได้ติดตั้ง VideoTrimModule บน Android"
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "ดู"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "ดูวิดีโอ"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "รอให้วิดีโอโหลดเสร็จ"
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "เรื่องราวของคุณ"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "เรื่องราวของคุณ"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "ซูม"

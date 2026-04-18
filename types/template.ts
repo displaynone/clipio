@@ -1,9 +1,13 @@
+import type { MessageDescriptor } from "@lingui/core";
+
+export type TranslatableText = string | MessageDescriptor;
+
 export type TemplateSlot = {
 	id: string;
-	x: number; // porcentaje 0-100
-	y: number; // porcentaje 0-100
-	width: number; // porcentaje 0-100
-	height: number; // porcentaje 0-100
+	x: number; // percentage 0-100
+	y: number; // percentage 0-100
+	width: number; // percentage 0-100
+	height: number; // percentage 0-100
 };
 
 export type TemplateSequenceEffect =
@@ -43,8 +47,8 @@ export type TemplateKind = "grid" | "sequence";
 
 export type TemplateData = {
 	id: string;
-	name: string;
-	description: string;
+	name: TranslatableText;
+	description: TranslatableText;
 	kind?: TemplateKind;
 	orientation: TemplateOrientation;
 	slots: TemplateSlot[];

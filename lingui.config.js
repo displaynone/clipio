@@ -1,0 +1,33 @@
+module.exports = {
+	locales: [
+		"en",
+		"es",
+		"fr",
+		"it",
+		"pt",
+		"de",
+		"zh",
+		"ja",
+		"ko",
+		"ar",
+		"hi",
+		"ur",
+		"id",
+		"tr",
+		"ru",
+		"pl",
+		"nl",
+		"vi",
+		"th",
+		"bn",
+		"ms",
+		"fil",
+	],
+	sourceLocale: "en",
+	catalogs: [
+		{
+			path: "locales/{locale}/messages",
+			include: ["app", "components", "features", "services"],
+		},
+	],
+};

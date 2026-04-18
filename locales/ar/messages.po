@@ -1,0 +1,527 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:12+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ar\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr " · يتضمن تسلسلاً غير محدود"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "تم ربط {0} مقاطع باستخدام {selectedEffectLabelLower}."
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "تم تحديد {0} مقاطع"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "تم تحديد {0} عناصر"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "تم تحديد {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "{count} مقاطع"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "تم تحديد {count} مقاطع"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} قبل {transitionSeconds} ثانية من المقطع التالي"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} جاهز"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "مقطع واحد"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "تم ربط مقطع واحد باستخدام {selectedEffectLabelLower}."
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "تم تحديد مقطع واحد"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "تم تحديد مقطع واحد"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "تم تحديد عنصر واحد"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "شبكة 2×2"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "شبكة 2×2 أفقية"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "رجوع"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "العودة إلى تحديد الوسائط"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "تمويه"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "اختر تخطيطًا سينمائيًا لتحديد شكل مشروعك."
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "إغلاق دائري"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "المقطع {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "تُصدَّر المقاطع واحدًا تلو الآخر"
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "تعزيز الألوان"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "متابعة"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "قطري علوي يسار"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "المدة"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "التأثير"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "النهاية"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "النهاية {0}"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "تصدير"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "اكتمل التصدير"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "التصدير معطّل"
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "خطأ في التصدير"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "تصدير المشروع"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "جارٍ تصدير الفيديو"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "جارٍ التصدير..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "تلاشي"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "تلاشي إلى الأسود"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "يقوم FFmpeg بإنشاء مقطع جديد."
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "وحدة FFmpegExportModule غير مثبتة. لم تعد عملية التصدير تستخدم Media3/Transformer افتراضيًا. للتصدير باستخدام FFmpeg دون خدمات خارجية، يجب دمج FFmpeg الأصلي مباشرةً على Android."
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "وميض + اهتزاز"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "تخطيط التركيز"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "تخطيط التركيز الأفقي"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "جارٍ الإنشاء..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "توهج"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "قص أفقي يسار"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "قص أفقي يمين"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "صورة"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "أفقي"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "تركيب أفقي 16:9 مع 4 فيديوهات في شبكة."
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "تركيب أفقي 16:9 مع مقطع رئيسي على اليسار وثلاثة مقاطع على اليمين."
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "المكتبة"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "نقطة ضوء"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "تم بلوغ الحد"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "تحميل الوسائط"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "تحميل الوسائط"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "جارٍ تحميل الصور المصغّرة"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "جارٍ التحميل..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "تحديد"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "تم رفض إذن الوصول إلى مكتبة الوسائط"
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "فشل تحديد الوسائط"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "لا توجد قوالب {orientationFilter}"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "لم يتم تحميل أي وسائط بعد. ابدأ رحلتك السينمائية بإضافة فيديوهات أو صور."
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "لا توجد قوالب متاحة"
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "لم يمكن إضافة سوى {addedCount} من أصل {0} من العناصر المحددة."
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "لم يمكن إضافة سوى {addedCount} من العنصر المحدد."
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "بكسلة"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "شغّل أي عدد من المقاطع واحدًا تلو الآخر واربطها بتأثير تلاشي لمدة ثانية واحدة بين الفيديوهات."
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "شغّل أي عدد من المقاطع الأفقية واحدًا تلو الآخر مع تلاشي لمدة ثانية واحدة."
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "معاينة"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "جارٍ معالجة القص"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "جاهز لاختيار قالب"
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "إزالة"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "إعادة ترتيب المقاطع"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "إعادة تعيين"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "فصل RGB"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "ثوانٍ"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "حدّد {remainingCount} عناصر إضافية قبل التصدير."
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "حدّد عنصرًا إضافيًا واحدًا قبل التصدير."
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "حدّد على الأقل فيديو واحدًا أو صورة واحدة قبل التصدير."
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "حدّد على الأقل فيديو واحدًا أو صورة واحدة للمتابعة."
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "تحديد المقاطع"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "تحديد الوسائط"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "تحديد القالب"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "ترتيب التسلسل"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "حدّد عدد الثواني التي تستغرقها الانتقالة بين المقاطع. استخدم `0` لقطع مباشر."
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "الشكل"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "مسح جانبي"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "لم تتم إضافة بعض العناصر"
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "البداية"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "البداية {0}"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "تبدأ من هنا"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "بدّل الفلتر لرؤية التركيبات الأخرى المتاحة."
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "لم يتم العثور على القالب"
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "مسار الملف المصدَّر غير متاح."
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "يتم الآن إنشاء النسخة النهائية بصيغة 9:16."
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "لا يحتوي المشروع على طبقات فيديو قابلة للتصدير."
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "معرّف القالب غير صالح."
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "تعذّر تصدير الفيديو."
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "تعذّر فتح الفيديو"
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "تستخدم الوصلة البصرية {selectedEffectLabelLower}. أعد ترتيب القائمة لتغيير النسخة النهائية."
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "لا توجد مقاطع مرئية لتصديرها."
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "هذا القالب يسمح فقط بـ {capacity} عناصر."
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "هذا القالب يسمح بعنصر واحد فقط."
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "مقطع من الخط الزمني"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "قص"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "القص غير متاح"
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "عمودي"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "تركيب عمودي 9:16 في قسمين: مقطع واحد في الأعلى وثلاثة مقاطع متساوية في الأسفل."
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "تركيب عمودي 9:16 مع 4 فيديوهات في شبكة."
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "مسح عمودي"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "VHS كلاسيكي"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "الفيديو غير جاهز"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "تسلسل الفيديو"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "تسلسل الفيديو الأفقي"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "وحدة VideoExportModule غير مثبتة على Android."
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "وحدة VideoTrimModule غير مثبتة على Android."
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "عرض"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "عرض الفيديو"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "انتظر حتى ينتهي تحميل الفيديو."
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "قصتك"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "قصتك"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "تكبير"

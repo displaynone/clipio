@@ -47,6 +47,19 @@ function resolveItemDurationMs(
 	return trim.durationMs ?? fallbackDurationMs;
 }
 
+function resolveKnownSourceDurationMs(
+	uri: string,
+	mediaByUri: Record<string, MediaItemMetadata>,
+) {
+	const metadata = resolveMediaMetadata(uri, mediaByUri);
+
+	if (metadata.type === "image") {
+		return Math.max(1, metadata.durationMs ?? DEFAULT_IMAGE_DURATION_MS);
+	}
+
+	return metadata.durationMs;
+}
+
 function resolveProjectDurationMs(
   instance: TemplateInstance,
   trimsByUri: Record<string, VideoTrim>,
@@ -165,13 +178,11 @@ function buildSequenceProject(
   const videoItems: VideoTrackItem[] = instance.selectedUris.map((sourceUri, index) => {
     const trim = resolveTrim(trimsByUri[sourceUri]);
     const media = resolveMediaMetadata(sourceUri, mediaByUri);
-    const sourceDurationMs = resolveItemDurationMs(
-      sourceUri,
-      trim,
-      mediaByUri,
-      DEFAULT_TIMELINE_DURATION_MS,
-    );
-    const itemDurationMs = sourceDurationMs;
+    const sourceDurationMs =
+      resolveKnownSourceDurationMs(sourceUri, mediaByUri) ??
+      trim.endMs ??
+      trim.durationMs;
+    const itemDurationMs = trim.durationMs ?? sourceDurationMs ?? DEFAULT_TIMELINE_DURATION_MS;
     const transitionDurationMs =
       index === 0
         ? 0

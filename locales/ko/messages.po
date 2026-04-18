@@ -1,0 +1,557 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2026-04-18 13:12+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: ko\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: app/select-template.tsx:129
+msgid " · Includes unlimited sequence"
+msgstr "· 무제한 시퀀스 포함"
+
+#. placeholder {0}: orderedUris.length
+#: components/templates/VideoSequenceTemplateView.tsx:175
+msgid "{0} clips linked with {selectedEffectLabelLower}."
+msgstr "{selectedEffectLabelLower}와 연결된 {0} 클립."
+
+#. placeholder {0}: selectedUris.length
+#: components/library/LibrarySelectionFooter.tsx:28
+msgid "{0} clips selected"
+msgstr "{0} 클립이 선택됨"
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:72
+msgid "{0} items selected"
+msgstr "{0} 항목 선택됨"
+
+#. placeholder {0}: formatSeconds(trimDurationMs)
+#: components/trim/VideoTrimEditor.tsx:412
+msgid "{0} selected"
+msgstr "{0} 선택됨"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "{count} Clips"
+msgstr "{count} 클립"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "{count} Clips Selected"
+msgstr "{count} 클립 선택됨"
+
+#: components/templates/VideoSequenceTemplateView.tsx:361
+msgid "{durationLabel}"
+msgstr "{durationLabel}"{selectedEffectLabelLower} {transitionSeconds}를 다음 클립에 추가"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:26
+msgid "{loadedCount}/{totalCount} ready"
+msgstr "{loadedCount}/{totalCount} 지원"
+
+#: components/templates/VideoSequenceTemplateView.tsx:348
+msgid "1 Clip"
+msgstr "클립 1개"
+
+#: components/templates/VideoSequenceTemplateView.tsx:174
+msgid "1 clip linked with {selectedEffectLabelLower}."
+msgstr "{selectedEffectLabelLower}와 연결된 클립 1개."
+
+#: components/library/LibrarySelectionFooter.tsx:27
+msgid "1 clip selected"
+msgstr "클립 1개 선택됨"
+
+#: components/templates/FocusTopTemplateView.tsx:100
+#: components/templates/Grid2x2TemplateView.tsx:86
+msgid "1 Clip Selected"
+msgstr "1개의 클립이 선택됨"
+
+#: app/select-template.tsx:71
+msgid "1 item selected"
+msgstr "항목 1개 선택됨"
+
+#: features/templates/templates.tsx:57
+msgid "2x2 Grid"
+msgstr "2x2 그리드"
+
+#: features/templates/templates.tsx:83
+msgid "2x2 Grid Landscape"
+msgstr "2x2 그리드 가로"
+
+#: app/template/[templateId].tsx:65
+msgid "Back"
+msgstr "뒤쪽에"
+
+#: app/select-template.tsx:233
+msgid "Back to media selection"
+msgstr "미디어 선택으로 돌아가기"
+
+#: components/templates/VideoSequenceTemplateView.tsx:45
+msgid "Blur"
+msgstr "흐림"
+
+#: app/select-template.tsx:124
+msgid "Choose a cinematic layout to set how your project looks."
+msgstr "프로젝트 모양을 설정하려면 영화 레이아웃을 선택하세요."
+
+#: components/templates/VideoSequenceTemplateView.tsx:105
+msgid "Circle Close"
+msgstr "서클 닫기"
+
+#. placeholder {0}: index + 1
+#: components/templates/VideoSequenceTemplateView.tsx:359
+msgid "Clip {0}"
+msgstr "클립 {0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:352
+msgid "Clips export one after another"
+msgstr "클립을 차례로 내보냅니다."
+
+#: components/templates/VideoSequenceTemplateView.tsx:53
+msgid "Color Boost"
+msgstr "컬러 부스트"
+
+#: components/library/LibrarySelectionFooter.tsx:80
+msgid "Continue"
+msgstr "계속하다"
+
+#: components/templates/VideoSequenceTemplateView.tsx:73
+msgid "Diag TL"
+msgstr "진단 TL"
+
+#: components/templates/VideoSequenceTemplateView.tsx:310
+msgid "Duration"
+msgstr "지속"
+
+#: components/templates/VideoSequenceTemplateView.tsx:261
+msgid "Effect"
+msgstr "효과"
+
+#: components/trim/VideoTrimEditor.tsx:521
+msgid "End"
+msgstr "끝"
+
+#. placeholder {0}: formatClock(effectiveEndMs)
+#: components/trim/VideoTrimEditor.tsx:481
+msgid "End {0}"
+msgstr "{0} 종료"
+
+#: app/template/[templateId].tsx:208
+msgid "Export"
+msgstr "내보내다"
+
+#: app/template/[templateId].tsx:152
+msgid "Export completed"
+msgstr "내보내기 완료"
+
+#: app/template/[templateId].tsx:127
+msgid "Export disabled"
+msgstr "내보내기가 비활성화되었습니다."
+
+#: app/template/[templateId].tsx:162
+msgid "Export error"
+msgstr "내보내기 오류"
+
+#: app/template/[templateId].tsx:191
+msgid "Export Project"
+msgstr "프로젝트 내보내기"
+
+#: app/template/[templateId].tsx:289
+msgid "Exporting video"
+msgstr "비디오 내보내기"
+
+#: app/template/[templateId].tsx:208
+msgid "Exporting..."
+msgstr "내보내는 중..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:41
+#: components/templates/VideoSequenceTemplateView.tsx:170
+msgid "Fade"
+msgstr "바래다"
+
+#: components/templates/VideoSequenceTemplateView.tsx:69
+msgid "Fade Black"
+msgstr "페이드 블랙"
+
+#: app/trim.tsx:71
+msgid "FFmpeg is generating a new clip."
+msgstr "FFmpeg가 새 클립을 생성하는 중입니다."
+
+#: features/video-editor/export/ffmpeg/FFmpegNativeBridge.ts:39
+msgid "FFmpegExportModule is not installed. Export no longer uses Media3/Transformer by default. To export with FFmpeg without third-party services, native FFmpeg must be integrated directly on Android."
+msgstr "FFmpegExportModule이 설치되지 않았습니다. 내보내기는 더 이상 기본적으로 Media3/Transformer를 사용하지 않습니다. 타사 서비스 없이 FFmpeg로 내보내려면 기본 FFmpeg를 Android에 직접 통합해야 합니다."
+
+#: components/templates/VideoSequenceTemplateView.tsx:77
+msgid "Flash + Shake"
+msgstr "플래시 + 흔들기"
+
+#: features/templates/templates.tsx:109
+msgid "Focus Layout"
+msgstr "초점 레이아웃"
+
+#: features/templates/templates.tsx:136
+msgid "Focus Layout Landscape"
+msgstr "초점 레이아웃 가로"
+
+#: components/VideoThumbnail.tsx:95
+msgid "Generating..."
+msgstr "생성 중..."
+
+#: components/templates/VideoSequenceTemplateView.tsx:85
+msgid "Glow"
+msgstr "불타는 듯한 빛깔"
+
+#: components/templates/VideoSequenceTemplateView.tsx:61
+msgid "HL Slice"
+msgstr "HL 슬라이스"
+
+#: components/templates/VideoSequenceTemplateView.tsx:65
+msgid "HR Slice"
+msgstr "HR 슬라이스"
+
+#: components/library/LibraryClipCard.tsx:187
+msgid "Image"
+msgstr "영상"
+
+#: app/select-template.tsx:202
+msgid "Landscape"
+msgstr "풍경"
+
+#: features/templates/templates.tsx:84
+msgid "Landscape 16:9 composition with 4 videos in a grid."
+msgstr "그리드에 4개의 비디오가 포함된 가로 16:9 구성입니다."
+
+#: features/templates/templates.tsx:138
+msgid "Landscape 16:9 composition with one main clip on the left and three clips on the right."
+msgstr "왼쪽에 메인 클립 1개, 오른쪽에 클립 3개가 있는 가로 16:9 구성입니다."
+
+#: app/(tabs)/_layout.tsx:63
+#: components/library/SelectedLibraryScreen.tsx:38
+msgid "Library"
+msgstr "도서관"
+
+#: components/templates/VideoSequenceTemplateView.tsx:93
+msgid "Light Point"
+msgstr "라이트 포인트"
+
+#: app/template/[templateId].tsx:85
+msgid "Limit reached"
+msgstr "한도 도달"
+
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Load media"
+msgstr "미디어 로드"
+
+#: components/home/HomeEmptyState.tsx:65
+msgid "Load Media"
+msgstr "미디어 로드"
+
+#: components/templates/TemplateThumbnailLoadingIndicator.tsx:23
+msgid "Loading thumbnails"
+msgstr "썸네일 로드 중"
+
+#: components/home/HomeEmptyState.tsx:65
+#: components/navigation/HeaderLoadVideosButton.tsx:14
+msgid "Loading..."
+msgstr "로드 중..."
+
+#: components/trim/VideoTrimEditor.tsx:530
+msgid "Mark"
+msgstr "표시"
+
+#: features/media/mediaPicker.ts:9
+msgid "Media library permission denied"
+msgstr "미디어 라이브러리 권한이 거부되었습니다."
+
+#: app/(tabs)/index.tsx:66
+#: app/template/[templateId].tsx:111
+msgid "Media selection failed"
+msgstr "미디어 선택 실패"
+
+#: app/select-template.tsx:215
+msgid "No {orientationFilter} templates"
+msgstr "{orientationFilter} 템플릿 없음"
+
+#: components/home/HomeEmptyState.tsx:47
+msgid "No media loaded yet. Start your cinematic journey by adding videos or images."
+msgstr "아직 로드된 미디어가 없습니다. 비디오나 이미지를 추가하여 영화 여행을 시작하세요."
+
+#: app/select-template.tsx:226
+msgid "No templates available"
+msgstr "사용 가능한 템플릿이 없습니다."
+
+#. placeholder {0}: selectedUris.length
+#: app/select-template.tsx:78
+msgid ""
+"No templates can fit {0} selected items.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"{0} 선택한 항목에 맞는 템플릿이 없습니다.\n"
+"\n"
+"돌아가서 더 적은 수의 항목을 선택하거나 개발자에게 문의하여 더 많은 템플릿을 추가하세요."
+
+#: app/select-template.tsx:75
+msgid ""
+"No templates can fit 1 selected item.\n"
+"\n"
+"Go back and select fewer items, or contact the developer to add more templates."
+msgstr ""
+"선택한 항목 1개에 맞는 템플릿이 없습니다.\n"
+"\n"
+"돌아가서 더 적은 수의 항목을 선택하거나 개발자에게 문의하여 더 많은 템플릿을 추가하세요."
+
+#. placeholder {0}: assets.length
+#: app/template/[templateId].tsx:106
+msgid "Only {addedCount} of the {0} selected items could be added."
+msgstr "{0} 선택 항목 중 {addedCount}만 추가할 수 있습니다."
+
+#: app/template/[templateId].tsx:105
+msgid "Only {addedCount} of the 1 selected item could be added."
+msgstr "선택한 1개 항목 중 {addedCount}만 추가할 수 있습니다."
+
+#: components/templates/VideoSequenceTemplateView.tsx:57
+msgid "Pixelate"
+msgstr "픽셀화"
+
+#: features/templates/templates.tsx:15
+msgid "Play any number of clips one after another and join them with a 1-second fade between videos."
+msgstr "원하는 만큼의 클립을 차례로 재생하고 비디오 사이에 1초 페이드를 적용하여 결합하세요."
+
+#: features/templates/templates.tsx:37
+msgid "Play any number of landscape clips one after another with a 1-second fade."
+msgstr "1초 페이드로 풍경 클립을 원하는 수만큼 차례로 재생합니다."
+
+#: app/export-preview.tsx:61
+msgid "Preview"
+msgstr "시사"
+
+#: app/trim.tsx:68
+msgid "Processing trim"
+msgstr "트림 처리"
+
+#: components/library/LibrarySelectionFooter.tsx:41
+msgid "Ready to choose a template"
+msgstr "템플릿을 선택할 준비가 되었습니다."
+
+#: components/library/LibraryClipCard.tsx:58
+msgid "Remove"
+msgstr "제거하다"
+
+#: components/templates/FocusTopTemplateView.tsx:98
+#: components/templates/Grid2x2TemplateView.tsx:84
+msgid "Reorder Clips"
+msgstr "클립 재정렬"
+
+#: components/trim/VideoTrimEditor.tsx:502
+msgid "Reset"
+msgstr "다시 놓기"
+
+#: components/templates/VideoSequenceTemplateView.tsx:81
+msgid "RGB Split"
+msgstr "RGB 분할"
+
+#: components/templates/VideoSequenceTemplateView.tsx:321
+msgid "Seconds"
+msgstr "초"
+
+#: app/template/[templateId].tsx:133
+msgid "Select {remainingCount} more items before exporting."
+msgstr "내보내기 전에 {remainingCount}개 이상의 항목을 선택하세요."
+
+#: app/template/[templateId].tsx:132
+msgid "Select 1 more item before exporting."
+msgstr "내보내기 전에 항목을 1개 더 선택하세요."
+
+#: app/template/[templateId].tsx:130
+msgid "Select at least one video or image before exporting."
+msgstr "내보내기 전에 하나 이상의 비디오 또는 이미지를 선택하십시오."
+
+#: app/(tabs)/index.tsx:74
+msgid "Select at least one video or image to continue."
+msgstr "계속하려면 동영상이나 이미지를 하나 이상 선택하세요."
+
+#: components/library/SelectedLibraryScreen.tsx:41
+msgid "Select Clips"
+msgstr "클립 선택"
+
+#: app/(tabs)/index.tsx:74
+msgid "Select media"
+msgstr "미디어 선택"
+
+#: app/select-template.tsx:103
+msgid "Select Template"
+msgstr "템플릿 선택"
+
+#: components/templates/VideoSequenceTemplateView.tsx:347
+msgid "Sequence Order"
+msgstr "시퀀스 순서"
+
+#: components/templates/VideoSequenceTemplateView.tsx:317
+msgid "Set how many seconds the transition between clips lasts. Use `0` for a hard cut."
+msgstr "클립 간 전환이 지속되는 시간(초)을 설정합니다. 하드 컷을 하려면 '0'을 사용하세요."
+
+#: app/select-template.tsx:117
+msgid "Shape"
+msgstr "모양"
+
+#: components/templates/VideoSequenceTemplateView.tsx:97
+msgid "Side Wipe"
+msgstr "측면 닦기"
+
+#: app/template/[templateId].tsx:103
+msgid "Some items were not added"
+msgstr "일부 항목이 추가되지 않았습니다."
+
+#: components/trim/VideoTrimEditor.tsx:493
+msgid "Start"
+msgstr "시작"
+
+#. placeholder {0}: formatClock(startMs)
+#: components/trim/VideoTrimEditor.tsx:475
+msgid "Start {0}"
+msgstr "{0} 시작"
+
+#: components/home/HomeEmptyState.tsx:43
+msgid "starts here"
+msgstr "여기에서 시작"
+
+#: app/select-template.tsx:218
+msgid "Switch the filter to see other available compositions."
+msgstr "사용 가능한 다른 구성을 보려면 필터를 전환하세요."
+
+#: app/template/[templateId].tsx:63
+msgid "Template not found"
+msgstr "템플릿을 찾을 수 없습니다."
+
+#: app/export-preview.tsx:91
+msgid "The exported file path is not available."
+msgstr "내보낸 파일 경로를 사용할 수 없습니다."
+
+#: app/template/[templateId].tsx:292
+msgid "The final edit is being generated in 9:16 format."
+msgstr "최종 편집은 9:16 형식으로 생성됩니다."
+
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:273
+#: features/video-editor/export/ffmpeg/buildFFmpegCommand.ts:460
+msgid "The project does not contain exportable video layers."
+msgstr "프로젝트에 내보낼 수 있는 비디오 레이어가 포함되어 있지 않습니다."
+
+#: app/template/[templateId].tsx:64
+msgid "The template ID is not valid."
+msgstr "템플릿 ID가 유효하지 않습니다."
+
+#: app/template/[templateId].tsx:147
+msgid "The video could not be exported."
+msgstr "동영상을 내보낼 수 없습니다."
+
+#: app/export-preview.tsx:88
+msgid "The video could not be opened"
+msgstr "동영상을 열 수 없습니다."
+
+#: components/templates/VideoSequenceTemplateView.tsx:355
+msgid "The visual join uses {selectedEffectLabelLower}. Reorder the list to change the final edit."
+msgstr "시각적 조인은 {selectedEffectLabelLower}를 사용합니다. 최종 편집 내용을 변경하려면 목록을 재정렬하세요."
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:75
+msgid "There are no visible clips to export."
+msgstr "내보낼 표시되는 클립이 없습니다."
+
+#: app/template/[templateId].tsx:88
+msgid "This template only allows {capacity} items."
+msgstr "이 템플릿은 {capacity} 항목만 허용합니다."
+
+#: app/template/[templateId].tsx:87
+msgid "This template only allows 1 item."
+msgstr "이 템플릿은 1개의 항목만 허용합니다."
+
+#: components/trim/VideoTrimEditor.tsx:409
+msgid "Timeline Segment"
+msgstr "타임라인 세그먼트"
+
+#: components/library/LibraryClipCard.tsx:56
+msgid "Trim"
+msgstr "손질"
+
+#: app/trim.tsx:57
+msgid "Trim unavailable"
+msgstr "트림을 사용할 수 없습니다."
+
+#: app/select-template.tsx:164
+msgid "Vertical"
+msgstr "수직의"
+
+#: features/templates/templates.tsx:111
+msgid "Vertical 9:16 composition in two sections: one clip on top and three equal clips below."
+msgstr "두 개의 섹션으로 구성된 수직 9:16 구성: 상단에 클립 1개, 하단에 동일한 클립 3개."
+
+#: features/templates/templates.tsx:58
+msgid "Vertical 9:16 composition with 4 videos in a grid."
+msgstr "그리드에 4개의 비디오가 포함된 세로 9:16 구성입니다."
+
+#: components/templates/VideoSequenceTemplateView.tsx:101
+msgid "Vertical Wipe"
+msgstr "수직 닦기"
+
+#: components/templates/VideoSequenceTemplateView.tsx:89
+msgid "VHS Retro"
+msgstr "VHS 레트로"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Video not ready"
+msgstr "동영상이 준비되지 않았습니다."
+
+#. placeholder {0}: result.outputUri
+#: app/template/[templateId].tsx:153
+msgid ""
+"Video saved to:\n"
+"{0}"
+msgstr ""
+"동영상 저장 위치:\n"
+"{0}"
+
+#: components/templates/VideoSequenceTemplateView.tsx:249
+#: features/templates/templates.tsx:13
+msgid "Video Sequence"
+msgstr "비디오 시퀀스"
+
+#: features/templates/templates.tsx:35
+msgid "Video Sequence Landscape"
+msgstr "비디오 시퀀스 풍경"
+
+#: features/video-editor/export/engines/LegacyMedia3ExportEngine.ts:113
+msgid "VideoExportModule is not installed on Android."
+msgstr "VideoExportModule은 Android에 설치되지 않았습니다."
+
+#: services/videoTrimService.ts:50
+msgid "VideoTrimModule is not installed on Android."
+msgstr "VideoTrimModule은 Android에 설치되어 있지 않습니다."
+
+#: components/library/LibraryClipCard.tsx:57
+msgid "View"
+msgstr "보기"
+
+#: app/template/[templateId].tsx:270
+msgid "View video"
+msgstr "동영상 보기"
+
+#: components/trim/VideoTrimEditor.tsx:245
+msgid "Wait for the video to finish loading."
+msgstr "비디오 로딩이 끝날 때까지 기다리십시오."
+
+#: app/select-template.tsx:120
+msgid "your story"
+msgstr "당신의 이야기"
+
+#: components/home/HomeEmptyState.tsx:39
+msgid "Your story"
+msgstr "당신의 이야기"
+
+#: components/templates/VideoSequenceTemplateView.tsx:49
+msgid "Zoom"
+msgstr "줌"

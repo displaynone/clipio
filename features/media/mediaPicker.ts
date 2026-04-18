@@ -1,3 +1,4 @@
+import { t } from "@lingui/core/macro";
 import * as ImagePicker from "expo-image-picker";
 import { MediaAsset } from "@/types/media";
 
@@ -5,7 +6,7 @@ export async function pickMediaFromLibrary(): Promise<MediaAsset[]> {
 	const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
 	if (permission.status !== "granted") {
-		throw new Error("Permiso de galería denegado");
+		throw new Error(t`Media library permission denied`);
 	}
 
 	const result = await ImagePicker.launchImageLibraryAsync({
