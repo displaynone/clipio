@@ -40,3 +40,5 @@ Pull requests should include a summary, validation commands, device coverage, li
 ## Agent-Specific Instructions
 
 Do not revert unrelated local changes. Keep edits scoped to the requested task, preserve existing project patterns, and avoid introducing new dependencies unless the change clearly requires them.
+
+Use `.nvmrc` in order to use the correct version of node.
