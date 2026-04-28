@@ -16,11 +16,11 @@ done
 
 if [[ "${#missing[@]}" -eq 0 ]]; then
   echo "FFmpeg Android binaries already exist."
-  "$PROJECT_ROOT/scripts/ffmpeg/check-android-ffmpeg.sh"
+  bash "$PROJECT_ROOT/scripts/ffmpeg/check-android-ffmpeg.sh"
   exit 0
 fi
 
 echo "Missing FFmpeg Android binaries for: ${missing[*]}"
 echo "Building FFmpeg before the native Android build..."
-"$PROJECT_ROOT/scripts/ffmpeg/build-android-ffmpeg.sh"
-"$PROJECT_ROOT/scripts/ffmpeg/check-android-ffmpeg.sh"
+bash "$PROJECT_ROOT/scripts/ffmpeg/build-android-ffmpeg.sh"
+bash "$PROJECT_ROOT/scripts/ffmpeg/check-android-ffmpeg.sh"

@@ -43,3 +43,11 @@ app-example
 /android/ffmpeg/build/
 /android/ffmpeg/source/
 /android/app/src/main/assets/ffmpeg/*/ffmpeg
+
+# Android/Gradle local build outputs. EAS local packages the project into a tarball
+# before building; CMake caches under .cxx can contain absolute host paths that
+# break extraction in the temporary build directory.
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/app/.cxx/
