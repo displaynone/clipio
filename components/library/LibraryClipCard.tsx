@@ -1,12 +1,13 @@
 import VideoThumbnail from "@/components/VideoThumbnail";
 import { useEditorStore } from "@/stores/editorStore";
-import { useRouter } from "expo-router";
+import { type Href, useRouter } from "expo-router";
 import type { MenuTriggerRef } from "heroui-native";
 import { Menu, PressableFeedback, useThemeColor } from "heroui-native";
 import { useRef, useState } from "react";
 import { Text, View } from "react-native";
 import {
 	CheckIcon,
+	CameraIcon,
 	EllipsisVerticalIcon,
 	EyeIcon,
 	PhotoIcon,
@@ -55,6 +56,7 @@ export default function LibraryClipCard({
 		mediaType === "image" ? media?.durationMs ?? null : trim?.durationMs ?? null;
 	const trimLabel = t`Trim`;
 	const viewLabel = t`View`;
+	const captureLabel = t`Capture`;
 	const removeLabel = t`Remove`;
 
 	const handleOpenMenu = () => {
@@ -75,6 +77,14 @@ export default function LibraryClipCard({
 			pathname: "/export-preview",
 			params: { uri: encodeURIComponent(uri) },
 		});
+	};
+
+	const handleCapture = () => {
+		setIsMenuOpen(false);
+		router.push({
+			pathname: "/capture",
+			params: { uri: encodeURIComponent(uri) },
+		} as unknown as Href);
 	};
 
 	const handleRemove = () => {
@@ -136,6 +146,14 @@ export default function LibraryClipCard({
 								<EyeIcon width={14} height={14} color={accentColor} />
 								<Menu.ItemTitle>
 									{viewLabel}
+								</Menu.ItemTitle>
+							</Menu.Item>
+						) : null}
+						{mediaType === "video" ? (
+							<Menu.Item onPress={handleCapture}>
+								<CameraIcon width={14} height={14} color={accentColor} />
+								<Menu.ItemTitle>
+									{captureLabel}
 								</Menu.ItemTitle>
 							</Menu.Item>
 						) : null}

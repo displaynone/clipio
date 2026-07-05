@@ -41,6 +41,16 @@
 				}
 			],
 			"expo-video",
+			[
+				"expo-media-library",
+				{
+					"photosPermission": "Allow Clipio to access your photos to save captured video frames.",
+					"savePhotosPermission": "Allow Clipio to save captured video frames to your photo library.",
+					"granularPermissions": [
+						"photo"
+					]
+				}
+			],
 			"expo-dev-client",
 			"expo-font",
 			"expo-image",
